@@ -17,6 +17,8 @@ namespace 流量计检定上位机.CDM
 
         double DataUpDragInit;
         double DataDownDragInit;
+        public double DataUpDragRenew { get; set; } = 10;
+        public double DataDownDragRenew { get; set; } = 1;
 
         public double YMax
         {
@@ -79,7 +81,13 @@ namespace 流量计检定上位机.CDM
 
         private bool ZedgraphControl_MouseUpEvent(ZedGraphControl sender, System.Windows.Forms.MouseEventArgs e)
         {
-            isDragLine = false;
+            if(isDragLine == true)
+            {
+                DataUp = DataUpDragRenew;
+                DataDown = DataDownDragRenew;
+                RenewDataUpDown();
+                isDragLine = false;
+            }
             return false;
         }
 
@@ -111,27 +119,30 @@ namespace 流量计检定上位机.CDM
                 {
                     if (move >= 0)
                     {
-                        DataUp = DataUpDragInit + deltaData;
-                        RenewDataUpDown();
+                        DataUpDragRenew = DataUpDragInit + deltaData;
+                        RenewDataUpDownDragRenew();
                     }
                     if (move < 0)
                     {
-                        DataUp = DataUpDragInit - deltaData;
-                        RenewDataUpDown();
+                        DataUpDragRenew = DataUpDragInit - deltaData;
+                        RenewDataUpDownDragRenew();
                     }
+                    ReNewFormUpDownDrag();
+
                 }
                 if(isUpDown == 2)
                 {
                     if (move >= 0)
                     {
-                        DataDown = DataDownDragInit + deltaData;
-                        RenewDataUpDown();
+                        DataDownDragRenew= DataDownDragInit + deltaData;
+                        RenewDataUpDownDragRenew();
                     }
                     if (move < 0)
                     {
-                        DataDown = DataDownDragInit - deltaData;
-                        RenewDataUpDown();
+                        DataDownDragRenew = DataDownDragInit - deltaData;
+                        RenewDataUpDownDragRenew(); 
                     }
+                    ReNewFormUpDownDrag();
                 }
 
             }
@@ -153,6 +164,24 @@ namespace 流量计检定上位机.CDM
             {
                 formMain.TemDown.Text = Math.Round(DataDown, 2).ToString();
                 formMain.TemUp.Text = Math.Round(DataUp, 2).ToString();
+            }
+
+        }
+
+        public void ReNewFormUpDownDrag()
+        {
+            formMain.LabelYMax.Text = Math.Round(YMax, 2).ToString();
+            formMain.LabelYMin.Text = Math.Round(YMin, 2).ToString();
+
+            if (formMain.TabControl.SelectedIndex == 0)
+            {
+                formMain.DesDown.Text = Math.Round(DataDownDragRenew, 2).ToString();
+                formMain.DesUp.Text = Math.Round(DataUpDragRenew, 2).ToString();
+            }
+            else if (formMain.TabControl.SelectedIndex == 1)
+            {
+                formMain.TemDown.Text = Math.Round(DataDownDragRenew, 2).ToString();
+                formMain.TemUp.Text = Math.Round(DataUpDragRenew, 2).ToString();
             }
 
         }
@@ -261,6 +290,28 @@ namespace 流量计检定上位机.CDM
             }
             zedgraphControl.AxisChange();
             zedgraphControl.Invalidate();
+        }
+
+        public void RenewDataUpDownDragRenew()
+        {
+            double downValue = DataDownDragRenew;
+            double upValue = DataUpDragRenew;
+            LineItem curve2 = zedgraphControl.GraphPane.CurveList[1] as LineItem;
+            IPointListEdit list2 = curve2.Points as IPointListEdit;
+            list2.Clear();
+            for (int i = -2000; i < 30000; ++i)
+            {
+                list2.Add(i, upValue);
+            }
+
+
+            LineItem curve3 = zedgraphControl.GraphPane.CurveList[2] as LineItem;
+            IPointListEdit list3 = curve3.Points as IPointListEdit;
+            list3.Clear();
+            for (int i = -2000; i < 30000; ++i)
+            {
+                list3.Add(i, downValue);
+            }
         }
 
         public void RenewDataUpDown()

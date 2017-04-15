@@ -4,7 +4,7 @@ using System.Text;
 
 namespace 流量计检定上位机.CDM
 {
-    class ChartParameters
+    public class ChartParameters
     {
 
         float ymax = 20.1f;

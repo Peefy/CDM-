@@ -60,9 +60,7 @@ namespace 流量计检定上位机
             #region FormInit
             this.WindowState = FormWindowState.Maximized;
             #endregion
-            #region FileInit
-            //FileSave.LoadSaveAppInfo(demarcate, flowMeterStandard, flowMeterWork);
-            #endregion
+
             #region DataInit
 
             flowUnitsComboBox.SelectedIndex = 0;
@@ -106,6 +104,11 @@ namespace 流量计检定上位机
                 TotalTitle = "温度曲线"
             });
             timerDraw.Enabled = true;
+            #region FileInit
+            CDM.Service.FileService.ReadUserConfig(zedGraphUtilsDes, zedGraphUtilsTem);
+            zedGraphUtilsDes.RenewDataUpDown();
+            zedGraphUtilsTem.RenewDataUpDown();
+            #endregion
             #endregion
             #region 更新文件的数据到UI
             #endregion
@@ -155,11 +158,14 @@ namespace 流量计检定上位机
                 master.Dispose();
                 master = null;
             }
-
-            //FileSave.ClosingSaveAppInfo(demarcate, flowMeterStandard, flowMeterWork);
-
+            
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            CDM.Service.FileService.SaveUserConfig(zedGraphUtilsDes, zedGraphUtilsTem);
+            base.OnFormClosing(e);
+        }
 
         #endregion
         #region ReportAndExcel

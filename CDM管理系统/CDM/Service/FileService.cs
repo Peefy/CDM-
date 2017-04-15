@@ -39,7 +39,7 @@ namespace 流量计检定上位机.CDM.Service
             //}
         }
 
-        public static void ReadUserConfig()
+        public static void ReadUserConfig(CDM.ZedGraghUtils des, CDM.ZedGraghUtils tem)
         {           
             try
             {
@@ -48,14 +48,21 @@ namespace 流量计检定上位机.CDM.Service
                 using (BinaryReader r = new BinaryReader(fs))
                 {
                     des.YMax = r.ReadDouble();
-                    w.Write(des.YMin);
-                    w.Write(des.DataUp);
-                    w.Write(des.DataDown);
+                    des.YMin = r.ReadDouble();
+                    des.DataUp = r.ReadDouble();
+                    des.DataDown = r.ReadDouble();
 
-                    w.Write(tem.YMax);
-                    w.Write(tem.YMin);
-                    w.Write(tem.DataUp);
-                    w.Write(tem.DataDown);
+                    des.DataUpDragRenew = des.DataUp;
+                    des.DataDownDragRenew = des.DataDown;
+
+                    tem.YMax = r.ReadDouble();
+                    tem.YMin = r.ReadDouble();
+                    tem.DataUp = r.ReadDouble();
+                    tem.DataDown = r.ReadDouble();
+
+                    tem.DataUpDragRenew = tem.DataUp;
+                    tem.DataDownDragRenew = tem.DataDown;
+
                 }
                 fs.Close();
             }
