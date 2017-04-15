@@ -282,6 +282,7 @@
             this.Controls.Add(this.skinLabel4);
             this.Controls.Add(this.skinLabel2);
             this.ForeColor = System.Drawing.Color.Navy;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form_Splash";
@@ -292,6 +293,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "";
             this.Load += new System.EventHandler(this.Form_Splash_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form_Splash_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

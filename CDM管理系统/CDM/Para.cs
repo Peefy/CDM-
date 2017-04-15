@@ -7,9 +7,9 @@ namespace 流量计检定上位机.CDM
     public class Para
     {
 
-        double _value;
+        float _value;
 
-        public double Value
+        public float Value
         {
             get
             {
@@ -35,8 +35,8 @@ namespace 流量计检定上位机.CDM
             }
         }
 
-        public double Up { get; set; }
-        public double Down { get; set; }
+        public float Up { get; set; }
+        public float Down { get; set; }
 
         public bool IsInRange { get; set; } = true;
 

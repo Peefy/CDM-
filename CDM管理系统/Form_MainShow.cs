@@ -11,6 +11,7 @@ using Modbus.Device;
 using System.IO.Ports;
 
 using CCWin.SkinControl;
+using System.Diagnostics;
 
 namespace 流量计检定上位机
 {
@@ -28,15 +29,16 @@ namespace 流量计检定上位机
         CDM.ZedGraghUtils zedGraphUtilsTem;
         CDM.ChartParameters paras = new CDM.ChartParameters();
         CDM.Model.SerialPortConfig serialPortConfig = new CDM.Model.SerialPortConfig();
+        CDM.Para paraDensity;
+        CDM.Para paraTem;
+        CDM.Para paraYiBiaoXiShu = new CDM.Para() {Up = 1.2f,Down = 0.8f };
+
+        CDM.Sqlite.ComWithSqlite ComWithSqliteServer;
+
         //create a new SerialPort object with default settings.
         SerialPort serialPort = new SerialPort(); 
         //Modbus Rtu Master
         ModbusSerialMaster master;
-
-        CDM.Para paraDensity;
-        CDM.Para paraTem;
-        CDM.Para paraYiBiaoXiShu = new CDM.Para() {Up = 1.2,Down = 0.8 };
-
         public SkinTextBox LabelYMax => labelYmax;
         public SkinTextBox LabelYMin => labelYmin;
         public SkinTextBox DesDown => desDown;
@@ -44,6 +46,8 @@ namespace 流量计检定上位机
         public SkinTextBox TemDown => temDown;
         public SkinTextBox TemUp => temUp;
         public TabControl TabControl => tabControl1;
+        public bool GraphEnable => timerDraw.Enabled;
+        public bool CurveFollow => timerDraw.Enabled;
 
         #endregion
         #region 主窗体初始化
@@ -51,6 +55,7 @@ namespace 流量计检定上位机
         {
             formMain = formmain;
             InitializeComponent();
+            ComWithSqliteServer = new CDM.Sqlite.ComWithSqlite();
             zedGraphUtilsDes = new CDM.ZedGraghUtils(zedGraphControl1,this);
             zedGraphUtilsTem = new CDM.ZedGraghUtils(zedGraphControl2,this);
         }
@@ -102,6 +107,7 @@ namespace 流量计检定上位机
             dataBitsComboBox.SelectedIndex = serialPortConfig.DataBitsIndex;
             parityComboBox.SelectedIndex = serialPortConfig.ParityIndex;
             biaoAddressTextbox.Value = serialPortConfig.BiaoAddressValue;
+            exEXEPathTextBox.Text = serialPortConfig.ProLinkPath;
 
             #endregion
             Thread.Sleep(300);
@@ -130,7 +136,6 @@ namespace 流量计检定上位机
         }
 
         #endregion
-
         #region FormEvent
 
         private void Form_Main_Resize(object sender, EventArgs e)
@@ -152,7 +157,12 @@ namespace 流量计检定上位机
                 master.Dispose();
                 master = null;
             }
-            
+            if (ComWithSqliteServer != null)
+            {
+                ComWithSqliteServer.Close();
+                ComWithSqliteServer = null;
+            }
+
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -169,6 +179,12 @@ namespace 流量计检定上位机
             serialPortConfig.DataBitsIndex  = dataBitsComboBox.SelectedIndex;
             serialPortConfig.ParityIndex = parityComboBox.SelectedIndex;
             serialPortConfig.BiaoAddressValue = biaoAddressTextbox.Value;
+            serialPortConfig.ProLinkPath = exEXEPathTextBox.Text;
+        }
+
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            //base.OnMouseWheel(e);
         }
 
         #endregion
@@ -308,17 +324,9 @@ namespace 流量计检定上位机
 
         #endregion
         #region 保存查询数据
-        Form_FindData formFindData;
         public void 查询数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(Form_FindData.Count == 0)
-            {
-                formFindData = new Form_FindData();
-                formFindData.MdiParent = formMain;
-                formFindData.ControlBox = false;
-                formFindData.Show();
-            }
-
+            MainTabControl.SelectedIndex = 2;
         }
 
         public void 保存数据ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -357,10 +365,10 @@ namespace 流量计检定上位机
                 try
                 {
                     serialPort.PortName = comcmb.Text;
-                    serialPort.BaudRate = 9600;  
-                    //serialPort.DataBits = 8;
-                    //serialPort.Parity = Parity.None;
-                    //serialPort.StopBits = StopBits.None;
+                    serialPort.BaudRate = serialPortConfig.BaudRateFromIndex;  
+                    serialPort.DataBits = serialPortConfig.DataBitsFromIndex;
+                    serialPort.Parity = serialPortConfig.ParityFromIndex;    //一般是偶校验
+                    serialPort.StopBits = serialPortConfig.StopBitsFromIndex;//一般是1位停止位
                     serialPort.Open();
                     master = ModbusSerialMaster.CreateRtu(serialPort);                 
                     master.Transport.Retries = 0;   //don't have to do retries
@@ -402,10 +410,15 @@ namespace 流量计检定上位机
         private void timerTime_Tick(object sender, EventArgs e)
         {
             labelTime.Text = DateTime.Now.ToString();
+            desWarningFlag.BackColor = 
+                zedGraphUtilsDes.IsWarning == true ? Color.Red : Color.Lime;
+            temWarningFlag.BackColor = 
+                zedGraphUtilsTem.IsWarning == true ? Color.Red : Color.Lime;
+            ClosingSaveData();
         }
 
         private void timerDraw_Tick(object sender, EventArgs e)
-        {
+        {         
             zedGraphUtilsDes.TimeDraw(float.Parse(labelMidu.Text));
             zedGraphUtilsTem.TimeDraw(12);
         }
@@ -418,7 +431,10 @@ namespace 流量计检定上位机
 
         private void btnStopCurve_Click(object sender, EventArgs e)
         {
-            timerDraw.Enabled = false;
+            var btn = sender as SkinButton;
+            timerDraw.Enabled = !timerDraw.Enabled;
+            btn.Text = timerDraw.Enabled == true ? "暂停实时曲线" : "开始实时曲线";
+
         }
 
         private void btnClearCurve_Click(object sender, EventArgs e)
@@ -558,6 +574,27 @@ namespace 流量计检定上位机
         private void skinButton4_Click(object sender, EventArgs e)
         {
             MainTabControl.SelectedIndex = 2;
+        }
+
+        private void startupExEXEButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(serialPortConfig.ProLinkPath);
+            }
+            catch
+            {
+
+            }
+            
+        }
+
+        private void findExEXEButton_Click(object sender, EventArgs e)
+        {
+            if(openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                exEXEPathTextBox.Text = openFileDialog.FileName;
+            }
         }
 
         private void timerGetData_Tick(object sender, EventArgs e)

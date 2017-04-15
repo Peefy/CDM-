@@ -91,6 +91,8 @@
     <Compile Include="CDM\Para.cs" />
     <Compile Include="CDM\Service\FileService.cs" />
     <Compile Include="CDM\Sqlite\BaseSqliteModel.cs" />
+    <Compile Include="CDM\Sqlite\ComWithSqlite.cs" />
+    <Compile Include="CDM\Sqlite\GatherSave.cs" />
     <Compile Include="CDM\ZedGraghUtils.cs" />
     <Compile Include="Form_FindData.cs">
       <SubType>Form</SubType>

@@ -35,6 +35,8 @@ namespace 流量计检定上位机.CDM.Service
             w.Write(ser.ParityIndex);
             w.Write(ser.BiaoAddressValue);
 
+            w.Write(ser.ProLinkPath);
+
             w.Flush();
             w.Close();
             fs.Close();
@@ -74,6 +76,8 @@ namespace 流量计检定上位机.CDM.Service
                     ser.DataBitsIndex = r.ReadInt32();
                     ser.ParityIndex = r.ReadInt32();
                     ser.BiaoAddressValue = r.ReadDecimal();
+
+                    ser.ProLinkPath = r.ReadString();
 
                 }
                 fs.Close();

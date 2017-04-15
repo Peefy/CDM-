@@ -14,7 +14,6 @@ namespace 流量计检定上位机.CDM
         ZedGraphControl zedgraphControl;
         Form_MainShow formMain;
 
-
         public double DataUp { get; set; } = 10;
         public double DataDown { get; set; } = 1;
 
@@ -44,6 +43,24 @@ namespace 流量计检定上位机.CDM
             set
             {
                 zedgraphControl.GraphPane.YAxis.Scale.Min = value;
+            }
+        }
+
+        public bool IsWarning
+        {
+            get
+            {
+                LineItem curve = zedgraphControl.GraphPane.CurveList[0] as LineItem;
+                IPointListEdit list = curve.Points as IPointListEdit;
+                if (list == null)
+                    return false;
+                for(int i = 0;i<list.Count ;++i)
+                {
+                    var data = list[i].Y;
+                    if (data < DataDown || data > DataUp)
+                        return true;
+                }
+                return false;
             }
         }
 
@@ -86,6 +103,12 @@ namespace 流量计检定上位机.CDM
         {
             if(isDragLine == true)
             {
+                if(DataUpDragRenew <= DataDownDragRenew)
+                {
+                    System.Windows.Forms.MessageBox.Show("上限不能小于下限！");
+                    DataUpDragRenew = DataUp ;
+                    DataDownDragRenew = DataDown;
+                }
                 DataUp = DataUpDragRenew;
                 DataDown = DataDownDragRenew;
                 RenewDataUpDown();
@@ -195,7 +218,7 @@ namespace 流量计检定上位机.CDM
         int DragStartY;
         private bool ZedgraphControl_MouseDownEvent(ZedGraphControl sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (IsHideUpDownLine == true)
+            if (IsHideUpDownLine == true || formMain.GraphEnable == false)
                 return false;
 
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
@@ -293,8 +316,8 @@ namespace 流量计检定上位机.CDM
             Scale xScale = zedgraphControl.GraphPane.XAxis.Scale;
             if(time > xScale.Max - xScale.MajorStep)
             {
-                xScale.Min = time + xScale.MajorStep;
-                xScale.Max = xScale.Min + 300;
+                xScale.Min = 0;
+                xScale.Max = xScale.Max + 300;
             }
             zedgraphControl.AxisChange();
             zedgraphControl.Invalidate();
@@ -336,8 +359,17 @@ namespace 流量计检定上位机.CDM
 
         public void RenewDataUpDown(double up ,double down)
         {
+            if(up <= down)
+            {
+                System.Windows.Forms.MessageBox.Show("上限不能小于下限");
+                ReNewFormUpDown();
+                up = DataUp;
+                down = DataDown;
+            }
             DataUp = up;
             DataDown = down;
+            DataUpDragRenew = up;
+            DataDownDragRenew = down;
             double downValue = DataDown;
             double upValue = DataUp;
             LineItem curve2 = zedgraphControl.GraphPane.CurveList[1] as LineItem;

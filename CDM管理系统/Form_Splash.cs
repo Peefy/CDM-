@@ -194,5 +194,13 @@ namespace 流量计检定上位机
             Application.Exit();//退出整个应用程序。（无法退出单独开启的线程）
             Application.ExitThread();//释放所有线程　
         }
+
+        private void Form_Splash_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                btnLogIn_Click(null, null);
+            }
+        }
     }
 }

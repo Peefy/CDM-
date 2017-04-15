@@ -53,6 +53,7 @@ namespace 流量计检定上位机
                 menuStrip.Enabled = true;
                 toolStrip.Enabled = true;
                 formMainShow.MdiParent = this;
+                formMainShow.WindowState = FormWindowState.Maximized;
                 formMainShow.Show();
             }
         }
