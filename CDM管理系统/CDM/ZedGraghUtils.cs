@@ -9,16 +9,19 @@ namespace 流量计检定上位机.CDM
     public class ZedGraghUtils
     {
         int tickStart;
+        double DataUpDragInit;
+        double DataDownDragInit;
         ZedGraphControl zedgraphControl;
         Form_MainShow formMain;
+
 
         public double DataUp { get; set; } = 10;
         public double DataDown { get; set; } = 1;
 
-        double DataUpDragInit;
-        double DataDownDragInit;
         public double DataUpDragRenew { get; set; } = 10;
         public double DataDownDragRenew { get; set; } = 1;
+
+        public bool IsHideUpDownLine { get; set; }
 
         public double YMax
         {
@@ -95,6 +98,8 @@ namespace 流量计检定上位机.CDM
         private bool ZedgraphControl_MouseMoveEvent(ZedGraphControl sender, System.Windows.Forms.MouseEventArgs e)
         {
             ReNewFormUpDown();
+            if (IsHideUpDownLine == true)
+                return false;
             if(isDragLine == false)
             {
                 if (JudgeIsUp(e.Location) == true)
@@ -190,7 +195,10 @@ namespace 流量计检定上位机.CDM
         int DragStartY;
         private bool ZedgraphControl_MouseDownEvent(ZedGraphControl sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if(e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (IsHideUpDownLine == true)
+                return false;
+
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 if (JudgeIsUp(e.Location) == true)
                 {
@@ -299,17 +307,12 @@ namespace 流量计检定上位机.CDM
             LineItem curve2 = zedgraphControl.GraphPane.CurveList[1] as LineItem;
             IPointListEdit list2 = curve2.Points as IPointListEdit;
             list2.Clear();
-            for (int i = -2000; i < 30000; ++i)
-            {
-                list2.Add(i, upValue);
-            }
-
-
             LineItem curve3 = zedgraphControl.GraphPane.CurveList[2] as LineItem;
             IPointListEdit list3 = curve3.Points as IPointListEdit;
             list3.Clear();
             for (int i = -2000; i < 30000; ++i)
             {
+                list2.Add(i, upValue);
                 list3.Add(i, downValue);
             }
         }
@@ -321,17 +324,12 @@ namespace 流量计检定上位机.CDM
             LineItem curve2 = zedgraphControl.GraphPane.CurveList[1] as LineItem;
             IPointListEdit list2 = curve2.Points as IPointListEdit;
             list2.Clear();
-            for(int i = -2000;i  <30000 ;++i)
-            {
-                list2.Add(i, upValue);
-            }
-
-
             LineItem curve3 = zedgraphControl.GraphPane.CurveList[2] as LineItem;
             IPointListEdit list3 = curve3.Points as IPointListEdit;
             list3.Clear();
             for (int i = -2000; i < 30000; ++i)
             {
+                list2.Add(i, upValue);
                 list3.Add(i, downValue);
             }
         }
@@ -345,20 +343,47 @@ namespace 流量计检定上位机.CDM
             LineItem curve2 = zedgraphControl.GraphPane.CurveList[1] as LineItem;
             IPointListEdit list2 = curve2.Points as IPointListEdit;
             list2.Clear();
-            for (int i = -2000; i < 30000; ++i)
-            {
-                list2.Add(i, upValue);
-            }
-
             LineItem curve3 = zedgraphControl.GraphPane.CurveList[2] as LineItem;
             IPointListEdit list3 = curve3.Points as IPointListEdit;
             list3.Clear();
             for (int i = -2000; i < 30000; ++i)
             {
+                list2.Add(i, upValue);
                 list3.Add(i, downValue);
             }
         }
 
+        public void HideUpDownLine()
+        {
+            LineItem curve2 = zedgraphControl.GraphPane.CurveList[1] as LineItem;
+            IPointListEdit list2 = curve2.Points as IPointListEdit;
+            list2.Clear();
+            LineItem curve3 = zedgraphControl.GraphPane.CurveList[2] as LineItem;
+            IPointListEdit list3 = curve3.Points as IPointListEdit;
+            list3.Clear();
+        }
+
+        public void RenewUpDownLine()
+        {
+            if(zedgraphControl.GraphPane.XAxis.Scale.Max >= 30000)
+            {
+                double downValue = DataDown;
+                double upValue = DataUp;
+
+                LineItem curve2 = zedgraphControl.GraphPane.CurveList[1] as LineItem;
+                IPointListEdit list2 = curve2.Points as IPointListEdit;
+
+                LineItem curve3 = zedgraphControl.GraphPane.CurveList[2] as LineItem;
+                IPointListEdit list3 = curve3.Points as IPointListEdit;
+
+                for (int i = 30000; i < 40000; ++i)
+                {
+                    list2.Add(i, downValue);
+                    list3.Add(i, downValue);
+                }
+
+            }
+        }
 
     }
 }

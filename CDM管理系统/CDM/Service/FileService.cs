@@ -11,7 +11,7 @@ namespace 流量计检定上位机.CDM.Service
         static string savePath = "C:\\Program Files\\dugu\\CDM";
         static string userConfigFileName = "\\\\user.uni";
 
-        public static void SaveUserConfig(CDM.ZedGraghUtils des,CDM.ZedGraghUtils tem)
+        public static void SaveUserConfig(CDM.ZedGraghUtils des,CDM.ZedGraghUtils tem,Model.SerialPortConfig ser)
         {
             //try
             //{
@@ -29,6 +29,12 @@ namespace 流量计检定上位机.CDM.Service
             w.Write(tem.DataUp);
             w.Write(tem.DataDown);
 
+            w.Write(ser.BaudRateIndex);
+            w.Write(ser.StopBitsIndex);
+            w.Write(ser.DataBitsIndex);
+            w.Write(ser.ParityIndex);
+            w.Write(ser.BiaoAddressValue);
+
             w.Flush();
             w.Close();
             fs.Close();
@@ -39,7 +45,7 @@ namespace 流量计检定上位机.CDM.Service
             //}
         }
 
-        public static void ReadUserConfig(CDM.ZedGraghUtils des, CDM.ZedGraghUtils tem)
+        public static void ReadUserConfig(CDM.ZedGraghUtils des, CDM.ZedGraghUtils tem,Model.SerialPortConfig ser)
         {           
             try
             {
@@ -62,6 +68,12 @@ namespace 流量计检定上位机.CDM.Service
 
                     tem.DataUpDragRenew = tem.DataUp;
                     tem.DataDownDragRenew = tem.DataDown;
+
+                    ser.BaudRateIndex = r.ReadInt32();
+                    ser.StopBitsIndex = r.ReadInt32();
+                    ser.DataBitsIndex = r.ReadInt32();
+                    ser.ParityIndex = r.ReadInt32();
+                    ser.BiaoAddressValue = r.ReadDecimal();
 
                 }
                 fs.Close();

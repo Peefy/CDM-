@@ -45,12 +45,16 @@
             this.skinTabPage1 = new CCWin.SkinControl.SkinTabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.hideLineDesCheckBox = new CCWin.SkinControl.SkinCheckBox();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.skinLabel21 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel20 = new CCWin.SkinControl.SkinLabel();
             this.desDown = new CCWin.SkinControl.SkinTextBox();
             this.desUp = new CCWin.SkinControl.SkinTextBox();
+            this.renewLineDesButton = new CCWin.SkinControl.SkinButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.hideLineTemCheckBox = new CCWin.SkinControl.SkinCheckBox();
+            this.renewLineTemButton = new CCWin.SkinControl.SkinButton();
             this.skinLabel22 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel23 = new CCWin.SkinControl.SkinLabel();
             this.temDown = new CCWin.SkinControl.SkinTextBox();
@@ -70,7 +74,7 @@
             this.skinLabel13 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel11 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel6 = new CCWin.SkinControl.SkinLabel();
-            this.skinTextBox1 = new CCWin.SkinControl.SkinTextBox();
+            this.MiDuXiShuTextBox = new CCWin.SkinControl.SkinTextBox();
             this.skinLabel2 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel5 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel7 = new CCWin.SkinControl.SkinLabel();
@@ -84,10 +88,12 @@
             this.skinLine9 = new CCWin.SkinControl.SkinLine();
             this.skinLine1 = new CCWin.SkinControl.SkinLine();
             this.groupSetDemarcate = new CCWin.SkinControl.SkinGroupBox();
+            this.skinLine8 = new CCWin.SkinControl.SkinLine();
             this.skinLine7 = new CCWin.SkinControl.SkinLine();
             this.skinLine6 = new CCWin.SkinControl.SkinLine();
             this.labelYmin = new CCWin.SkinControl.SkinTextBox();
             this.labelYmax = new CCWin.SkinControl.SkinTextBox();
+            this.YiBiaoParaSettingButton = new CCWin.SkinControl.SkinButton();
             this.skinButton4 = new CCWin.SkinControl.SkinButton();
             this.btnChangeUpDown = new CCWin.SkinControl.SkinButton();
             this.skinLabel10 = new CCWin.SkinControl.SkinLabel();
@@ -266,11 +272,13 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.hideLineDesCheckBox);
             this.tabPage1.Controls.Add(this.zedGraphControl1);
             this.tabPage1.Controls.Add(this.skinLabel21);
             this.tabPage1.Controls.Add(this.skinLabel20);
             this.tabPage1.Controls.Add(this.desDown);
             this.tabPage1.Controls.Add(this.desUp);
+            this.tabPage1.Controls.Add(this.renewLineDesButton);
             this.tabPage1.Location = new System.Drawing.Point(4, 23);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -279,11 +287,30 @@
             this.tabPage1.Text = "密度曲线";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // hideLineDesCheckBox
+            // 
+            this.hideLineDesCheckBox.AutoSize = true;
+            this.hideLineDesCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.hideLineDesCheckBox.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.hideLineDesCheckBox.DownBack = null;
+            this.hideLineDesCheckBox.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.hideLineDesCheckBox.Location = new System.Drawing.Point(400, 459);
+            this.hideLineDesCheckBox.MouseBack = null;
+            this.hideLineDesCheckBox.Name = "hideLineDesCheckBox";
+            this.hideLineDesCheckBox.NormlBack = null;
+            this.hideLineDesCheckBox.SelectedDownBack = null;
+            this.hideLineDesCheckBox.SelectedMouseBack = null;
+            this.hideLineDesCheckBox.SelectedNormlBack = null;
+            this.hideLineDesCheckBox.Size = new System.Drawing.Size(133, 23);
+            this.hideLineDesCheckBox.TabIndex = 37;
+            this.hideLineDesCheckBox.Text = "隐藏上下限标线";
+            this.hideLineDesCheckBox.UseVisualStyleBackColor = false;
+            this.hideLineDesCheckBox.CheckedChanged += new System.EventHandler(this.hideLineDesCheckBox_CheckedChanged);
+            // 
             // zedGraphControl1
             // 
             this.zedGraphControl1.IsShowContextMenu = false;
             this.zedGraphControl1.IsShowHScrollBar = true;
-            this.zedGraphControl1.IsShowVScrollBar = true;
             this.zedGraphControl1.Location = new System.Drawing.Point(3, 3);
             this.zedGraphControl1.Name = "zedGraphControl1";
             this.zedGraphControl1.PanButtons = System.Windows.Forms.MouseButtons.None;
@@ -411,8 +438,27 @@
             this.desUp.WaterText = "";
             this.desUp.WordWrap = true;
             // 
+            // renewLineDesButton
+            // 
+            this.renewLineDesButton.BackColor = System.Drawing.Color.DarkGray;
+            this.renewLineDesButton.BaseColor = System.Drawing.Color.Gray;
+            this.renewLineDesButton.BorderColor = System.Drawing.Color.DarkGray;
+            this.renewLineDesButton.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.renewLineDesButton.DownBack = null;
+            this.renewLineDesButton.Location = new System.Drawing.Point(539, 456);
+            this.renewLineDesButton.MouseBack = null;
+            this.renewLineDesButton.Name = "renewLineDesButton";
+            this.renewLineDesButton.NormlBack = null;
+            this.renewLineDesButton.Size = new System.Drawing.Size(130, 28);
+            this.renewLineDesButton.TabIndex = 7;
+            this.renewLineDesButton.Text = "更新上下限标线";
+            this.renewLineDesButton.UseVisualStyleBackColor = false;
+            this.renewLineDesButton.Click += new System.EventHandler(this.renewLineDesButton_Click);
+            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.hideLineTemCheckBox);
+            this.tabPage2.Controls.Add(this.renewLineTemButton);
             this.tabPage2.Controls.Add(this.skinLabel22);
             this.tabPage2.Controls.Add(this.skinLabel23);
             this.tabPage2.Controls.Add(this.temDown);
@@ -425,6 +471,43 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "温度曲线";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // hideLineTemCheckBox
+            // 
+            this.hideLineTemCheckBox.AutoSize = true;
+            this.hideLineTemCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.hideLineTemCheckBox.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.hideLineTemCheckBox.DownBack = null;
+            this.hideLineTemCheckBox.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.hideLineTemCheckBox.Location = new System.Drawing.Point(400, 459);
+            this.hideLineTemCheckBox.MouseBack = null;
+            this.hideLineTemCheckBox.Name = "hideLineTemCheckBox";
+            this.hideLineTemCheckBox.NormlBack = null;
+            this.hideLineTemCheckBox.SelectedDownBack = null;
+            this.hideLineTemCheckBox.SelectedMouseBack = null;
+            this.hideLineTemCheckBox.SelectedNormlBack = null;
+            this.hideLineTemCheckBox.Size = new System.Drawing.Size(133, 23);
+            this.hideLineTemCheckBox.TabIndex = 36;
+            this.hideLineTemCheckBox.Text = "隐藏上下限标线";
+            this.hideLineTemCheckBox.UseVisualStyleBackColor = false;
+            this.hideLineTemCheckBox.CheckedChanged += new System.EventHandler(this.hideLineTemCheckBox_CheckedChanged);
+            // 
+            // renewLineTemButton
+            // 
+            this.renewLineTemButton.BackColor = System.Drawing.Color.DarkGray;
+            this.renewLineTemButton.BaseColor = System.Drawing.Color.Gray;
+            this.renewLineTemButton.BorderColor = System.Drawing.Color.DarkGray;
+            this.renewLineTemButton.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.renewLineTemButton.DownBack = null;
+            this.renewLineTemButton.Location = new System.Drawing.Point(539, 456);
+            this.renewLineTemButton.MouseBack = null;
+            this.renewLineTemButton.Name = "renewLineTemButton";
+            this.renewLineTemButton.NormlBack = null;
+            this.renewLineTemButton.Size = new System.Drawing.Size(130, 28);
+            this.renewLineTemButton.TabIndex = 35;
+            this.renewLineTemButton.Text = "更新上下限标线";
+            this.renewLineTemButton.UseVisualStyleBackColor = false;
+            this.renewLineTemButton.Click += new System.EventHandler(this.renewLineTemButton_Click);
             // 
             // skinLabel22
             // 
@@ -542,7 +625,6 @@
             // 
             this.zedGraphControl2.IsShowContextMenu = false;
             this.zedGraphControl2.IsShowHScrollBar = true;
-            this.zedGraphControl2.IsShowVScrollBar = true;
             this.zedGraphControl2.Location = new System.Drawing.Point(3, 3);
             this.zedGraphControl2.Name = "zedGraphControl2";
             this.zedGraphControl2.PanButtons = System.Windows.Forms.MouseButtons.None;
@@ -657,7 +739,7 @@
             this.groupDataShow.Controls.Add(this.skinLabel13);
             this.groupDataShow.Controls.Add(this.skinLabel11);
             this.groupDataShow.Controls.Add(this.skinLabel6);
-            this.groupDataShow.Controls.Add(this.skinTextBox1);
+            this.groupDataShow.Controls.Add(this.MiDuXiShuTextBox);
             this.groupDataShow.Controls.Add(this.skinLabel2);
             this.groupDataShow.Controls.Add(this.skinLabel5);
             this.groupDataShow.Controls.Add(this.skinLabel7);
@@ -783,49 +865,49 @@
             this.skinLabel6.TabIndex = 27;
             this.skinLabel6.Text = "密度仪表系数";
             // 
-            // skinTextBox1
+            // MiDuXiShuTextBox
             // 
-            this.skinTextBox1.BackColor = System.Drawing.Color.Transparent;
-            this.skinTextBox1.DownBack = null;
-            this.skinTextBox1.Icon = null;
-            this.skinTextBox1.IconIsButton = false;
-            this.skinTextBox1.IconMouseState = CCWin.SkinClass.ControlState.Normal;
-            this.skinTextBox1.IsPasswordChat = '\0';
-            this.skinTextBox1.IsSystemPasswordChar = false;
-            this.skinTextBox1.Lines = new string[] {
-        "1.2"};
-            this.skinTextBox1.Location = new System.Drawing.Point(11, 151);
-            this.skinTextBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.skinTextBox1.MaxLength = 32767;
-            this.skinTextBox1.MinimumSize = new System.Drawing.Size(28, 28);
-            this.skinTextBox1.MouseBack = null;
-            this.skinTextBox1.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.skinTextBox1.Multiline = false;
-            this.skinTextBox1.Name = "skinTextBox1";
-            this.skinTextBox1.NormlBack = null;
-            this.skinTextBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.skinTextBox1.ReadOnly = false;
-            this.skinTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.skinTextBox1.Size = new System.Drawing.Size(180, 28);
+            this.MiDuXiShuTextBox.BackColor = System.Drawing.Color.Transparent;
+            this.MiDuXiShuTextBox.DownBack = null;
+            this.MiDuXiShuTextBox.Icon = null;
+            this.MiDuXiShuTextBox.IconIsButton = false;
+            this.MiDuXiShuTextBox.IconMouseState = CCWin.SkinClass.ControlState.Normal;
+            this.MiDuXiShuTextBox.IsPasswordChat = '\0';
+            this.MiDuXiShuTextBox.IsSystemPasswordChar = false;
+            this.MiDuXiShuTextBox.Lines = new string[] {
+        "1.12"};
+            this.MiDuXiShuTextBox.Location = new System.Drawing.Point(11, 151);
+            this.MiDuXiShuTextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.MiDuXiShuTextBox.MaxLength = 32767;
+            this.MiDuXiShuTextBox.MinimumSize = new System.Drawing.Size(28, 28);
+            this.MiDuXiShuTextBox.MouseBack = null;
+            this.MiDuXiShuTextBox.MouseState = CCWin.SkinClass.ControlState.Normal;
+            this.MiDuXiShuTextBox.Multiline = false;
+            this.MiDuXiShuTextBox.Name = "MiDuXiShuTextBox";
+            this.MiDuXiShuTextBox.NormlBack = null;
+            this.MiDuXiShuTextBox.Padding = new System.Windows.Forms.Padding(5);
+            this.MiDuXiShuTextBox.ReadOnly = false;
+            this.MiDuXiShuTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.MiDuXiShuTextBox.Size = new System.Drawing.Size(180, 28);
             // 
             // 
             // 
-            this.skinTextBox1.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.skinTextBox1.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.skinTextBox1.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
-            this.skinTextBox1.SkinTxt.Location = new System.Drawing.Point(5, 5);
-            this.skinTextBox1.SkinTxt.Name = "BaseText";
-            this.skinTextBox1.SkinTxt.Size = new System.Drawing.Size(170, 18);
-            this.skinTextBox1.SkinTxt.TabIndex = 0;
-            this.skinTextBox1.SkinTxt.Text = "1.2";
-            this.skinTextBox1.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.skinTextBox1.SkinTxt.WaterText = "";
-            this.skinTextBox1.TabIndex = 31;
-            this.skinTextBox1.Text = "1.2";
-            this.skinTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.skinTextBox1.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.skinTextBox1.WaterText = "";
-            this.skinTextBox1.WordWrap = true;
+            this.MiDuXiShuTextBox.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MiDuXiShuTextBox.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MiDuXiShuTextBox.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.MiDuXiShuTextBox.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.MiDuXiShuTextBox.SkinTxt.Name = "BaseText";
+            this.MiDuXiShuTextBox.SkinTxt.Size = new System.Drawing.Size(170, 18);
+            this.MiDuXiShuTextBox.SkinTxt.TabIndex = 0;
+            this.MiDuXiShuTextBox.SkinTxt.Text = "1.12";
+            this.MiDuXiShuTextBox.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.MiDuXiShuTextBox.SkinTxt.WaterText = "";
+            this.MiDuXiShuTextBox.TabIndex = 31;
+            this.MiDuXiShuTextBox.Text = "1.12";
+            this.MiDuXiShuTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.MiDuXiShuTextBox.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.MiDuXiShuTextBox.WaterText = "";
+            this.MiDuXiShuTextBox.WordWrap = true;
             // 
             // skinLabel2
             // 
@@ -969,10 +1051,12 @@
             // 
             this.groupSetDemarcate.BackColor = System.Drawing.Color.Transparent;
             this.groupSetDemarcate.BorderColor = System.Drawing.Color.Black;
+            this.groupSetDemarcate.Controls.Add(this.skinLine8);
             this.groupSetDemarcate.Controls.Add(this.skinLine7);
             this.groupSetDemarcate.Controls.Add(this.skinLine6);
             this.groupSetDemarcate.Controls.Add(this.labelYmin);
             this.groupSetDemarcate.Controls.Add(this.labelYmax);
+            this.groupSetDemarcate.Controls.Add(this.YiBiaoParaSettingButton);
             this.groupSetDemarcate.Controls.Add(this.skinButton4);
             this.groupSetDemarcate.Controls.Add(this.btnChangeUpDown);
             this.groupSetDemarcate.Controls.Add(this.skinLabel10);
@@ -987,10 +1071,21 @@
             this.groupSetDemarcate.Size = new System.Drawing.Size(175, 398);
             this.groupSetDemarcate.TabIndex = 4;
             this.groupSetDemarcate.TabStop = false;
-            this.groupSetDemarcate.Text = "曲线设置";
+            this.groupSetDemarcate.Text = "参数设置";
             this.groupSetDemarcate.TitleBorderColor = System.Drawing.Color.Black;
             this.groupSetDemarcate.TitleRectBackColor = System.Drawing.Color.DarkGray;
             this.groupSetDemarcate.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
+            // 
+            // skinLine8
+            // 
+            this.skinLine8.BackColor = System.Drawing.Color.Transparent;
+            this.skinLine8.LineColor = System.Drawing.Color.Black;
+            this.skinLine8.LineHeight = 2;
+            this.skinLine8.Location = new System.Drawing.Point(0, 236);
+            this.skinLine8.Name = "skinLine8";
+            this.skinLine8.Size = new System.Drawing.Size(170, 10);
+            this.skinLine8.TabIndex = 32;
+            this.skinLine8.Text = "skinLine1";
             // 
             // skinLine7
             // 
@@ -1025,7 +1120,7 @@
             this.labelYmin.IsSystemPasswordChar = false;
             this.labelYmin.Lines = new string[] {
         "0"};
-            this.labelYmin.Location = new System.Drawing.Point(58, 299);
+            this.labelYmin.Location = new System.Drawing.Point(61, 352);
             this.labelYmin.Margin = new System.Windows.Forms.Padding(0);
             this.labelYmin.MaxLength = 32767;
             this.labelYmin.MinimumSize = new System.Drawing.Size(28, 28);
@@ -1069,7 +1164,7 @@
             this.labelYmax.IsSystemPasswordChar = false;
             this.labelYmax.Lines = new string[] {
         "1.2"};
-            this.labelYmax.Location = new System.Drawing.Point(58, 266);
+            this.labelYmax.Location = new System.Drawing.Point(61, 319);
             this.labelYmax.Margin = new System.Windows.Forms.Padding(0);
             this.labelYmax.MaxLength = 32767;
             this.labelYmax.MinimumSize = new System.Drawing.Size(28, 28);
@@ -1103,6 +1198,23 @@
             this.labelYmax.WordWrap = true;
             this.labelYmax.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.labelYmax_PreviewKeyDown);
             // 
+            // YiBiaoParaSettingButton
+            // 
+            this.YiBiaoParaSettingButton.BackColor = System.Drawing.Color.DarkGray;
+            this.YiBiaoParaSettingButton.BaseColor = System.Drawing.Color.Gray;
+            this.YiBiaoParaSettingButton.BorderColor = System.Drawing.Color.DarkGray;
+            this.YiBiaoParaSettingButton.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.YiBiaoParaSettingButton.DownBack = null;
+            this.YiBiaoParaSettingButton.Location = new System.Drawing.Point(22, 200);
+            this.YiBiaoParaSettingButton.MouseBack = null;
+            this.YiBiaoParaSettingButton.Name = "YiBiaoParaSettingButton";
+            this.YiBiaoParaSettingButton.NormlBack = null;
+            this.YiBiaoParaSettingButton.Size = new System.Drawing.Size(130, 28);
+            this.YiBiaoParaSettingButton.TabIndex = 7;
+            this.YiBiaoParaSettingButton.Text = "仪表参数设置";
+            this.YiBiaoParaSettingButton.UseVisualStyleBackColor = false;
+            this.YiBiaoParaSettingButton.Click += new System.EventHandler(this.YiBiaoParaSettingButton_Click);
+            // 
             // skinButton4
             // 
             this.skinButton4.BackColor = System.Drawing.Color.DarkGray;
@@ -1118,6 +1230,7 @@
             this.skinButton4.TabIndex = 7;
             this.skinButton4.Text = "历史记录";
             this.skinButton4.UseVisualStyleBackColor = false;
+            this.skinButton4.Click += new System.EventHandler(this.skinButton4_Click);
             // 
             // btnChangeUpDown
             // 
@@ -1126,7 +1239,7 @@
             this.btnChangeUpDown.BorderColor = System.Drawing.Color.DarkGray;
             this.btnChangeUpDown.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btnChangeUpDown.DownBack = null;
-            this.btnChangeUpDown.Location = new System.Drawing.Point(11, 199);
+            this.btnChangeUpDown.Location = new System.Drawing.Point(14, 250);
             this.btnChangeUpDown.MouseBack = null;
             this.btnChangeUpDown.Name = "btnChangeUpDown";
             this.btnChangeUpDown.NormlBack = null;
@@ -1142,7 +1255,7 @@
             this.skinLabel10.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel10.BorderColor = System.Drawing.Color.White;
             this.skinLabel10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.skinLabel10.Location = new System.Drawing.Point(11, 302);
+            this.skinLabel10.Location = new System.Drawing.Point(14, 355);
             this.skinLabel10.Name = "skinLabel10";
             this.skinLabel10.Size = new System.Drawing.Size(42, 22);
             this.skinLabel10.TabIndex = 27;
@@ -1154,7 +1267,7 @@
             this.skinLabel8.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel8.BorderColor = System.Drawing.Color.White;
             this.skinLabel8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.skinLabel8.Location = new System.Drawing.Point(10, 270);
+            this.skinLabel8.Location = new System.Drawing.Point(13, 323);
             this.skinLabel8.Name = "skinLabel8";
             this.skinLabel8.Size = new System.Drawing.Size(42, 22);
             this.skinLabel8.TabIndex = 27;
@@ -1256,7 +1369,7 @@
             this.skinGroupBox1.Name = "skinGroupBox1";
             this.skinGroupBox1.RectBackColor = System.Drawing.Color.DarkGray;
             this.skinGroupBox1.RoundStyle = CCWin.SkinClass.RoundStyle.All;
-            this.skinGroupBox1.Size = new System.Drawing.Size(181, 336);
+            this.skinGroupBox1.Size = new System.Drawing.Size(188, 336);
             this.skinGroupBox1.TabIndex = 9;
             this.skinGroupBox1.TabStop = false;
             this.skinGroupBox1.Text = "仪表通信设置";
@@ -1273,7 +1386,7 @@
             0,
             0});
             this.biaoAddressTextbox.Name = "biaoAddressTextbox";
-            this.biaoAddressTextbox.Size = new System.Drawing.Size(87, 29);
+            this.biaoAddressTextbox.Size = new System.Drawing.Size(103, 29);
             this.biaoAddressTextbox.TabIndex = 10;
             // 
             // skinButton1
@@ -1306,7 +1419,7 @@
             "偶校验"});
             this.parityComboBox.Location = new System.Drawing.Point(72, 157);
             this.parityComboBox.Name = "parityComboBox";
-            this.parityComboBox.Size = new System.Drawing.Size(87, 30);
+            this.parityComboBox.Size = new System.Drawing.Size(103, 30);
             this.parityComboBox.TabIndex = 8;
             this.parityComboBox.WaterText = "";
             // 
@@ -1325,7 +1438,7 @@
             "1.5位"});
             this.stopBitsComboBox.Location = new System.Drawing.Point(72, 116);
             this.stopBitsComboBox.Name = "stopBitsComboBox";
-            this.stopBitsComboBox.Size = new System.Drawing.Size(87, 30);
+            this.stopBitsComboBox.Size = new System.Drawing.Size(103, 30);
             this.stopBitsComboBox.TabIndex = 8;
             this.stopBitsComboBox.WaterText = "";
             // 
@@ -1344,7 +1457,7 @@
             "9"});
             this.dataBitsComboBox.Location = new System.Drawing.Point(72, 72);
             this.dataBitsComboBox.Name = "dataBitsComboBox";
-            this.dataBitsComboBox.Size = new System.Drawing.Size(87, 30);
+            this.dataBitsComboBox.Size = new System.Drawing.Size(103, 30);
             this.dataBitsComboBox.TabIndex = 8;
             this.dataBitsComboBox.WaterText = "";
             // 
@@ -1361,7 +1474,7 @@
             "9600"});
             this.baudComboBox.Location = new System.Drawing.Point(72, 28);
             this.baudComboBox.Name = "baudComboBox";
-            this.baudComboBox.Size = new System.Drawing.Size(87, 30);
+            this.baudComboBox.Size = new System.Drawing.Size(103, 30);
             this.baudComboBox.TabIndex = 8;
             this.baudComboBox.WaterText = "";
             // 
@@ -1555,7 +1668,7 @@
         private CCWin.SkinControl.SkinComboBox flowUnitsComboBox;
         private CCWin.SkinControl.SkinLabel skinLabel11;
         private CCWin.SkinControl.SkinLabel skinLabel6;
-        private CCWin.SkinControl.SkinTextBox skinTextBox1;
+        private CCWin.SkinControl.SkinTextBox MiDuXiShuTextBox;
         private CCWin.SkinControl.SkinLine skinLine3;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -1591,6 +1704,12 @@
         private CCWin.SkinControl.SkinLabel skinLabel23;
         private CCWin.SkinControl.SkinTextBox temDown;
         private CCWin.SkinControl.SkinTextBox temUp;
+        private CCWin.SkinControl.SkinLine skinLine8;
+        private CCWin.SkinControl.SkinButton YiBiaoParaSettingButton;
+        private CCWin.SkinControl.SkinButton renewLineDesButton;
+        private CCWin.SkinControl.SkinButton renewLineTemButton;
+        private CCWin.SkinControl.SkinCheckBox hideLineDesCheckBox;
+        private CCWin.SkinControl.SkinCheckBox hideLineTemCheckBox;
     }
 }
 

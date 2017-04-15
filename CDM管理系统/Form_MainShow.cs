@@ -27,13 +27,14 @@ namespace 流量计检定上位机
         CDM.ZedGraghUtils zedGraphUtilsDes;
         CDM.ZedGraghUtils zedGraphUtilsTem;
         CDM.ChartParameters paras = new CDM.ChartParameters();
+        CDM.Model.SerialPortConfig serialPortConfig = new CDM.Model.SerialPortConfig();
         //create a new SerialPort object with default settings.
         SerialPort serialPort = new SerialPort(); 
         //Modbus Rtu Master
         ModbusSerialMaster master;
 
         CDM.Para paraDensity;
-        CDM.Para paraFlow;
+        CDM.Para paraTem;
         CDM.Para paraYiBiaoXiShu = new CDM.Para() {Up = 1.2,Down = 0.8 };
 
         public SkinTextBox LabelYMax => labelYmax;
@@ -60,29 +61,6 @@ namespace 流量计检定上位机
             #region FormInit
             this.WindowState = FormWindowState.Maximized;
             #endregion
-
-            #region DataInit
-
-            flowUnitsComboBox.SelectedIndex = 0;
-            MainTabControl.SelectedIndex = 0;
-            baudComboBox.SelectedIndex = 1;
-            stopBitsComboBox.SelectedIndex = 1;
-            dataBitsComboBox.SelectedIndex = 2;
-            parityComboBox.SelectedIndex = 1;
-            biaoAddressTextbox.Value = 1;
-
-            paraDensity = new CDM.Para()
-            {
-                Up = 1,
-                Down = 0.5,
-            };
-            paraFlow = new CDM.Para()
-            {
-                Up = 40,
-                Down = 15,
-            };
-
-            #endregion
             #region Serialinit
             string[] ports = SerialPort.GetPortNames();
             Array.Sort(ports);
@@ -95,24 +73,39 @@ namespace 流量计检定上位机
             {
                 YTitle = "密度",
                 CurveName = "密度",
-                TotalTitle = "密度曲线"
+                TotalTitle = "密度曲线",
+                YMin = 500,
+                YMax = 1000,
             });
             zedGraphUtilsTem.Init(new CDM.ChartParameters()
             {
                 YTitle = "温度",
                 CurveName = "温度",
-                TotalTitle = "温度曲线"
+                TotalTitle = "温度曲线",
+                YMin = 0,
+                YMax = 100,
             });
             timerDraw.Enabled = true;
+
+            #endregion            
             #region FileInit
-            CDM.Service.FileService.ReadUserConfig(zedGraphUtilsDes, zedGraphUtilsTem);
+            CDM.Service.FileService.ReadUserConfig(zedGraphUtilsDes, zedGraphUtilsTem,serialPortConfig);
             zedGraphUtilsDes.RenewDataUpDown();
             zedGraphUtilsTem.RenewDataUpDown();
-            #endregion
-            #endregion
-            #region 更新文件的数据到UI
+            #endregion            
+            #region DataInit
+
+            flowUnitsComboBox.SelectedIndex = 0;
+            MainTabControl.SelectedIndex = 0;
+            baudComboBox.SelectedIndex = serialPortConfig.BaudRateIndex;
+            stopBitsComboBox.SelectedIndex = serialPortConfig.StopBitsIndex;
+            dataBitsComboBox.SelectedIndex = serialPortConfig.DataBitsIndex;
+            parityComboBox.SelectedIndex = serialPortConfig.ParityIndex;
+            biaoAddressTextbox.Value = serialPortConfig.BiaoAddressValue;
+
             #endregion
             Thread.Sleep(300);
+            #region MiduListInit
             CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
             CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
             CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
@@ -121,6 +114,7 @@ namespace 流量计检定上位机
             CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
             CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
             CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
+            #endregion
             #endregion
         }
         #endregion
@@ -163,8 +157,18 @@ namespace 流量计检定上位机
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            CDM.Service.FileService.SaveUserConfig(zedGraphUtilsDes, zedGraphUtilsTem);
+            ClosingSaveData();
+            CDM.Service.FileService.SaveUserConfig(zedGraphUtilsDes, zedGraphUtilsTem,serialPortConfig);
             base.OnFormClosing(e);
+        }
+
+        private void ClosingSaveData()
+        {
+            serialPortConfig.BaudRateIndex = baudComboBox.SelectedIndex;
+            serialPortConfig.StopBitsIndex = stopBitsComboBox.SelectedIndex ;
+            serialPortConfig.DataBitsIndex  = dataBitsComboBox.SelectedIndex;
+            serialPortConfig.ParityIndex = parityComboBox.SelectedIndex;
+            serialPortConfig.BiaoAddressValue = biaoAddressTextbox.Value;
         }
 
         #endregion
@@ -426,7 +430,7 @@ namespace 流量计检定上位机
 
         private void btnChangeUpDown_Click(object sender, EventArgs e)
         {
-            float ymax, ymin,desdown,desup,temdown,temup;
+            float ymax, ymin,desdown,desup,temdown,temup,miduxishu;
             try
             {
                 ymax = float.Parse(labelYmax.Text);
@@ -435,11 +439,19 @@ namespace 流量计检定上位机
                 desup = float.Parse(desUp.Text);
                 temdown = float.Parse(temDown.Text);
                 temup = float.Parse(temUp.Text);
+                miduxishu = float.Parse(MiDuXiShuTextBox.Text);
             }
             catch
             {
                 MessageBox.Show("输入的数不合规范,请重新输入");
                 return;
+            }
+            paraYiBiaoXiShu.Value = miduxishu;
+            if(paraYiBiaoXiShu.IsInRange == false)
+            {
+                MessageBox.Show($"密度仪表系数的范围在{paraYiBiaoXiShu.Down}到{paraYiBiaoXiShu.Up}之间");
+                MiDuXiShuTextBox.Text = paraYiBiaoXiShu.Value.ToString();
+                paraYiBiaoXiShu.IsInRange = true;
             }
             paras.YMax = ymax; paras.YMin = ymin;
             
@@ -506,6 +518,46 @@ namespace 流量计检定上位机
             {
                 zedGraphUtilsTem.ReNewFormUpDown();
             }
+        }
+
+        private void YiBiaoParaSettingButton_Click(object sender, EventArgs e)
+        {
+            MainTabControl.SelectedIndex = 1;
+        }
+
+        private void hideLineDesCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = sender as SkinCheckBox;
+            if (check.Checked == true)
+                zedGraphUtilsDes.HideUpDownLine();
+            else
+                zedGraphUtilsDes.RenewDataUpDown();
+            zedGraphUtilsDes.IsHideUpDownLine = check.Checked;
+        }
+
+        private void hideLineTemCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = sender as SkinCheckBox;
+            if (check.Checked == true)
+                zedGraphUtilsTem.HideUpDownLine();
+            else
+                zedGraphUtilsTem.RenewDataUpDown();
+            zedGraphUtilsTem.IsHideUpDownLine = check.Checked;
+        }
+
+        private void renewLineTemButton_Click(object sender, EventArgs e)
+        {
+            zedGraphUtilsTem.RenewUpDownLine();
+        }
+
+        private void renewLineDesButton_Click(object sender, EventArgs e)
+        {
+            zedGraphUtilsDes.RenewUpDownLine();
+        }
+
+        private void skinButton4_Click(object sender, EventArgs e)
+        {
+            MainTabControl.SelectedIndex = 2;
         }
 
         private void timerGetData_Tick(object sender, EventArgs e)
