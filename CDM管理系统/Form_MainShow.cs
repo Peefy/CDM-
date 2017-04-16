@@ -335,7 +335,6 @@ namespace 流量计检定上位机
         }
 
         #endregion
-
         #region SerialPort
 
         bool SerialPortClosing,Listening;
@@ -347,10 +346,9 @@ namespace 流量计检定上位机
                 if(serialPort.IsOpen)
                 {
                     SerialPortClosing = true;
-                    while (Listening)
-                        Application.DoEvents();
-                    serialPort.Close();
                     timerGetData.Enabled = false;
+                    master.Dispose();
+                    serialPort.Close();                 
                     SerialPortClosing = false;
                 }
             }
@@ -404,7 +402,6 @@ namespace 流量计检定上位机
         }
 
         #endregion
-
         #region Timer
 
         private void timerTime_Tick(object sender, EventArgs e)
@@ -597,14 +594,27 @@ namespace 流量计检定上位机
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timerGetData.Enabled = false;
+            master?.WriteMultipleRegisters(1, 0, new ushort[] { 0x1111, 0x2222 });
+            timerGetData.Enabled = true;
+        }
+
         private void timerGetData_Tick(object sender, EventArgs e)
         {
             try
             {
                 byte slaveID = 1;
                 ushort startAddress = 0;
-                ushort numofPoints = 2;
+                ushort numofPoints = 8;
                 ushort[] holdingregister = master.ReadHoldingRegisters(slaveID, startAddress, numofPoints);
+                labelStatus.Text = "";
+                foreach (var data in holdingregister)
+                {
+                    labelStatus.Text += data.ToString("X2") + " ";
+                }
+                
                 byte[] bytes= { };
                 for (int i = 0; i < numofPoints; i++)
                 {
@@ -624,7 +634,7 @@ namespace 流量计检定上位机
                 //The server maybe close the com port, or response timeout.
                 if (exception.Source.Equals("System"))
                 {
-                    Console.WriteLine(DateTime.Now.ToString() + " " + exception.Message);
+                    MessageBox.Show(DateTime.Now.ToString() + " " + exception.Message);
                 }
                 //The server return error code.
                 //You can get the function code and exception code.
@@ -636,25 +646,26 @@ namespace 流量计检定上位机
 
                     str = str.Remove(0, str.IndexOf("\r\n", StringComparison.Ordinal) + 17);
                     FunctionCode = Convert.ToInt16(str.Remove(str.IndexOf("\r\n", StringComparison.Ordinal)));
-                    Console.WriteLine("Function Code: " + FunctionCode.ToString("X"));
+                    MessageBox.Show("Function Code: " + FunctionCode.ToString("X"));
 
                     str = str.Remove(0, str.IndexOf("\r\n", StringComparison.Ordinal) + 17);
                     ExceptionCode = str.Remove(str.IndexOf("-", StringComparison.Ordinal));
                     switch (ExceptionCode.Trim())
                     {
                         case "1":
-                            Console.WriteLine("Exception Code: " + ExceptionCode.Trim() + "----> Illegal function!");
+                            MessageBox.Show("Exception Code: " + ExceptionCode.Trim() + "----> Illegal function!");
                             break;
                         case "2":
-                            Console.WriteLine("Exception Code: " + ExceptionCode.Trim() + "----> Illegal data address!");
+                            MessageBox.Show("Exception Code: " + ExceptionCode.Trim() + "----> Illegal data address!");
                             break;
                         case "3":
-                            Console.WriteLine("Exception Code: " + ExceptionCode.Trim() + "----> Illegal data value!");
+                            MessageBox.Show("Exception Code: " + ExceptionCode.Trim() + "----> Illegal data value!");
                             break;
                         case "4":
-                            Console.WriteLine("Exception Code: " + ExceptionCode.Trim() + "----> Slave device failure!");
+                            MessageBox.Show("Exception Code: " + ExceptionCode.Trim() + "----> Slave device failure!");
                             break;
                     }
+                    timerGetData.Enabled = false;
                 }
             }          
         }

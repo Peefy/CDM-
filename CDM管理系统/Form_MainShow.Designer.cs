@@ -109,6 +109,7 @@
             this.btnClearCurve = new CCWin.SkinControl.SkinButton();
             this.skinTabPage2 = new CCWin.SkinControl.SkinTabPage();
             this.skinGroupBox2 = new CCWin.SkinControl.SkinGroupBox();
+            this.exEXEPathTextBox = new CCWin.SkinControl.SkinTextBox();
             this.findExEXEButton = new CCWin.SkinControl.SkinButton();
             this.startupExEXEButton = new CCWin.SkinControl.SkinButton();
             this.skinGroupBox1 = new CCWin.SkinControl.SkinGroupBox();
@@ -126,7 +127,7 @@
             this.timerGetData = new System.Windows.Forms.Timer(this.components);
             this.timerTime = new System.Windows.Forms.Timer(this.components);
             this.timerDraw = new System.Windows.Forms.Timer(this.components);
-            this.exEXEPathTextBox = new CCWin.SkinControl.SkinTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.skinTabPage1.SuspendLayout();
@@ -1447,6 +1448,49 @@
             this.skinGroupBox2.TitleRectBackColor = System.Drawing.Color.DarkGray;
             this.skinGroupBox2.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
             // 
+            // exEXEPathTextBox
+            // 
+            this.exEXEPathTextBox.BackColor = System.Drawing.Color.Transparent;
+            this.exEXEPathTextBox.DownBack = null;
+            this.exEXEPathTextBox.Icon = null;
+            this.exEXEPathTextBox.IconIsButton = false;
+            this.exEXEPathTextBox.IconMouseState = CCWin.SkinClass.ControlState.Normal;
+            this.exEXEPathTextBox.IsPasswordChat = '\0';
+            this.exEXEPathTextBox.IsSystemPasswordChar = false;
+            this.exEXEPathTextBox.Lines = new string[0];
+            this.exEXEPathTextBox.Location = new System.Drawing.Point(15, 135);
+            this.exEXEPathTextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.exEXEPathTextBox.MaxLength = 32767;
+            this.exEXEPathTextBox.MinimumSize = new System.Drawing.Size(28, 28);
+            this.exEXEPathTextBox.MouseBack = null;
+            this.exEXEPathTextBox.MouseState = CCWin.SkinClass.ControlState.Normal;
+            this.exEXEPathTextBox.Multiline = true;
+            this.exEXEPathTextBox.Name = "exEXEPathTextBox";
+            this.exEXEPathTextBox.NormlBack = null;
+            this.exEXEPathTextBox.Padding = new System.Windows.Forms.Padding(5);
+            this.exEXEPathTextBox.ReadOnly = true;
+            this.exEXEPathTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.exEXEPathTextBox.Size = new System.Drawing.Size(166, 174);
+            // 
+            // 
+            // 
+            this.exEXEPathTextBox.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.exEXEPathTextBox.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.exEXEPathTextBox.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.exEXEPathTextBox.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.exEXEPathTextBox.SkinTxt.Multiline = true;
+            this.exEXEPathTextBox.SkinTxt.Name = "BaseText";
+            this.exEXEPathTextBox.SkinTxt.ReadOnly = true;
+            this.exEXEPathTextBox.SkinTxt.Size = new System.Drawing.Size(156, 164);
+            this.exEXEPathTextBox.SkinTxt.TabIndex = 0;
+            this.exEXEPathTextBox.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.exEXEPathTextBox.SkinTxt.WaterText = "";
+            this.exEXEPathTextBox.TabIndex = 32;
+            this.exEXEPathTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.exEXEPathTextBox.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.exEXEPathTextBox.WaterText = "";
+            this.exEXEPathTextBox.WordWrap = true;
+            // 
             // findExEXEButton
             // 
             this.findExEXEButton.BackColor = System.Drawing.Color.DarkGray;
@@ -1668,7 +1712,7 @@
             // 
             // timerGetData
             // 
-            this.timerGetData.Interval = 2000;
+            this.timerGetData.Interval = 1000;
             this.timerGetData.Tick += new System.EventHandler(this.timerGetData_Tick);
             // 
             // timerTime
@@ -1682,48 +1726,15 @@
             this.timerDraw.Interval = 200;
             this.timerDraw.Tick += new System.EventHandler(this.timerDraw_Tick);
             // 
-            // exEXEPathTextBox
+            // button1
             // 
-            this.exEXEPathTextBox.BackColor = System.Drawing.Color.Transparent;
-            this.exEXEPathTextBox.DownBack = null;
-            this.exEXEPathTextBox.Icon = null;
-            this.exEXEPathTextBox.IconIsButton = false;
-            this.exEXEPathTextBox.IconMouseState = CCWin.SkinClass.ControlState.Normal;
-            this.exEXEPathTextBox.IsPasswordChat = '\0';
-            this.exEXEPathTextBox.IsSystemPasswordChar = false;
-            this.exEXEPathTextBox.Lines = new string[0];
-            this.exEXEPathTextBox.Location = new System.Drawing.Point(15, 135);
-            this.exEXEPathTextBox.Margin = new System.Windows.Forms.Padding(0);
-            this.exEXEPathTextBox.MaxLength = 32767;
-            this.exEXEPathTextBox.MinimumSize = new System.Drawing.Size(28, 28);
-            this.exEXEPathTextBox.MouseBack = null;
-            this.exEXEPathTextBox.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.exEXEPathTextBox.Multiline = true;
-            this.exEXEPathTextBox.Name = "exEXEPathTextBox";
-            this.exEXEPathTextBox.NormlBack = null;
-            this.exEXEPathTextBox.Padding = new System.Windows.Forms.Padding(5);
-            this.exEXEPathTextBox.ReadOnly = true;
-            this.exEXEPathTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.exEXEPathTextBox.Size = new System.Drawing.Size(166, 174);
-            // 
-            // 
-            // 
-            this.exEXEPathTextBox.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.exEXEPathTextBox.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.exEXEPathTextBox.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
-            this.exEXEPathTextBox.SkinTxt.Location = new System.Drawing.Point(5, 5);
-            this.exEXEPathTextBox.SkinTxt.Multiline = true;
-            this.exEXEPathTextBox.SkinTxt.Name = "BaseText";
-            this.exEXEPathTextBox.SkinTxt.ReadOnly = true;
-            this.exEXEPathTextBox.SkinTxt.Size = new System.Drawing.Size(156, 164);
-            this.exEXEPathTextBox.SkinTxt.TabIndex = 0;
-            this.exEXEPathTextBox.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.exEXEPathTextBox.SkinTxt.WaterText = "";
-            this.exEXEPathTextBox.TabIndex = 32;
-            this.exEXEPathTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.exEXEPathTextBox.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.exEXEPathTextBox.WaterText = "";
-            this.exEXEPathTextBox.WordWrap = true;
+            this.button1.Location = new System.Drawing.Point(36, 583);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 32;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form_MainShow
             // 
@@ -1733,8 +1744,7 @@
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1272, 727);
             this.ControlBox = false;
-            this.ControlBoxActive = System.Drawing.Color.Gray;
-            this.ControlBoxDeactive = System.Drawing.Color.DarkGray;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.skinLabel9);
@@ -1882,6 +1892,7 @@
         private CCWin.SkinControl.SkinGroupBox skinGroupBox2;
         private CCWin.SkinControl.SkinButton findExEXEButton;
         private CCWin.SkinControl.SkinTextBox exEXEPathTextBox;
+        private System.Windows.Forms.Button button1;
     }
 }
 
