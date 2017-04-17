@@ -45,9 +45,12 @@ namespace 流量计检定上位机
         public SkinTextBox DesUp => desUp;
         public SkinTextBox TemDown => temDown;
         public SkinTextBox TemUp => temUp;
+
         public TabControl TabControl => tabControl1;
         public bool GraphEnable => timerDraw.Enabled;
-        public bool CurveFollow => timerDraw.Enabled;
+        public bool CurveFollow => curveCheckBox.Checked;
+
+        public double TimeDraw_s => timerDraw.Interval / 1000.0;
 
         #endregion
         #region 主窗体初始化
@@ -365,17 +368,17 @@ namespace 流量计检定上位机
                     serialPort.PortName = comcmb.Text;
                     serialPort.BaudRate = serialPortConfig.BaudRateFromIndex;  
                     serialPort.DataBits = serialPortConfig.DataBitsFromIndex;
-                    serialPort.Parity = serialPortConfig.ParityFromIndex;    //一般是偶校验
+                    serialPort.Parity = serialPortConfig.ParityFromIndex;    
                     serialPort.StopBits = serialPortConfig.StopBitsFromIndex;//一般是1位停止位
                     serialPort.Open();
-                    master = ModbusSerialMaster.CreateRtu(serialPort);                 
+                    master = ModbusSerialMaster.CreateRtu(serialPort);              
                     master.Transport.Retries = 0;   //don't have to do retries
                     master.Transport.ReadTimeout = 300; //milliseconds
                     timerGetData.Enabled = true;
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show("串口打开失败！\r\n" + "可能原因:" + ex.Message);
+                    MessageBox.Show($"串口打开失败！\r\n可能原因:{ex.Message}");
                 }
             }
             btnConnect.Text = serialPort.IsOpen ? "关闭" : "打开";
@@ -605,18 +608,17 @@ namespace 流量计检定上位机
         {
             try
             {
-                byte slaveID = 1;
+                byte slaveID = Convert.ToByte(serialPortConfig.BiaoAddressValue);
                 ushort startAddress = 0;
-                ushort numofPoints = 8;
+                ushort numofPoints = 8;  //数据帧中 word 的数量
                 ushort[] holdingregister = master.ReadHoldingRegisters(slaveID, startAddress, numofPoints);
                 labelStatus.Text = "";
                 foreach (var data in holdingregister)
                 {
                     labelStatus.Text += data.ToString("X2") + " ";
-                }
-                
+                }          
                 byte[] bytes= { };
-                for (int i = 0; i < numofPoints; i++)
+                for (int i = 0; i < numofPoints * 2; i++)
                 {
                     byte[] byteTemp;
                     byteTemp = BitConverter.GetBytes(holdingregister[i]);
@@ -625,7 +627,7 @@ namespace 流量计检定上位机
                 float val = BitConverterHelper.ToSingle(bytes, 0);
                 val = (float)(Math.Round(val, 3));
                 labelMidu.Text = val.ToString();
-                CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, val));
+                //CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, val));
             }
             catch (Exception exception)
             {

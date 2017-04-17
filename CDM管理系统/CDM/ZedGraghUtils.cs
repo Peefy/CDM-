@@ -254,7 +254,7 @@ namespace 流量计检定上位机.CDM
             myPane.Title.Text = paras.TotalTitle;
             myPane.XAxis.Title.Text = paras.XTitle;
             myPane.YAxis.Title.Text = paras.YTitle;
-            RollingPointPairList list = new RollingPointPairList(200000);
+            RollingPointPairList list = new RollingPointPairList(200000); 
             LineItem curve = myPane.AddCurve(paras.CurveName, list, Color.Black, SymbolType.None);
 
             myPane.AddCurve("上限", new RollingPointPairList(40000), Color.Red, SymbolType.None);
@@ -312,12 +312,19 @@ namespace 流量计检定上位机.CDM
             double time = (Environment.TickCount - tickStart) / 1000.0;
             list.Add(time,new Random().Next(7));
             //list.Add(time, addData);
-
             Scale xScale = zedgraphControl.GraphPane.XAxis.Scale;
-            if(time > xScale.Max - xScale.MajorStep)
+            if(formMain.CurveFollow == false)
             {
-                xScale.Min = 0;
-                xScale.Max = xScale.Max + 300;
+                if (time > xScale.Max - xScale.MajorStep)
+                {
+                    xScale.Min += 150;
+                    xScale.Max += 150;
+                }
+            }
+            else 
+            {
+                xScale.Min = xScale.Min + formMain.TimeDraw_s;
+                xScale.Max = xScale.Max + formMain.TimeDraw_s;
             }
             zedgraphControl.AxisChange();
             zedgraphControl.Invalidate();

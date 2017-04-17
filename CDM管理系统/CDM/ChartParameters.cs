@@ -36,7 +36,7 @@ namespace 流量计检定上位机.CDM
         public float XMin { get; set; }
         public float XMax { get; set; }
         public string TotalTitle { get; set; } = "Title";
-        public string XTitle { get; set; } = "采样点数";
+        public string XTitle { get; set; } = "采样时间/s";
         public string YTitle { get; set; } = "变量";
         public string CurveName { get; set; } = "密度";
     }
