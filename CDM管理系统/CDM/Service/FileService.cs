@@ -37,6 +37,9 @@ namespace 流量计检定上位机.CDM.Service
 
             w.Write(ser.ProLinkPath);
 
+            w.Write(ser.DesValueAddress);
+            w.Write(ser.TemValueAddress);
+
             w.Flush();
             w.Close();
             fs.Close();
@@ -78,6 +81,9 @@ namespace 流量计检定上位机.CDM.Service
                     ser.BiaoAddressValue = r.ReadDecimal();
 
                     ser.ProLinkPath = r.ReadString();
+
+                    ser.DesValueAddress = r.ReadInt32();
+                    ser.TemValueAddress = r.ReadInt32();
 
                 }
                 fs.Close();

@@ -142,7 +142,7 @@
             // MenuItemGenerateExcel
             // 
             this.MenuItemGenerateExcel.BackColor = System.Drawing.Color.DarkGray;
-            this.MenuItemGenerateExcel.Image = global::流量计检定上位机.Properties.Resources.excel;
+            this.MenuItemGenerateExcel.Image = global::CDM管理系统.Properties.Resources.excel;
             this.MenuItemGenerateExcel.Name = "MenuItemGenerateExcel";
             this.MenuItemGenerateExcel.Size = new System.Drawing.Size(189, 22);
             this.MenuItemGenerateExcel.Text = "生成Excel";
@@ -168,18 +168,18 @@
             // 保存数据ToolStripMenuItem
             // 
             this.保存数据ToolStripMenuItem.BackColor = System.Drawing.Color.DarkGray;
-            this.保存数据ToolStripMenuItem.Image = global::流量计检定上位机.Properties.Resources.save;
+            this.保存数据ToolStripMenuItem.Image = global::CDM管理系统.Properties.Resources.save;
             this.保存数据ToolStripMenuItem.Name = "保存数据ToolStripMenuItem";
-            this.保存数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.保存数据ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.保存数据ToolStripMenuItem.Text = "保存数据";
             this.保存数据ToolStripMenuItem.Click += new System.EventHandler(this.保存数据ToolStripMenuItem_Click);
             // 
             // 查询数据ToolStripMenuItem
             // 
             this.查询数据ToolStripMenuItem.BackColor = System.Drawing.Color.DarkGray;
-            this.查询数据ToolStripMenuItem.Image = global::流量计检定上位机.Properties.Resources.find;
+            this.查询数据ToolStripMenuItem.Image = global::CDM管理系统.Properties.Resources.find;
             this.查询数据ToolStripMenuItem.Name = "查询数据ToolStripMenuItem";
-            this.查询数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.查询数据ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.查询数据ToolStripMenuItem.Text = "查询数据";
             this.查询数据ToolStripMenuItem.Click += new System.EventHandler(this.查询数据ToolStripMenuItem_Click);
             // 
@@ -198,7 +198,7 @@
             this.toolBarToolStripMenuItem.CheckOnClick = true;
             this.toolBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolBarToolStripMenuItem.Name = "toolBarToolStripMenuItem";
-            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.toolBarToolStripMenuItem.Text = "工具栏(&T)";
             this.toolBarToolStripMenuItem.Click += new System.EventHandler(this.ToolBarToolStripMenuItem_Click);
             // 
@@ -220,7 +220,7 @@
             // 
             this.RegisterMenuItem.BackColor = System.Drawing.Color.DarkGray;
             this.RegisterMenuItem.Name = "RegisterMenuItem";
-            this.RegisterMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.RegisterMenuItem.Size = new System.Drawing.Size(124, 22);
             this.RegisterMenuItem.Text = "使用说明";
             this.RegisterMenuItem.Click += new System.EventHandler(this.RegisterMenuItem_Click);
             // 
@@ -287,7 +287,7 @@
             // toolStripButton4
             // 
             this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = global::流量计检定上位机.Properties.Resources.excel;
+            this.toolStripButton4.Image = global::CDM管理系统.Properties.Resources.excel;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
@@ -302,7 +302,7 @@
             // toolStripButton5
             // 
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = global::流量计检定上位机.Properties.Resources.save;
+            this.toolStripButton5.Image = global::CDM管理系统.Properties.Resources.save;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
@@ -312,7 +312,7 @@
             // toolStripButton6
             // 
             this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = global::流量计检定上位机.Properties.Resources.find;
+            this.toolStripButton6.Image = global::CDM管理系统.Properties.Resources.find;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
@@ -322,7 +322,8 @@
             // timerGetData
             // 
             this.timerGetData.Enabled = true;
-            this.timerGetData.Interval = 200;
+            this.timerGetData.Interval = 80;
+            //this.timerGetData.Tick += new System.EventHandler(this.timerGetData_Tick);
             // 
             // timerShowTime
             // 

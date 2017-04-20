@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-
-using System.Threading;
-using Modbus;
-using System.Net;
-using SocketCom;
-using Modbus.Device;
 using System.IO.Ports;
-
-using CCWin.SkinControl;
+using System.Threading;
 using System.Diagnostics;
+
+using Modbus.Device;
+using CCWin.SkinControl;
+
 
 namespace 流量计检定上位机
 {
@@ -29,8 +25,8 @@ namespace 流量计检定上位机
         CDM.ZedGraghUtils zedGraphUtilsTem;
         CDM.ChartParameters paras = new CDM.ChartParameters();
         CDM.Model.SerialPortConfig serialPortConfig = new CDM.Model.SerialPortConfig();
-        CDM.Para paraDensity;
-        CDM.Para paraTem;
+        CDM.Para paraDensity = new CDM.Para() { Value = 1,Up = 10000,Down = 0};
+        CDM.Para paraTem = new CDM.Para() { Value = 1 ,Up = 10000,Down = 0};
         CDM.Para paraYiBiaoXiShu = new CDM.Para() {Up = 1.2f,Down = 0.8f };
 
         CDM.Sqlite.ComWithSqlite ComWithSqliteServer;
@@ -60,7 +56,11 @@ namespace 流量计检定上位机
             InitializeComponent();
             ComWithSqliteServer = new CDM.Sqlite.ComWithSqlite();
             zedGraphUtilsDes = new CDM.ZedGraghUtils(zedGraphControl1,this);
-            zedGraphUtilsTem = new CDM.ZedGraghUtils(zedGraphControl2,this);
+            zedGraphUtilsTem = new CDM.ZedGraghUtils(zedGraphControl2, this)
+            {
+                DataDown = 10,
+                DataUp = 50,
+            };
         }
 
         public void Init()
@@ -103,6 +103,9 @@ namespace 流量计检定上位机
             #endregion            
             #region DataInit
 
+            paraDensity.Value = 1;
+            paraTem.Value = 1;
+
             flowUnitsComboBox.SelectedIndex = 0;
             MainTabControl.SelectedIndex = 0;
             baudComboBox.SelectedIndex = serialPortConfig.BaudRateIndex;
@@ -111,6 +114,9 @@ namespace 流量计检定上位机
             parityComboBox.SelectedIndex = serialPortConfig.ParityIndex;
             biaoAddressTextbox.Value = serialPortConfig.BiaoAddressValue;
             exEXEPathTextBox.Text = serialPortConfig.ProLinkPath;
+
+            desAddressNumericUpDown.Value = serialPortConfig.DesValueAddress;
+            temAddressNumericUpDown.Value = serialPortConfig.TemValueAddress;
 
             #endregion
             Thread.Sleep(300);
@@ -183,6 +189,12 @@ namespace 流量计检定上位机
             serialPortConfig.ParityIndex = parityComboBox.SelectedIndex;
             serialPortConfig.BiaoAddressValue = biaoAddressTextbox.Value;
             serialPortConfig.ProLinkPath = exEXEPathTextBox.Text;
+
+            serialPortConfig.DesValueAddress = 
+                Convert.ToInt32(desAddressNumericUpDown.Value);
+            serialPortConfig.TemValueAddress =
+                Convert.ToInt32(temAddressNumericUpDown.Value);
+
         }
 
         protected override void OnMouseWheel(MouseEventArgs e)
@@ -419,8 +431,9 @@ namespace 流量计检定上位机
 
         private void timerDraw_Tick(object sender, EventArgs e)
         {         
-            zedGraphUtilsDes.TimeDraw(float.Parse(labelMidu.Text));
-            zedGraphUtilsTem.TimeDraw(12);
+            zedGraphUtilsDes.TimeDraw(paraDensity.Value);
+            zedGraphUtilsTem.TimeDraw(paraTem.Value);
+            //labelMidu.Text = paraDensity.Value.ToString();
         }
 
         private void btnStartCurve_Click(object sender, EventArgs e)
@@ -441,6 +454,7 @@ namespace 流量计检定上位机
         {
             timerDraw.Enabled = false;
             zedGraphUtilsDes.Clear();
+            zedGraphUtilsTem.Clear();
             timerDraw.Enabled = true;
         }
 
@@ -599,49 +613,72 @@ namespace 流量计检定上位机
 
         private void button1_Click(object sender, EventArgs e)
         {
-            timerGetData.Enabled = false;
-            master?.WriteMultipleRegisters(1, 0, new ushort[] { 0x1111, 0x2222 });
-            timerGetData.Enabled = true;
+            //timerGetData.Enabled = false;
+            master?.WriteMultipleRegisters(1, 0, new ushort[] { 0x1234, 0x2222,0x2135 });
+            //timerGetData.Enabled = true;
+        }
+
+        private void desAddressNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            var updown = sender as SkinNumericUpDown;
+            serialPortConfig.DesValueAddress = Convert.ToInt32(updown.Value);
+        }
+
+        private void temAddressNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            var updown = sender as SkinNumericUpDown;
+            serialPortConfig.TemValueAddress = Convert.ToInt32(updown.Value);
+        }
+
+        float GetDesTemData(int dataAddress)
+        {
+            byte slaveID = Convert.ToByte(serialPortConfig.BiaoAddressValue);
+            ushort startAddress = (ushort)dataAddress;
+            ushort numofPoints = 2;  //数据帧中 word 的数量
+            ushort[] holdingregister = master.ReadHoldingRegisters(slaveID, startAddress, numofPoints);
+            byte[] bytes = { };
+            for (int i = 0; i < numofPoints * 2; i++)
+            {
+                byte[] byteTemp;
+                byteTemp = BitConverter.GetBytes(holdingregister[i]);
+                bytes = BitConverterHelper.BytesConnect(bytes, byteTemp);
+            }
+            float val = BitConverterHelper.ToSingle(bytes, 0);
+            val = (float)(Math.Round(val, 3));
+            return val;
+        }
+
+        private void timerSave_Tick(object sender, EventArgs e)
+        {
+
         }
 
         private void timerGetData_Tick(object sender, EventArgs e)
         {
             try
             {
-                byte slaveID = Convert.ToByte(serialPortConfig.BiaoAddressValue);
-                ushort startAddress = 0;
-                ushort numofPoints = 8;  //数据帧中 word 的数量
-                ushort[] holdingregister = master.ReadHoldingRegisters(slaveID, startAddress, numofPoints);
-                labelStatus.Text = "";
-                foreach (var data in holdingregister)
-                {
-                    labelStatus.Text += data.ToString("X2") + " ";
-                }          
-                byte[] bytes= { };
-                for (int i = 0; i < numofPoints * 2; i++)
-                {
-                    byte[] byteTemp;
-                    byteTemp = BitConverter.GetBytes(holdingregister[i]);
-                    bytes = BitConverterHelper.BytesConnect(bytes, byteTemp);
-                }
-                float val = BitConverterHelper.ToSingle(bytes, 0);
-                val = (float)(Math.Round(val, 3));
-                labelMidu.Text = val.ToString();
-                //CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, val));
+                paraDensity.Value = GetDesTemData(serialPortConfig.DesValueAddress);
+                paraTem.Value = GetDesTemData(serialPortConfig.TemValueAddress);
+                labelMidu.Text = paraDensity.Value.ToString();
+                LabelTemp.Text = paraTem.Value.ToString();
             }
             catch (Exception exception)
             {
+                timerGetData.Enabled = false;
+                timerGetData.Stop();
                 //Connection exception
                 //No response from server.
                 //The server maybe close the com port, or response timeout.
                 if (exception.Source.Equals("System"))
                 {
                     MessageBox.Show(DateTime.Now.ToString() + " " + exception.Message);
+
                 }
                 //The server return error code.
                 //You can get the function code and exception code.
                 if (exception.Source.Equals("nModbusPC"))
                 {
+    
                     string str = exception.Message;
                     int FunctionCode;
                     string ExceptionCode;
@@ -655,19 +692,22 @@ namespace 流量计检定上位机
                     switch (ExceptionCode.Trim())
                     {
                         case "1":
-                            MessageBox.Show("Exception Code: " + ExceptionCode.Trim() + "----> Illegal function!");
+                            MessageBox.Show("Exception Code: " + ExceptionCode.Trim() + "----> Illegal function!" );
                             break;
                         case "2":
-                            MessageBox.Show("Exception Code: " + ExceptionCode.Trim() + "----> Illegal data address!");
+                            MessageBox.Show("Exception Code: " + ExceptionCode.Trim() + "----> Illegal data address!" );
                             break;
                         case "3":
-                            MessageBox.Show("Exception Code: " + ExceptionCode.Trim() + "----> Illegal data value!");
+                            MessageBox.Show("Exception Code: " + ExceptionCode.Trim() + "----> Illegal data value!"  );
                             break;
                         case "4":
-                            MessageBox.Show("Exception Code: " + ExceptionCode.Trim() + "----> Slave device failure!");
+                            MessageBox.Show("Exception Code: " + ExceptionCode.Trim() + "----> Slave device failure!" );
                             break;
+
                     }
-                    timerGetData.Enabled = false;
+                   
+                    //this.formMain.Close();
+
                 }
             }          
         }

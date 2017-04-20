@@ -19,6 +19,9 @@ namespace 流量计检定上位机.CDM.Model
 
         public string ProLinkPath { get; set; } = "";
 
+        public int DesValueAddress { get; set; } = 100;
+        public int TemValueAddress { get; set; } = 200;
+
         public int BaudRateFromIndex
         {
             get

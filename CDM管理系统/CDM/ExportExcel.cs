@@ -10,7 +10,7 @@ namespace 流量计检定上位机.CDM
     class ExportExcel
     {
         const string ExcelSaveFilter = "生成excel（*.xls）|*.xls";
-        string strHeaderText = "密度数据";
+        string strHeaderText = "采集数据";
 
         public int ColumnCount { get; private set; } = 2;
 

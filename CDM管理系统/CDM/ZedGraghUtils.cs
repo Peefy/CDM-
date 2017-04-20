@@ -14,11 +14,11 @@ namespace 流量计检定上位机.CDM
         ZedGraphControl zedgraphControl;
         Form_MainShow formMain;
 
-        public double DataUp { get; set; } = 10;
-        public double DataDown { get; set; } = 1;
+        public double DataUp { get; set; } = 800;
+        public double DataDown { get; set; } = 600;
 
-        public double DataUpDragRenew { get; set; } = 10;
-        public double DataDownDragRenew { get; set; } = 1;
+        public double DataUpDragRenew { get; set; } = 800;
+        public double DataDownDragRenew { get; set; } = 600;
 
         public bool IsHideUpDownLine { get; set; }
 
@@ -71,6 +71,8 @@ namespace 流量计检定上位机.CDM
             zedgraphControl.MouseDownEvent += ZedgraphControl_MouseDownEvent;
             zedgraphControl.MouseMoveEvent += ZedgraphControl_MouseMoveEvent;
             zedgraphControl.MouseUpEvent += ZedgraphControl_MouseUpEvent;
+            DataDownDragRenew = DataDown;
+            DataUpDragRenew = DataUp;
         }
 
         bool JudgeIsUp(Point point)
@@ -310,8 +312,8 @@ namespace 流量计检定上位机.CDM
             if (list == null)
                 return;
             double time = (Environment.TickCount - tickStart) / 1000.0;
-            list.Add(time,new Random().Next(7));
-            //list.Add(time, addData);
+            //list.Add(time,new Random().Next(7));
+            list.Add(time, addData);
             Scale xScale = zedgraphControl.GraphPane.XAxis.Scale;
             if(formMain.CurveFollow == false)
             {

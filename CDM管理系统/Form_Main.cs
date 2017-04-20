@@ -201,5 +201,7 @@ namespace 流量计检定上位机
                 MessageBox.Show("注册码不对！");
             }  
         }
+
+
     }
 }
