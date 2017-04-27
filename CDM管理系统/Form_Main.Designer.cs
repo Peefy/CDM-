@@ -323,7 +323,6 @@
             // 
             this.timerGetData.Enabled = true;
             this.timerGetData.Interval = 80;
-            //this.timerGetData.Tick += new System.EventHandler(this.timerGetData_Tick);
             // 
             // timerShowTime
             // 
@@ -459,8 +458,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1288, 693);
-            this.ControlBoxActive = System.Drawing.Color.Gray;
-            this.ControlBoxDeactive = System.Drawing.Color.DarkGray;
             this.Controls.Add(this.panelRegister);
             this.Controls.Add(this.skinLabel9);
             this.Controls.Add(this.toolStrip);

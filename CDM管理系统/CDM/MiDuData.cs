@@ -16,5 +16,7 @@ namespace 流量计检定上位机.CDM
             Data = data;
         }
 
+        public static List<CDM.Sqlite.GatherSave> ListSave = new List<Sqlite.GatherSave>();
+
     }
 }

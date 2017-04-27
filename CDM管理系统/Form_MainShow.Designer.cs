@@ -70,8 +70,6 @@
             this.btnRenew = new CCWin.SkinControl.SkinButton();
             this.btnConnect = new CCWin.SkinControl.SkinButton();
             this.groupDataShow = new CCWin.SkinControl.SkinGroupBox();
-            this.temAddressNumericUpDown = new CCWin.SkinControl.SkinNumericUpDown();
-            this.desAddressNumericUpDown = new CCWin.SkinControl.SkinNumericUpDown();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flowUnitsComboBox = new CCWin.SkinControl.SkinComboBox();
@@ -80,7 +78,7 @@
             this.skinLabel13 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel11 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel6 = new CCWin.SkinControl.SkinLabel();
-            this.MiDuXiShuTextBox = new CCWin.SkinControl.SkinTextBox();
+            this.K0_TextBox = new CCWin.SkinControl.SkinTextBox();
             this.skinLabel2 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel5 = new CCWin.SkinControl.SkinLabel();
             this.LabelTemp = new CCWin.SkinControl.SkinLabel();
@@ -89,7 +87,6 @@
             this.skinLabel27 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel26 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel3 = new CCWin.SkinControl.SkinLabel();
-            this.skinLine5 = new CCWin.SkinControl.SkinLine();
             this.skinLine4 = new CCWin.SkinControl.SkinLine();
             this.skinLine3 = new CCWin.SkinControl.SkinLine();
             this.skinLine2 = new CCWin.SkinControl.SkinLine();
@@ -130,10 +127,27 @@
             this.skinLabel16 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel15 = new CCWin.SkinControl.SkinLabel();
             this.skinTabPage3 = new CCWin.SkinControl.SkinTabPage();
+            this.textBoxFindResult = new System.Windows.Forms.TextBox();
+            this.skinGroupBox3 = new CCWin.SkinControl.SkinGroupBox();
+            this.isFindMin = new System.Windows.Forms.CheckBox();
+            this.btnFindData = new CCWin.SkinControl.SkinButton();
+            this.skinLabel7 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel28 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel29 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel32 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel31 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel30 = new CCWin.SkinControl.SkinLabel();
+            this.mnupMin = new CCWin.SkinControl.SkinNumericUpDown();
+            this.nmupHour = new CCWin.SkinControl.SkinNumericUpDown();
+            this.nmupDay = new CCWin.SkinControl.SkinNumericUpDown();
+            this.nmupMonth = new CCWin.SkinControl.SkinNumericUpDown();
+            this.nmupYear = new CCWin.SkinControl.SkinNumericUpDown();
             this.timerGetData = new System.Windows.Forms.Timer(this.components);
             this.timerTime = new System.Windows.Forms.Timer(this.components);
             this.timerDraw = new System.Windows.Forms.Timer(this.components);
             this.timerSave = new System.Windows.Forms.Timer(this.components);
+            this.K1_TextBox = new CCWin.SkinControl.SkinTextBox();
+            this.K2_TextBox = new CCWin.SkinControl.SkinTextBox();
             this.panel2.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.skinTabPage1.SuspendLayout();
@@ -144,8 +158,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.temWarningFlag)).BeginInit();
             this.groupConnectSet.SuspendLayout();
             this.groupDataShow.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.temAddressNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.desAddressNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupSetDemarcate.SuspendLayout();
@@ -154,6 +166,13 @@
             this.skinGroupBox2.SuspendLayout();
             this.skinGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.biaoAddressTextbox)).BeginInit();
+            this.skinTabPage3.SuspendLayout();
+            this.skinGroupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mnupMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmupHour)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmupDay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmupMonth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmupYear)).BeginInit();
             this.SuspendLayout();
             // 
             // labelTime
@@ -182,7 +201,7 @@
             this.skinLabel9.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel9.BorderColor = System.Drawing.Color.White;
             this.skinLabel9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel9.Location = new System.Drawing.Point(24, -15);
+            this.skinLabel9.Location = new System.Drawing.Point(25, -15);
             this.skinLabel9.Name = "skinLabel9";
             this.skinLabel9.Size = new System.Drawing.Size(69, 17);
             this.skinLabel9.TabIndex = 28;
@@ -194,7 +213,7 @@
             this.labelStatus.BackColor = System.Drawing.Color.Transparent;
             this.labelStatus.BorderColor = System.Drawing.Color.White;
             this.labelStatus.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.labelStatus.Location = new System.Drawing.Point(6, 3);
+            this.labelStatus.Location = new System.Drawing.Point(6, 19);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(37, 20);
             this.labelStatus.TabIndex = 29;
@@ -242,12 +261,12 @@
             this.MainTabControl.BackColor = System.Drawing.Color.DarkGray;
             this.MainTabControl.CloseRect = new System.Drawing.Rectangle(2, 2, 12, 12);
             this.MainTabControl.Controls.Add(this.skinTabPage1);
-            this.MainTabControl.Controls.Add(this.skinTabPage2);
             this.MainTabControl.Controls.Add(this.skinTabPage3);
+            this.MainTabControl.Controls.Add(this.skinTabPage2);
             this.MainTabControl.HeadBack = null;
             this.MainTabControl.ImgTxtOffset = new System.Drawing.Point(0, 0);
             this.MainTabControl.ItemSize = new System.Drawing.Size(120, 40);
-            this.MainTabControl.Location = new System.Drawing.Point(3, 3);
+            this.MainTabControl.Location = new System.Drawing.Point(4, 5);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.PageArrowDown = ((System.Drawing.Image)(resources.GetObject("MainTabControl.PageArrowDown")));
             this.MainTabControl.PageArrowHover = ((System.Drawing.Image)(resources.GetObject("MainTabControl.PageArrowHover")));
@@ -257,8 +276,8 @@
             this.MainTabControl.PageHover = ((System.Drawing.Image)(resources.GetObject("MainTabControl.PageHover")));
             this.MainTabControl.PageImagePosition = CCWin.SkinControl.SkinTabControl.ePageImagePosition.Left;
             this.MainTabControl.PageNorml = null;
-            this.MainTabControl.SelectedIndex = 2;
-            this.MainTabControl.Size = new System.Drawing.Size(1269, 618);
+            this.MainTabControl.SelectedIndex = 0;
+            this.MainTabControl.Size = new System.Drawing.Size(1269, 605);
             this.MainTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.MainTabControl.TabIndex = 31;
             // 
@@ -274,7 +293,7 @@
             this.skinTabPage1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.skinTabPage1.Location = new System.Drawing.Point(0, 40);
             this.skinTabPage1.Name = "skinTabPage1";
-            this.skinTabPage1.Size = new System.Drawing.Size(1269, 578);
+            this.skinTabPage1.Size = new System.Drawing.Size(1269, 565);
             this.skinTabPage1.TabIndex = 0;
             this.skinTabPage1.TabItemImage = null;
             this.skinTabPage1.Text = "主界面";
@@ -797,8 +816,6 @@
             // 
             this.groupDataShow.BackColor = System.Drawing.Color.Transparent;
             this.groupDataShow.BorderColor = System.Drawing.Color.Black;
-            this.groupDataShow.Controls.Add(this.temAddressNumericUpDown);
-            this.groupDataShow.Controls.Add(this.desAddressNumericUpDown);
             this.groupDataShow.Controls.Add(this.pictureBox2);
             this.groupDataShow.Controls.Add(this.pictureBox1);
             this.groupDataShow.Controls.Add(this.flowUnitsComboBox);
@@ -807,7 +824,9 @@
             this.groupDataShow.Controls.Add(this.skinLabel13);
             this.groupDataShow.Controls.Add(this.skinLabel11);
             this.groupDataShow.Controls.Add(this.skinLabel6);
-            this.groupDataShow.Controls.Add(this.MiDuXiShuTextBox);
+            this.groupDataShow.Controls.Add(this.K2_TextBox);
+            this.groupDataShow.Controls.Add(this.K1_TextBox);
+            this.groupDataShow.Controls.Add(this.K0_TextBox);
             this.groupDataShow.Controls.Add(this.skinLabel2);
             this.groupDataShow.Controls.Add(this.skinLabel5);
             this.groupDataShow.Controls.Add(this.LabelTemp);
@@ -816,7 +835,6 @@
             this.groupDataShow.Controls.Add(this.skinLabel27);
             this.groupDataShow.Controls.Add(this.skinLabel26);
             this.groupDataShow.Controls.Add(this.skinLabel3);
-            this.groupDataShow.Controls.Add(this.skinLine5);
             this.groupDataShow.Controls.Add(this.skinLine4);
             this.groupDataShow.Controls.Add(this.skinLine3);
             this.groupDataShow.Controls.Add(this.skinLine2);
@@ -830,49 +848,13 @@
             this.groupDataShow.Name = "groupDataShow";
             this.groupDataShow.RectBackColor = System.Drawing.Color.DarkGray;
             this.groupDataShow.RoundStyle = CCWin.SkinClass.RoundStyle.All;
-            this.groupDataShow.Size = new System.Drawing.Size(200, 440);
+            this.groupDataShow.Size = new System.Drawing.Size(200, 435);
             this.groupDataShow.TabIndex = 4;
             this.groupDataShow.TabStop = false;
             this.groupDataShow.Text = "数据显示";
             this.groupDataShow.TitleBorderColor = System.Drawing.Color.Black;
             this.groupDataShow.TitleRectBackColor = System.Drawing.Color.DarkGray;
             this.groupDataShow.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
-            // 
-            // temAddressNumericUpDown
-            // 
-            this.temAddressNumericUpDown.Location = new System.Drawing.Point(11, 222);
-            this.temAddressNumericUpDown.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.temAddressNumericUpDown.Name = "temAddressNumericUpDown";
-            this.temAddressNumericUpDown.Size = new System.Drawing.Size(180, 29);
-            this.temAddressNumericUpDown.TabIndex = 33;
-            this.temAddressNumericUpDown.Value = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.temAddressNumericUpDown.ValueChanged += new System.EventHandler(this.temAddressNumericUpDown_ValueChanged);
-            // 
-            // desAddressNumericUpDown
-            // 
-            this.desAddressNumericUpDown.Location = new System.Drawing.Point(11, 169);
-            this.desAddressNumericUpDown.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.desAddressNumericUpDown.Name = "desAddressNumericUpDown";
-            this.desAddressNumericUpDown.Size = new System.Drawing.Size(180, 29);
-            this.desAddressNumericUpDown.TabIndex = 33;
-            this.desAddressNumericUpDown.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.desAddressNumericUpDown.ValueChanged += new System.EventHandler(this.desAddressNumericUpDown_ValueChanged);
             // 
             // pictureBox2
             // 
@@ -906,7 +888,7 @@
             "g/ml (克/毫升)",
             "kg/l (千克/升)",
             "g/cm3 (克/立方厘米)"});
-            this.flowUnitsComboBox.Location = new System.Drawing.Point(11, 111);
+            this.flowUnitsComboBox.Location = new System.Drawing.Point(11, 220);
             this.flowUnitsComboBox.Name = "flowUnitsComboBox";
             this.flowUnitsComboBox.Size = new System.Drawing.Size(180, 30);
             this.flowUnitsComboBox.TabIndex = 8;
@@ -957,9 +939,9 @@
             this.skinLabel11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
             this.skinLabel11.Location = new System.Drawing.Point(13, 84);
             this.skinLabel11.Name = "skinLabel11";
-            this.skinLabel11.Size = new System.Drawing.Size(74, 22);
+            this.skinLabel11.Size = new System.Drawing.Size(31, 22);
             this.skinLabel11.TabIndex = 27;
-            this.skinLabel11.Text = "密度单位";
+            this.skinLabel11.Text = "K1";
             // 
             // skinLabel6
             // 
@@ -969,53 +951,53 @@
             this.skinLabel6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
             this.skinLabel6.Location = new System.Drawing.Point(13, 27);
             this.skinLabel6.Name = "skinLabel6";
-            this.skinLabel6.Size = new System.Drawing.Size(106, 22);
+            this.skinLabel6.Size = new System.Drawing.Size(31, 22);
             this.skinLabel6.TabIndex = 27;
-            this.skinLabel6.Text = "密度仪表系数";
+            this.skinLabel6.Text = "K0";
             // 
-            // MiDuXiShuTextBox
+            // K0_TextBox
             // 
-            this.MiDuXiShuTextBox.BackColor = System.Drawing.Color.Transparent;
-            this.MiDuXiShuTextBox.DownBack = null;
-            this.MiDuXiShuTextBox.Icon = null;
-            this.MiDuXiShuTextBox.IconIsButton = false;
-            this.MiDuXiShuTextBox.IconMouseState = CCWin.SkinClass.ControlState.Normal;
-            this.MiDuXiShuTextBox.IsPasswordChat = '\0';
-            this.MiDuXiShuTextBox.IsSystemPasswordChar = false;
-            this.MiDuXiShuTextBox.Lines = new string[] {
+            this.K0_TextBox.BackColor = System.Drawing.Color.Transparent;
+            this.K0_TextBox.DownBack = null;
+            this.K0_TextBox.Icon = null;
+            this.K0_TextBox.IconIsButton = false;
+            this.K0_TextBox.IconMouseState = CCWin.SkinClass.ControlState.Normal;
+            this.K0_TextBox.IsPasswordChat = '\0';
+            this.K0_TextBox.IsSystemPasswordChar = false;
+            this.K0_TextBox.Lines = new string[] {
         "1.12"};
-            this.MiDuXiShuTextBox.Location = new System.Drawing.Point(11, 53);
-            this.MiDuXiShuTextBox.Margin = new System.Windows.Forms.Padding(0);
-            this.MiDuXiShuTextBox.MaxLength = 32767;
-            this.MiDuXiShuTextBox.MinimumSize = new System.Drawing.Size(28, 28);
-            this.MiDuXiShuTextBox.MouseBack = null;
-            this.MiDuXiShuTextBox.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.MiDuXiShuTextBox.Multiline = false;
-            this.MiDuXiShuTextBox.Name = "MiDuXiShuTextBox";
-            this.MiDuXiShuTextBox.NormlBack = null;
-            this.MiDuXiShuTextBox.Padding = new System.Windows.Forms.Padding(5);
-            this.MiDuXiShuTextBox.ReadOnly = false;
-            this.MiDuXiShuTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.MiDuXiShuTextBox.Size = new System.Drawing.Size(180, 28);
+            this.K0_TextBox.Location = new System.Drawing.Point(11, 53);
+            this.K0_TextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.K0_TextBox.MaxLength = 32767;
+            this.K0_TextBox.MinimumSize = new System.Drawing.Size(28, 28);
+            this.K0_TextBox.MouseBack = null;
+            this.K0_TextBox.MouseState = CCWin.SkinClass.ControlState.Normal;
+            this.K0_TextBox.Multiline = false;
+            this.K0_TextBox.Name = "K0_TextBox";
+            this.K0_TextBox.NormlBack = null;
+            this.K0_TextBox.Padding = new System.Windows.Forms.Padding(5);
+            this.K0_TextBox.ReadOnly = false;
+            this.K0_TextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.K0_TextBox.Size = new System.Drawing.Size(180, 28);
             // 
             // 
             // 
-            this.MiDuXiShuTextBox.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.MiDuXiShuTextBox.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MiDuXiShuTextBox.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
-            this.MiDuXiShuTextBox.SkinTxt.Location = new System.Drawing.Point(5, 5);
-            this.MiDuXiShuTextBox.SkinTxt.Name = "BaseText";
-            this.MiDuXiShuTextBox.SkinTxt.Size = new System.Drawing.Size(170, 18);
-            this.MiDuXiShuTextBox.SkinTxt.TabIndex = 0;
-            this.MiDuXiShuTextBox.SkinTxt.Text = "1.12";
-            this.MiDuXiShuTextBox.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.MiDuXiShuTextBox.SkinTxt.WaterText = "";
-            this.MiDuXiShuTextBox.TabIndex = 31;
-            this.MiDuXiShuTextBox.Text = "1.12";
-            this.MiDuXiShuTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.MiDuXiShuTextBox.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.MiDuXiShuTextBox.WaterText = "";
-            this.MiDuXiShuTextBox.WordWrap = true;
+            this.K0_TextBox.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.K0_TextBox.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.K0_TextBox.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.K0_TextBox.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.K0_TextBox.SkinTxt.Name = "BaseText";
+            this.K0_TextBox.SkinTxt.Size = new System.Drawing.Size(170, 18);
+            this.K0_TextBox.SkinTxt.TabIndex = 0;
+            this.K0_TextBox.SkinTxt.Text = "1.12";
+            this.K0_TextBox.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.K0_TextBox.SkinTxt.WaterText = "";
+            this.K0_TextBox.TabIndex = 31;
+            this.K0_TextBox.Text = "1.12";
+            this.K0_TextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.K0_TextBox.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.K0_TextBox.WaterText = "";
+            this.K0_TextBox.WordWrap = true;
             // 
             // skinLabel2
             // 
@@ -1087,7 +1069,7 @@
             this.skinLabel27.Name = "skinLabel27";
             this.skinLabel27.Size = new System.Drawing.Size(74, 22);
             this.skinLabel27.TabIndex = 27;
-            this.skinLabel27.Text = "温度地址";
+            this.skinLabel27.Text = "密度单位";
             // 
             // skinLabel26
             // 
@@ -1095,11 +1077,11 @@
             this.skinLabel26.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel26.BorderColor = System.Drawing.Color.White;
             this.skinLabel26.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.skinLabel26.Location = new System.Drawing.Point(14, 144);
+            this.skinLabel26.Location = new System.Drawing.Point(13, 142);
             this.skinLabel26.Name = "skinLabel26";
-            this.skinLabel26.Size = new System.Drawing.Size(74, 22);
+            this.skinLabel26.Size = new System.Drawing.Size(31, 22);
             this.skinLabel26.TabIndex = 27;
-            this.skinLabel26.Text = "密度地址";
+            this.skinLabel26.Text = "K2";
             // 
             // skinLabel3
             // 
@@ -1112,17 +1094,6 @@
             this.skinLabel3.Size = new System.Drawing.Size(42, 22);
             this.skinLabel3.TabIndex = 27;
             this.skinLabel3.Text = "密度";
-            // 
-            // skinLine5
-            // 
-            this.skinLine5.BackColor = System.Drawing.Color.Transparent;
-            this.skinLine5.LineColor = System.Drawing.Color.Black;
-            this.skinLine5.LineHeight = 2;
-            this.skinLine5.Location = new System.Drawing.Point(3, 430);
-            this.skinLine5.Name = "skinLine5";
-            this.skinLine5.Size = new System.Drawing.Size(188, 11);
-            this.skinLine5.TabIndex = 26;
-            this.skinLine5.Text = "skinLine1";
             // 
             // skinLine4
             // 
@@ -1184,7 +1155,7 @@
             this.skinLine10.BackColor = System.Drawing.Color.Transparent;
             this.skinLine10.LineColor = System.Drawing.Color.Black;
             this.skinLine10.LineHeight = 2;
-            this.skinLine10.Location = new System.Drawing.Point(6, 155);
+            this.skinLine10.Location = new System.Drawing.Point(6, 153);
             this.skinLine10.Name = "skinLine10";
             this.skinLine10.Size = new System.Drawing.Size(188, 12);
             this.skinLine10.TabIndex = 26;
@@ -1518,7 +1489,7 @@
             this.skinTabPage2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.skinTabPage2.Location = new System.Drawing.Point(0, 40);
             this.skinTabPage2.Name = "skinTabPage2";
-            this.skinTabPage2.Size = new System.Drawing.Size(1269, 578);
+            this.skinTabPage2.Size = new System.Drawing.Size(1269, 565);
             this.skinTabPage2.TabIndex = 1;
             this.skinTabPage2.TabItemImage = null;
             this.skinTabPage2.Text = "仪表参数设置";
@@ -1797,14 +1768,277 @@
             // skinTabPage3
             // 
             this.skinTabPage3.BackColor = System.Drawing.Color.DarkGray;
+            this.skinTabPage3.Controls.Add(this.textBoxFindResult);
+            this.skinTabPage3.Controls.Add(this.skinGroupBox3);
             this.skinTabPage3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.skinTabPage3.Font = new System.Drawing.Font("宋体", 10F);
             this.skinTabPage3.Location = new System.Drawing.Point(0, 40);
             this.skinTabPage3.Name = "skinTabPage3";
-            this.skinTabPage3.Size = new System.Drawing.Size(1269, 578);
+            this.skinTabPage3.Size = new System.Drawing.Size(1269, 565);
             this.skinTabPage3.TabIndex = 2;
             this.skinTabPage3.TabItemImage = null;
             this.skinTabPage3.Text = "数据查询";
+            // 
+            // textBoxFindResult
+            // 
+            this.textBoxFindResult.Location = new System.Drawing.Point(266, 14);
+            this.textBoxFindResult.Multiline = true;
+            this.textBoxFindResult.Name = "textBoxFindResult";
+            this.textBoxFindResult.ReadOnly = true;
+            this.textBoxFindResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxFindResult.Size = new System.Drawing.Size(605, 374);
+            this.textBoxFindResult.TabIndex = 35;
+            // 
+            // skinGroupBox3
+            // 
+            this.skinGroupBox3.BackColor = System.Drawing.Color.Transparent;
+            this.skinGroupBox3.BorderColor = System.Drawing.Color.Black;
+            this.skinGroupBox3.Controls.Add(this.isFindMin);
+            this.skinGroupBox3.Controls.Add(this.btnFindData);
+            this.skinGroupBox3.Controls.Add(this.skinLabel7);
+            this.skinGroupBox3.Controls.Add(this.skinLabel28);
+            this.skinGroupBox3.Controls.Add(this.skinLabel29);
+            this.skinGroupBox3.Controls.Add(this.skinLabel32);
+            this.skinGroupBox3.Controls.Add(this.skinLabel31);
+            this.skinGroupBox3.Controls.Add(this.skinLabel30);
+            this.skinGroupBox3.Controls.Add(this.mnupMin);
+            this.skinGroupBox3.Controls.Add(this.nmupHour);
+            this.skinGroupBox3.Controls.Add(this.nmupDay);
+            this.skinGroupBox3.Controls.Add(this.nmupMonth);
+            this.skinGroupBox3.Controls.Add(this.nmupYear);
+            this.skinGroupBox3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinGroupBox3.ForeColor = System.Drawing.Color.Indigo;
+            this.skinGroupBox3.Location = new System.Drawing.Point(24, 14);
+            this.skinGroupBox3.Name = "skinGroupBox3";
+            this.skinGroupBox3.RectBackColor = System.Drawing.Color.DarkGray;
+            this.skinGroupBox3.RoundStyle = CCWin.SkinClass.RoundStyle.All;
+            this.skinGroupBox3.Size = new System.Drawing.Size(216, 341);
+            this.skinGroupBox3.TabIndex = 34;
+            this.skinGroupBox3.TabStop = false;
+            this.skinGroupBox3.Text = "查询设置";
+            this.skinGroupBox3.TitleBorderColor = System.Drawing.Color.Black;
+            this.skinGroupBox3.TitleRectBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.skinGroupBox3.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
+            // 
+            // isFindMin
+            // 
+            this.isFindMin.AutoSize = true;
+            this.isFindMin.Checked = true;
+            this.isFindMin.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.isFindMin.Location = new System.Drawing.Point(177, 220);
+            this.isFindMin.Name = "isFindMin";
+            this.isFindMin.Size = new System.Drawing.Size(15, 14);
+            this.isFindMin.TabIndex = 36;
+            this.isFindMin.UseVisualStyleBackColor = true;
+            // 
+            // btnFindData
+            // 
+            this.btnFindData.BackColor = System.Drawing.Color.DarkGray;
+            this.btnFindData.BaseColor = System.Drawing.Color.Gray;
+            this.btnFindData.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnFindData.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.btnFindData.DownBack = null;
+            this.btnFindData.Location = new System.Drawing.Point(116, 302);
+            this.btnFindData.MouseBack = null;
+            this.btnFindData.Name = "btnFindData";
+            this.btnFindData.NormlBack = null;
+            this.btnFindData.Size = new System.Drawing.Size(94, 33);
+            this.btnFindData.TabIndex = 35;
+            this.btnFindData.Text = "开始查询";
+            this.btnFindData.UseVisualStyleBackColor = false;
+            this.btnFindData.Click += new System.EventHandler(this.btnFindData_Click);
+            // 
+            // skinLabel7
+            // 
+            this.skinLabel7.AutoSize = true;
+            this.skinLabel7.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel7.BorderColor = System.Drawing.Color.White;
+            this.skinLabel7.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel7.Location = new System.Drawing.Point(20, 32);
+            this.skinLabel7.Name = "skinLabel7";
+            this.skinLabel7.Size = new System.Drawing.Size(159, 28);
+            this.skinLabel7.TabIndex = 1;
+            this.skinLabel7.Text = "请输入查询日期";
+            // 
+            // skinLabel28
+            // 
+            this.skinLabel28.AutoSize = true;
+            this.skinLabel28.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel28.BorderColor = System.Drawing.Color.White;
+            this.skinLabel28.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.skinLabel28.Location = new System.Drawing.Point(22, 104);
+            this.skinLabel28.Name = "skinLabel28";
+            this.skinLabel28.Size = new System.Drawing.Size(26, 22);
+            this.skinLabel28.TabIndex = 31;
+            this.skinLabel28.Text = "月";
+            // 
+            // skinLabel29
+            // 
+            this.skinLabel29.AutoSize = true;
+            this.skinLabel29.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel29.BorderColor = System.Drawing.Color.White;
+            this.skinLabel29.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.skinLabel29.Location = new System.Drawing.Point(23, 68);
+            this.skinLabel29.Name = "skinLabel29";
+            this.skinLabel29.Size = new System.Drawing.Size(26, 22);
+            this.skinLabel29.TabIndex = 31;
+            this.skinLabel29.Text = "年";
+            // 
+            // skinLabel32
+            // 
+            this.skinLabel32.AutoSize = true;
+            this.skinLabel32.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel32.BorderColor = System.Drawing.Color.White;
+            this.skinLabel32.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.skinLabel32.Location = new System.Drawing.Point(21, 213);
+            this.skinLabel32.Name = "skinLabel32";
+            this.skinLabel32.Size = new System.Drawing.Size(26, 22);
+            this.skinLabel32.TabIndex = 32;
+            this.skinLabel32.Text = "分";
+            // 
+            // skinLabel31
+            // 
+            this.skinLabel31.AutoSize = true;
+            this.skinLabel31.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel31.BorderColor = System.Drawing.Color.White;
+            this.skinLabel31.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.skinLabel31.Location = new System.Drawing.Point(23, 178);
+            this.skinLabel31.Name = "skinLabel31";
+            this.skinLabel31.Size = new System.Drawing.Size(26, 22);
+            this.skinLabel31.TabIndex = 32;
+            this.skinLabel31.Text = "时";
+            // 
+            // skinLabel30
+            // 
+            this.skinLabel30.AutoSize = true;
+            this.skinLabel30.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel30.BorderColor = System.Drawing.Color.White;
+            this.skinLabel30.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.skinLabel30.Location = new System.Drawing.Point(22, 141);
+            this.skinLabel30.Name = "skinLabel30";
+            this.skinLabel30.Size = new System.Drawing.Size(26, 22);
+            this.skinLabel30.TabIndex = 32;
+            this.skinLabel30.Text = "日";
+            // 
+            // mnupMin
+            // 
+            this.mnupMin.ArrowColor = System.Drawing.Color.Black;
+            this.mnupMin.BackColor = System.Drawing.Color.DarkGray;
+            this.mnupMin.BaseColor = System.Drawing.Color.DarkGray;
+            this.mnupMin.BorderColor = System.Drawing.Color.Black;
+            this.mnupMin.Location = new System.Drawing.Point(53, 211);
+            this.mnupMin.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.mnupMin.Name = "mnupMin";
+            this.mnupMin.Size = new System.Drawing.Size(114, 29);
+            this.mnupMin.TabIndex = 28;
+            this.mnupMin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // nmupHour
+            // 
+            this.nmupHour.ArrowColor = System.Drawing.Color.Black;
+            this.nmupHour.BackColor = System.Drawing.Color.DarkGray;
+            this.nmupHour.BaseColor = System.Drawing.Color.DarkGray;
+            this.nmupHour.BorderColor = System.Drawing.Color.Black;
+            this.nmupHour.Location = new System.Drawing.Point(53, 176);
+            this.nmupHour.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.nmupHour.Name = "nmupHour";
+            this.nmupHour.Size = new System.Drawing.Size(114, 29);
+            this.nmupHour.TabIndex = 28;
+            this.nmupHour.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // nmupDay
+            // 
+            this.nmupDay.ArrowColor = System.Drawing.Color.Black;
+            this.nmupDay.BackColor = System.Drawing.Color.DarkGray;
+            this.nmupDay.BaseColor = System.Drawing.Color.DarkGray;
+            this.nmupDay.BorderColor = System.Drawing.Color.Black;
+            this.nmupDay.Location = new System.Drawing.Point(53, 141);
+            this.nmupDay.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.nmupDay.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nmupDay.Name = "nmupDay";
+            this.nmupDay.Size = new System.Drawing.Size(114, 29);
+            this.nmupDay.TabIndex = 28;
+            this.nmupDay.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // nmupMonth
+            // 
+            this.nmupMonth.ArrowColor = System.Drawing.Color.Black;
+            this.nmupMonth.BackColor = System.Drawing.Color.DarkGray;
+            this.nmupMonth.BaseColor = System.Drawing.Color.DarkGray;
+            this.nmupMonth.BorderColor = System.Drawing.Color.Black;
+            this.nmupMonth.Location = new System.Drawing.Point(53, 104);
+            this.nmupMonth.Maximum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.nmupMonth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nmupMonth.Name = "nmupMonth";
+            this.nmupMonth.Size = new System.Drawing.Size(114, 29);
+            this.nmupMonth.TabIndex = 28;
+            this.nmupMonth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // nmupYear
+            // 
+            this.nmupYear.ArrowColor = System.Drawing.Color.Black;
+            this.nmupYear.BackColor = System.Drawing.Color.DarkGray;
+            this.nmupYear.BaseColor = System.Drawing.Color.DarkGray;
+            this.nmupYear.BorderColor = System.Drawing.Color.Black;
+            this.nmupYear.Location = new System.Drawing.Point(53, 65);
+            this.nmupYear.Maximum = new decimal(new int[] {
+            2100,
+            0,
+            0,
+            0});
+            this.nmupYear.Minimum = new decimal(new int[] {
+            2016,
+            0,
+            0,
+            0});
+            this.nmupYear.Name = "nmupYear";
+            this.nmupYear.Size = new System.Drawing.Size(114, 29);
+            this.nmupYear.TabIndex = 28;
+            this.nmupYear.Value = new decimal(new int[] {
+            2016,
+            0,
+            0,
+            0});
             // 
             // timerGetData
             // 
@@ -1824,8 +2058,97 @@
             // 
             // timerSave
             // 
+            this.timerSave.Enabled = true;
             this.timerSave.Interval = 3000;
             this.timerSave.Tick += new System.EventHandler(this.timerSave_Tick);
+            // 
+            // K1_TextBox
+            // 
+            this.K1_TextBox.BackColor = System.Drawing.Color.Transparent;
+            this.K1_TextBox.DownBack = null;
+            this.K1_TextBox.Icon = null;
+            this.K1_TextBox.IconIsButton = false;
+            this.K1_TextBox.IconMouseState = CCWin.SkinClass.ControlState.Normal;
+            this.K1_TextBox.IsPasswordChat = '\0';
+            this.K1_TextBox.IsSystemPasswordChar = false;
+            this.K1_TextBox.Lines = new string[] {
+        "1.12"};
+            this.K1_TextBox.Location = new System.Drawing.Point(11, 108);
+            this.K1_TextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.K1_TextBox.MaxLength = 32767;
+            this.K1_TextBox.MinimumSize = new System.Drawing.Size(28, 28);
+            this.K1_TextBox.MouseBack = null;
+            this.K1_TextBox.MouseState = CCWin.SkinClass.ControlState.Normal;
+            this.K1_TextBox.Multiline = false;
+            this.K1_TextBox.Name = "K1_TextBox";
+            this.K1_TextBox.NormlBack = null;
+            this.K1_TextBox.Padding = new System.Windows.Forms.Padding(5);
+            this.K1_TextBox.ReadOnly = false;
+            this.K1_TextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.K1_TextBox.Size = new System.Drawing.Size(180, 28);
+            // 
+            // 
+            // 
+            this.K1_TextBox.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.K1_TextBox.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.K1_TextBox.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.K1_TextBox.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.K1_TextBox.SkinTxt.Name = "BaseText";
+            this.K1_TextBox.SkinTxt.Size = new System.Drawing.Size(170, 18);
+            this.K1_TextBox.SkinTxt.TabIndex = 0;
+            this.K1_TextBox.SkinTxt.Text = "1.12";
+            this.K1_TextBox.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.K1_TextBox.SkinTxt.WaterText = "";
+            this.K1_TextBox.TabIndex = 31;
+            this.K1_TextBox.Text = "1.12";
+            this.K1_TextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.K1_TextBox.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.K1_TextBox.WaterText = "";
+            this.K1_TextBox.WordWrap = true;
+            // 
+            // K2_TextBox
+            // 
+            this.K2_TextBox.BackColor = System.Drawing.Color.Transparent;
+            this.K2_TextBox.DownBack = null;
+            this.K2_TextBox.Icon = null;
+            this.K2_TextBox.IconIsButton = false;
+            this.K2_TextBox.IconMouseState = CCWin.SkinClass.ControlState.Normal;
+            this.K2_TextBox.IsPasswordChat = '\0';
+            this.K2_TextBox.IsSystemPasswordChar = false;
+            this.K2_TextBox.Lines = new string[] {
+        "1.12"};
+            this.K2_TextBox.Location = new System.Drawing.Point(12, 166);
+            this.K2_TextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.K2_TextBox.MaxLength = 32767;
+            this.K2_TextBox.MinimumSize = new System.Drawing.Size(28, 28);
+            this.K2_TextBox.MouseBack = null;
+            this.K2_TextBox.MouseState = CCWin.SkinClass.ControlState.Normal;
+            this.K2_TextBox.Multiline = false;
+            this.K2_TextBox.Name = "K2_TextBox";
+            this.K2_TextBox.NormlBack = null;
+            this.K2_TextBox.Padding = new System.Windows.Forms.Padding(5);
+            this.K2_TextBox.ReadOnly = false;
+            this.K2_TextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.K2_TextBox.Size = new System.Drawing.Size(180, 28);
+            // 
+            // 
+            // 
+            this.K2_TextBox.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.K2_TextBox.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.K2_TextBox.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.K2_TextBox.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.K2_TextBox.SkinTxt.Name = "BaseText";
+            this.K2_TextBox.SkinTxt.Size = new System.Drawing.Size(170, 18);
+            this.K2_TextBox.SkinTxt.TabIndex = 0;
+            this.K2_TextBox.SkinTxt.Text = "1.12";
+            this.K2_TextBox.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.K2_TextBox.SkinTxt.WaterText = "";
+            this.K2_TextBox.TabIndex = 31;
+            this.K2_TextBox.Text = "1.12";
+            this.K2_TextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.K2_TextBox.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.K2_TextBox.WaterText = "";
+            this.K2_TextBox.WordWrap = true;
             // 
             // Form_MainShow
             // 
@@ -1833,7 +2156,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(1272, 727);
+            this.ClientSize = new System.Drawing.Size(1272, 744);
             this.ControlBox = false;
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.panel2);
@@ -1870,8 +2193,6 @@
             this.groupConnectSet.PerformLayout();
             this.groupDataShow.ResumeLayout(false);
             this.groupDataShow.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.temAddressNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.desAddressNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupSetDemarcate.ResumeLayout(false);
@@ -1882,6 +2203,15 @@
             this.skinGroupBox1.ResumeLayout(false);
             this.skinGroupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.biaoAddressTextbox)).EndInit();
+            this.skinTabPage3.ResumeLayout(false);
+            this.skinTabPage3.PerformLayout();
+            this.skinGroupBox3.ResumeLayout(false);
+            this.skinGroupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mnupMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmupHour)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmupDay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmupMonth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmupYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1934,7 +2264,7 @@
         private CCWin.SkinControl.SkinComboBox flowUnitsComboBox;
         private CCWin.SkinControl.SkinLabel skinLabel11;
         private CCWin.SkinControl.SkinLabel skinLabel6;
-        private CCWin.SkinControl.SkinTextBox MiDuXiShuTextBox;
+        private CCWin.SkinControl.SkinTextBox K0_TextBox;
         private CCWin.SkinControl.SkinLine skinLine3;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -1942,7 +2272,6 @@
         private CCWin.SkinControl.SkinLabel skinLabel14;
         private CCWin.SkinControl.SkinLabel skinLabel4;
         private CCWin.SkinControl.SkinLabel skinLabel13;
-        private CCWin.SkinControl.SkinLine skinLine5;
         private CCWin.SkinControl.SkinLine skinLine4;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -1986,11 +2315,26 @@
         private CCWin.SkinControl.SkinTextBox exEXEPathTextBox;
         private CCWin.SkinControl.SkinLabel skinLabel26;
         private CCWin.SkinControl.SkinLine skinLine10;
-        private CCWin.SkinControl.SkinNumericUpDown temAddressNumericUpDown;
-        private CCWin.SkinControl.SkinNumericUpDown desAddressNumericUpDown;
         private CCWin.SkinControl.SkinLabel skinLabel27;
         private CCWin.SkinControl.SkinLine skinLine11;
         public System.Windows.Forms.Timer timerSave;
+        private CCWin.SkinControl.SkinGroupBox skinGroupBox3;
+        private CCWin.SkinControl.SkinButton btnFindData;
+        private CCWin.SkinControl.SkinLabel skinLabel7;
+        private CCWin.SkinControl.SkinLabel skinLabel28;
+        private CCWin.SkinControl.SkinLabel skinLabel29;
+        private CCWin.SkinControl.SkinLabel skinLabel30;
+        private CCWin.SkinControl.SkinNumericUpDown nmupDay;
+        private CCWin.SkinControl.SkinNumericUpDown nmupMonth;
+        private CCWin.SkinControl.SkinNumericUpDown nmupYear;
+        private System.Windows.Forms.TextBox textBoxFindResult;
+        private CCWin.SkinControl.SkinLabel skinLabel32;
+        private CCWin.SkinControl.SkinLabel skinLabel31;
+        private CCWin.SkinControl.SkinNumericUpDown mnupMin;
+        private CCWin.SkinControl.SkinNumericUpDown nmupHour;
+        private System.Windows.Forms.CheckBox isFindMin;
+        private CCWin.SkinControl.SkinTextBox K2_TextBox;
+        private CCWin.SkinControl.SkinTextBox K1_TextBox;
     }
 }
 

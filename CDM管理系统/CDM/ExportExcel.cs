@@ -12,7 +12,7 @@ namespace 流量计检定上位机.CDM
         const string ExcelSaveFilter = "生成excel（*.xls）|*.xls";
         string strHeaderText = "采集数据";
 
-        public int ColumnCount { get; private set; } = 2;
+        public int ColumnCount { get; private set; } = 4;
 
         public void Export(SaveFileDialog saveFileDialog)
         {
@@ -43,6 +43,22 @@ namespace 流量计检定上位机.CDM
             }
         }
 
+        public void ExportPath(string fileName)
+        {
+            var fullFileName = fileName + ".xls";
+            var startPath = Application.StartupPath;
+            var savePath = startPath + "\\ExcelData\\" ;
+            if (Directory.Exists(savePath) == false) Directory.CreateDirectory(savePath);
+            using (MemoryStream ms = Export(true))
+            {
+                using (FileStream fs = new FileStream(savePath + fullFileName, FileMode.Create, FileAccess.Write))
+                {
+                    byte[] data = ms.ToArray();
+                    fs.Write(data, 0, data.Length);
+                    fs.Flush();
+                }
+            }
+        }
 
         MemoryStream Export(bool isPrivate)
         {
@@ -82,8 +98,8 @@ namespace 流量计检定上位机.CDM
             HSSFCellStyle headStyle = (HSSFCellStyle)workBook.CreateCellStyle();
             headStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
             HSSFFont font = (HSSFFont)workBook.CreateFont();
-            font.FontHeightInPoints = 15;
-            font.Boldweight = 400;
+            font.FontHeightInPoints = 20;
+            font.Boldweight = 500;
             headStyle.SetFont(font);
             headerRow.GetCell(0).CellStyle = headStyle;
             sheet.AddMergedRegion(new NPOI.SS.Util.Region(0, 0, 0, ColumnCount - 1));
@@ -91,17 +107,23 @@ namespace 流量计检定上位机.CDM
 
             headerRow = (HSSFRow)sheet.CreateRow(1);
             headStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
-            font.FontHeightInPoints = 15;
-            font.Boldweight = 400;
+            font.FontHeightInPoints = 20;
+            font.Boldweight = 500;
             headStyle.SetFont(font);
 
             headerRow.CreateCell(0).SetCellValue("时间");
             headerRow.GetCell(0).CellStyle = headStyle;
 
-            headerRow.CreateCell(1).SetCellValue("密度大小");
+            headerRow.CreateCell(1).SetCellValue("密度");
             headerRow.GetCell(1).CellStyle = headStyle;
 
-            for (int i = 0; i < CDM.MiDuData.List.Count; ++i)
+            headerRow.CreateCell(2).SetCellValue("温度");
+            headerRow.GetCell(2).CellStyle = headStyle;
+
+            headerRow.CreateCell(3).SetCellValue("驱动增益");
+            headerRow.GetCell(3).CellStyle = headStyle;
+
+            for (int i = 0; i < MiDuData.ListSave.Count; ++i)
             {
                 headerRow = (HSSFRow)sheet.CreateRow(i + 2);
                 headStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
@@ -109,16 +131,22 @@ namespace 流量计检定上位机.CDM
                 font.Boldweight = 400;
                 headStyle.SetFont(font);
 
-                headerRow.CreateCell(0).SetCellValue(CDM.MiDuData.List[i].Time.ToString());
+                headerRow.CreateCell(0).SetCellValue(CDM.MiDuData.ListSave[i].GatherTime);
                 headerRow.GetCell(0).CellStyle = headStyle;
                
-                headerRow.CreateCell(1).SetCellValue(CDM.MiDuData.List[i].Data.ToString());
+                headerRow.CreateCell(1).SetCellValue(CDM.MiDuData.ListSave[i].Density);
                 headerRow.GetCell(1).CellStyle = headStyle;
-               
+
+                headerRow.CreateCell(2).SetCellValue(CDM.MiDuData.ListSave[i].Temperature);
+                headerRow.GetCell(2).CellStyle = headStyle;
+
+                headerRow.CreateCell(3).SetCellValue(CDM.MiDuData.ListSave[i].Gain);
+                headerRow.GetCell(3).CellStyle = headStyle;
 
             }
             sheet.SetColumnWidth(0, 30 * 256);
             sheet.SetColumnWidth(1, 20 * 256);
+            sheet.SetColumnWidth(3, 30 * 256);
             using (MemoryStream ms = new MemoryStream())
             {
                 workBook.Write(ms);

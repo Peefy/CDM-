@@ -7,7 +7,8 @@ using System.Diagnostics;
 
 using Modbus.Device;
 using CCWin.SkinControl;
-
+using System.Collections.Generic;
+using 流量计检定上位机.CDM;
 
 namespace 流量计检定上位机
 {
@@ -30,6 +31,8 @@ namespace 流量计检定上位机
         CDM.Para paraYiBiaoXiShu = new CDM.Para() {Up = 1.2f,Down = 0.8f };
 
         CDM.Sqlite.ComWithSqlite ComWithSqliteServer;
+
+        List<CDM.Sqlite.GatherSave> SaveDatas;
 
         //create a new SerialPort object with default settings.
         SerialPort serialPort = new SerialPort(); 
@@ -61,6 +64,7 @@ namespace 流量计检定上位机
                 DataDown = 10,
                 DataUp = 50,
             };
+            SaveDatas = new List<CDM.Sqlite.GatherSave>();
         }
 
         public void Init()
@@ -106,6 +110,13 @@ namespace 流量计检定上位机
             paraDensity.Value = 1;
             paraTem.Value = 1;
 
+            DateTime timeNow = DateTime.Now;
+            nmupYear.Value = timeNow.Year;
+            nmupMonth.Value = timeNow.Month;
+            nmupDay.Value = timeNow.Day;
+            nmupHour.Value = timeNow.Hour;
+            mnupMin.Value = timeNow.Minute;
+
             flowUnitsComboBox.SelectedIndex = 0;
             MainTabControl.SelectedIndex = 0;
             baudComboBox.SelectedIndex = serialPortConfig.BaudRateIndex;
@@ -115,11 +126,8 @@ namespace 流量计检定上位机
             biaoAddressTextbox.Value = serialPortConfig.BiaoAddressValue;
             exEXEPathTextBox.Text = serialPortConfig.ProLinkPath;
 
-            desAddressNumericUpDown.Value = serialPortConfig.DesValueAddress;
-            temAddressNumericUpDown.Value = serialPortConfig.TemValueAddress;
-
             #endregion
-            Thread.Sleep(300);
+            Thread.Sleep(200);
             #region MiduListInit
             CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
             CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
@@ -168,8 +176,7 @@ namespace 流量计检定上位机
             }
             if (ComWithSqliteServer != null)
             {
-                ComWithSqliteServer.Close();
-                ComWithSqliteServer = null;
+                ComWithSqliteServer.Close();             ComWithSqliteServer = null;
             }
 
         }
@@ -190,10 +197,10 @@ namespace 流量计检定上位机
             serialPortConfig.BiaoAddressValue = biaoAddressTextbox.Value;
             serialPortConfig.ProLinkPath = exEXEPathTextBox.Text;
 
-            serialPortConfig.DesValueAddress = 
-                Convert.ToInt32(desAddressNumericUpDown.Value);
+            serialPortConfig.DesValueAddress =
+                CDM.Model.AddressConfig.Density;
             serialPortConfig.TemValueAddress =
-                Convert.ToInt32(temAddressNumericUpDown.Value);
+                CDM.Model.AddressConfig.Temperature;
 
         }
 
@@ -220,9 +227,12 @@ namespace 流量计检定上位机
             }
             try
             {
-                new CDM.ExportExcel().Export(saveFileDialog);
+                new Thread(new ThreadStart(() =>
+                {
+                    new CDM.ExportExcel().ExportPath("123");
+                })).Start();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -469,7 +479,7 @@ namespace 流量计检定上位机
                 desup = float.Parse(desUp.Text);
                 temdown = float.Parse(temDown.Text);
                 temup = float.Parse(temUp.Text);
-                miduxishu = float.Parse(MiDuXiShuTextBox.Text);
+                miduxishu = float.Parse(K0_TextBox.Text);
             }
             catch
             {
@@ -480,7 +490,7 @@ namespace 流量计检定上位机
             if(paraYiBiaoXiShu.IsInRange == false)
             {
                 MessageBox.Show($"密度仪表系数的范围在{paraYiBiaoXiShu.Down}到{paraYiBiaoXiShu.Up}之间");
-                MiDuXiShuTextBox.Text = paraYiBiaoXiShu.Value.ToString();
+                K0_TextBox.Text = paraYiBiaoXiShu.Value.ToString();
                 paraYiBiaoXiShu.IsInRange = true;
             }
             paras.YMax = ymax; paras.YMin = ymin;
@@ -650,15 +660,72 @@ namespace 流量计检定上位机
 
         private void timerSave_Tick(object sender, EventArgs e)
         {
+            var saveData = new CDM.Sqlite.GatherSave()
+            {
+                GatherTime = DateTime.Now.ToString("yyyy/MM/dd_HH:mm:ss"),
+                Density = paraDensity.Value.ToString(),
+                Temperature = paraTem.Value.ToString(),
+                Gain = K0_TextBox.Text
+            };
+            ComWithSqliteServer.InsertData(saveData);
+            MiDuData.ListSave.Add(saveData);
+            var timeNow = DateTime.Now;
+            if(timeNow.Minute == 30 && timeNow.Second < 3)
+            {
+                if (CDM.MiDuData.ListSave.Count == 0)
+                {
+                    MessageBox.Show("没有数据将不予生成");
+                    return;
+                }
+                try
+                {
+                    var name = TimeHelper.GetUpLoadTime();
+                    new Thread(new ThreadStart(() =>
+                    {
+                        new CDM.ExportExcel().ExportPath("gather" + name);
+                        MiDuData.ListSave.Clear();
+                    })).Start();                  
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            var fullFileName = "123" + ".xls";
+            var startPath = Application.StartupPath;
+            var savePath = startPath + "\\ExcelData\\" + fullFileName;
+            labelStatus.Text = savePath;
+        }
+
+        private void btnFindData_Click(object sender, EventArgs e)
+        {
+            var year = Convert.ToInt32(nmupYear.Value);
+            var month = Convert.ToInt32(nmupMonth.Value);
+            var day = Convert.ToInt32(nmupDay.Value);
+            var hour = Convert.ToInt32(nmupHour.Value);
+            var min = Convert.ToInt32(mnupMin.Value);
+            var time = new DateTime(year, month, day,hour,min,0);
+            var timeStr = "";
+            if(isFindMin.Checked == true)
+                timeStr = time.ToString("yyyy/MM/dd_HH:mm");
+            else
+                timeStr = time.ToString("yyyy/MM/dd_HH");
+            var findStr = ComWithSqliteServer.FindData(timeStr);
+            if (findStr == "") findStr = "没有数据";
+            var str = "采集时间  密度  温度  增益\r\n" + findStr;
+            textBoxFindResult.Text = str;
         }
 
         private void timerGetData_Tick(object sender, EventArgs e)
         {
             try
             {
-                paraDensity.Value = GetDesTemData(serialPortConfig.DesValueAddress);
-                paraTem.Value = GetDesTemData(serialPortConfig.TemValueAddress);
+                paraDensity.Value = GetDesTemData(CDM.Model.AddressConfig.Density);
+                paraTem.Value = GetDesTemData(CDM.Model.AddressConfig.Temperature);
                 labelMidu.Text = paraDensity.Value.ToString();
                 LabelTemp.Text = paraTem.Value.ToString();
             }

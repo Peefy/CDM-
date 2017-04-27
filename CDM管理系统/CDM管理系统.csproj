@@ -87,6 +87,7 @@
     <Compile Include="CDM\ExportExcel.cs" />
     <Compile Include="CDM\FlowUnits.cs" />
     <Compile Include="CDM\MiDuData.cs" />
+    <Compile Include="CDM\Model\AddressConfig.cs" />
     <Compile Include="CDM\Model\SerialPortConfig.cs" />
     <Compile Include="CDM\Para.cs" />
     <Compile Include="CDM\Service\FileService.cs" />

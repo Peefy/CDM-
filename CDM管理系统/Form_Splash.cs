@@ -17,6 +17,7 @@ namespace 流量计检定上位机
         {
             InitializeComponent();
             this.Cursor = Cursors.Default;
+            btnLogIn.Focus();
         }
 
         private void Form_Splash_Load(object sender, EventArgs e)

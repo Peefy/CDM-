@@ -28,5 +28,15 @@ namespace 流量计检定上位机.CDM.Sqlite
             set;
         }
 
+        public virtual string CreateTableToString()
+        {
+            return "";
+        }
+
+        public virtual string ValuesTableToString()
+        {
+            return "";
+        }
+
     }
 }
