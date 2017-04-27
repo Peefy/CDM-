@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             CCWin.SkinControl.SkinRollingBarThemeBase skinRollingBarThemeBase1 = new CCWin.SkinControl.SkinRollingBarThemeBase();
             this.labelAppName = new CCWin.SkinControl.SkinLabel();
-            this.skinLabel2 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel4 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel5 = new CCWin.SkinControl.SkinLabel();
             this.btnLogIn = new CCWin.SkinControl.SkinButton();
@@ -55,19 +54,6 @@
             this.labelAppName.Size = new System.Drawing.Size(220, 35);
             this.labelAppName.TabIndex = 0;
             this.labelAppName.Text = "CDM管理系统";
-            // 
-            // skinLabel2
-            // 
-            this.skinLabel2.AutoSize = true;
-            this.skinLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel2.BorderColor = System.Drawing.Color.White;
-            this.skinLabel2.Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Bold);
-            this.skinLabel2.ForeColor = System.Drawing.Color.Navy;
-            this.skinLabel2.Location = new System.Drawing.Point(411, 227);
-            this.skinLabel2.Name = "skinLabel2";
-            this.skinLabel2.Size = new System.Drawing.Size(148, 22);
-            this.skinLabel2.TabIndex = 0;
-            this.skinLabel2.Text = "自动化研究所";
             // 
             // skinLabel4
             // 
@@ -280,7 +266,6 @@
             this.Controls.Add(this.labelAppName);
             this.Controls.Add(this.skinLabel5);
             this.Controls.Add(this.skinLabel4);
-            this.Controls.Add(this.skinLabel2);
             this.ForeColor = System.Drawing.Color.Navy;
             this.KeyPreview = true;
             this.MaximizeBox = false;
@@ -302,7 +287,6 @@
         #endregion
 
         private CCWin.SkinControl.SkinLabel labelAppName;
-        private CCWin.SkinControl.SkinLabel skinLabel2;
         private CCWin.SkinControl.SkinLabel skinLabel4;
         private CCWin.SkinControl.SkinLabel skinLabel5;
         private CCWin.SkinControl.SkinButton btnLogIn;

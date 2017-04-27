@@ -22,6 +22,10 @@ namespace 流量计检定上位机.CDM.Model
         public int DesValueAddress { get; set; } = 100;
         public int TemValueAddress { get; set; } = 200;
 
+        public float K0Value { get; set; } = 1.12f;
+        public float K1Value { get; set; } = 0.95f;
+        public float K2Value { get; set; } = 1.09f;
+
         public int BaudRateFromIndex
         {
             get
@@ -57,7 +61,7 @@ namespace 流量计检定上位机.CDM.Model
                 switch(DataBitsIndex)
                 {
                     case 0:return 6;
-                    case 1: return 7;
+                    case 1:return 7;
                     case 2:return 8;
                     case 3:return 9;
                     default:return 8;

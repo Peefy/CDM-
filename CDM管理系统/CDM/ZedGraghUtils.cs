@@ -426,5 +426,10 @@ namespace 流量计检定上位机.CDM
             }
         }
 
+        public void Print()
+        {
+            zedgraphControl.DoPrintPreview();
+        }
+
     }
 }

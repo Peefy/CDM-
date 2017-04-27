@@ -43,7 +43,7 @@ namespace 流量计检定上位机.CDM.Sqlite
             while (dataReader.Read())
             {
                 if(dataReader["GatherTime"].ToString().Contains(time) == true)
-                    str += $"{dataReader["GatherTime"]}  {dataReader["Density"]}  {dataReader["Temperature"]}  {dataReader["Gain"]}   \r\n" ;
+                    str += $"{dataReader["GatherTime"]}  {dataReader["Density"]}  {dataReader["Temperature"]}  {dataReader["K0"]}  {dataReader["K1"]}  {dataReader["K2"]}    \r\n" ;
             }
             return str;
         }

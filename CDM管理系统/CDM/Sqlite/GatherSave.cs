@@ -9,8 +9,9 @@ namespace 流量计检定上位机.CDM.Sqlite
         public string GatherTime { get; set; } = "True";
         public string Density { get; set; }
         public string Temperature { get; set; }
-        public string Gain { get; set; }
-        public string DisplaySort { get; set; }
+        public string K0 { get; set; }
+        public string K1 { get; set; }
+        public string K2 { get; set; }
 
         public override string CreateTableToString()
         {
@@ -19,8 +20,9 @@ namespace 流量计检定上位机.CDM.Sqlite
                 nameof(GatherTime) + " varchar(10), " +
                 nameof(Density) + " varchar(20), " +
                 nameof(Temperature) + " varchar(10), " +
-                nameof(Gain) + " varchar(30), " +
-                nameof(DisplaySort) + " varchar(10)";
+                nameof(K0) + " varchar(30), " +
+                nameof(K1) + " varchar(30), " +
+                nameof(K2) + " varchar(10)";
 
 
         }
@@ -32,8 +34,9 @@ namespace 流量计检定上位机.CDM.Sqlite
                 $"'{GatherTime}', " +
                 $"'{Density}', " +
                 $"'{Temperature}', " +
-                $"'{Gain}', " +
-                $"'{DisplaySort}'";
+                $"'{K0}', " +
+                $"'{K1}', " +
+                $"'{K2}'";
 
         }
     }

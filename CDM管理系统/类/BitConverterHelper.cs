@@ -53,6 +53,30 @@ namespace 流量计检定上位机
             return bytes;
         }
 
+        public static ushort[] SingleToUShort(Single data)
+        {
+            byte[] bytes = new byte[4];
+            ushort[] goal = new ushort[2];
+            byte[] tmp = BitConverter.GetBytes(data);
+            bytes[0] = tmp[3];
+            bytes[1] = tmp[2];
+            bytes[2] = tmp[1];
+            bytes[3] = tmp[0];
+            goal[0] = BitConverter.ToUInt16(bytes, 0);
+            goal[1] = BitConverter.ToUInt16(bytes, 2);
+            return goal;
+        }
+
+        public static ushort[] UShortConnect(ushort[] one, ushort[] two)
+        {
+            ushort[] goal = new ushort[one.Length + two.Length];
+            for (int i = 0; i < one.Length; ++i)
+                goal[i] = one[i];
+            for (int i = 0; i < two.Length; ++i)
+                goal[i + one.Length] = two[i];
+            return goal;
+        }
+
         public static byte[] BytesConnect(byte[] one, byte[] two)
         {
             byte[] goal = new byte[one.Length + two.Length];

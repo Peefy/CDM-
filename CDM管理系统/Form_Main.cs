@@ -75,8 +75,7 @@ namespace 流量计检定上位机
 
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var document = new System.Drawing.Printing.PrintDocument();
-            printDialog.ShowDialog();
+            formMainShow.btnPrintCurve_Click(null, null);
         }
 
         private void printToolStripButton_Click(object sender, EventArgs e)
@@ -119,8 +118,6 @@ namespace 流量计检定上位机
         {
             formMainShow.OpenFile(sender, e);
         }
-
-
 
         #endregion
         #region 标定控制

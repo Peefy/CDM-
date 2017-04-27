@@ -89,7 +89,7 @@
             this.helpMenu});
             this.menuStrip.Location = new System.Drawing.Point(4, 28);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1280, 25);
+            this.menuStrip.Size = new System.Drawing.Size(1264, 25);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -240,7 +240,7 @@
             this.toolStripButton6});
             this.toolStrip.Location = new System.Drawing.Point(4, 53);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1280, 25);
+            this.toolStrip.Size = new System.Drawing.Size(1264, 25);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "ToolStrip";
             // 
@@ -306,7 +306,7 @@
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Text = "保存标定数据";
+            this.toolStripButton5.Text = "保存数据";
             this.toolStripButton5.Click += new System.EventHandler(this.保存数据ToolStripMenuItem_Click);
             // 
             // toolStripButton6
@@ -457,7 +457,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(1288, 693);
+            this.ClientSize = new System.Drawing.Size(1272, 727);
             this.Controls.Add(this.panelRegister);
             this.Controls.Add(this.skinLabel9);
             this.Controls.Add(this.toolStrip);
@@ -466,7 +466,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.MdiBackColor = System.Drawing.Color.DarkGray;
-            this.MinimumSize = new System.Drawing.Size(490, 600);
+            this.MinimumSize = new System.Drawing.Size(1272, 726);
             this.Name = "Form_Main";
             this.Radius = 10;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
