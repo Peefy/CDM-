@@ -41,6 +41,10 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.skinLabel12 = new CCWin.SkinControl.SkinLabel();
             this.labelVersion = new CCWin.SkinControl.SkinLabel();
+            this.timerGetData = new System.Windows.Forms.Timer(this.components);
+            this.timerTime = new System.Windows.Forms.Timer(this.components);
+            this.timerDraw = new System.Windows.Forms.Timer(this.components);
+            this.timerSave = new System.Windows.Forms.Timer(this.components);
             this.MainTabControl = new CCWin.SkinControl.SkinTabControl();
             this.skinTabPage1 = new CCWin.SkinControl.SkinTabPage();
             this.panelLocation1 = new System.Windows.Forms.Panel();
@@ -59,7 +63,6 @@
             this.skinLabel8 = new CCWin.SkinControl.SkinLabel();
             this.panelIsAutoMode = new System.Windows.Forms.Panel();
             this.btnStopCurve = new CCWin.SkinControl.SkinButton();
-            this.btnStartCurve = new CCWin.SkinControl.SkinButton();
             this.btnPrintCurve = new CCWin.SkinControl.SkinButton();
             this.btnClearCurve = new CCWin.SkinControl.SkinButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -108,8 +111,34 @@
             this.skinLine9 = new CCWin.SkinControl.SkinLine();
             this.skinLine11 = new CCWin.SkinControl.SkinLine();
             this.skinLine1 = new CCWin.SkinControl.SkinLine();
+            this.skinTabPage2 = new CCWin.SkinControl.SkinTabPage();
+            this.panelLocation3 = new System.Windows.Forms.Panel();
+            this.skinGroupBox1 = new CCWin.SkinControl.SkinGroupBox();
+            this.biaoAddressTextbox = new CCWin.SkinControl.SkinNumericUpDown();
+            this.protocolComboBox = new CCWin.SkinControl.SkinComboBox();
+            this.parityComboBox = new CCWin.SkinControl.SkinComboBox();
+            this.stopBitsComboBox = new CCWin.SkinControl.SkinComboBox();
+            this.dataBitsComboBox = new CCWin.SkinControl.SkinComboBox();
+            this.baudComboBox = new CCWin.SkinControl.SkinComboBox();
+            this.skinLabel18 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel33 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel19 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel17 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel16 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel15 = new CCWin.SkinControl.SkinLabel();
+            this.skinGroupBox2 = new CCWin.SkinControl.SkinGroupBox();
+            this.exEXEPathTextBox = new CCWin.SkinControl.SkinTextBox();
+            this.findExEXEButton = new CCWin.SkinControl.SkinButton();
+            this.startupExEXEButton = new CCWin.SkinControl.SkinButton();
             this.skinTabPage3 = new CCWin.SkinControl.SkinTabPage();
             this.panelLocation2 = new System.Windows.Forms.Panel();
+            this.dataGridViewFindData = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skinGroupBox3 = new CCWin.SkinControl.SkinGroupBox();
             this.isFindMin = new System.Windows.Forms.CheckBox();
             this.btnFindData = new CCWin.SkinControl.SkinButton();
@@ -124,28 +153,6 @@
             this.nmupDay = new CCWin.SkinControl.SkinNumericUpDown();
             this.nmupMonth = new CCWin.SkinControl.SkinNumericUpDown();
             this.nmupYear = new CCWin.SkinControl.SkinNumericUpDown();
-            this.textBoxFindResult = new System.Windows.Forms.TextBox();
-            this.skinTabPage2 = new CCWin.SkinControl.SkinTabPage();
-            this.panelLocation3 = new System.Windows.Forms.Panel();
-            this.skinGroupBox1 = new CCWin.SkinControl.SkinGroupBox();
-            this.biaoAddressTextbox = new CCWin.SkinControl.SkinNumericUpDown();
-            this.parityComboBox = new CCWin.SkinControl.SkinComboBox();
-            this.stopBitsComboBox = new CCWin.SkinControl.SkinComboBox();
-            this.dataBitsComboBox = new CCWin.SkinControl.SkinComboBox();
-            this.baudComboBox = new CCWin.SkinControl.SkinComboBox();
-            this.skinLabel18 = new CCWin.SkinControl.SkinLabel();
-            this.skinLabel19 = new CCWin.SkinControl.SkinLabel();
-            this.skinLabel17 = new CCWin.SkinControl.SkinLabel();
-            this.skinLabel16 = new CCWin.SkinControl.SkinLabel();
-            this.skinLabel15 = new CCWin.SkinControl.SkinLabel();
-            this.skinGroupBox2 = new CCWin.SkinControl.SkinGroupBox();
-            this.exEXEPathTextBox = new CCWin.SkinControl.SkinTextBox();
-            this.findExEXEButton = new CCWin.SkinControl.SkinButton();
-            this.startupExEXEButton = new CCWin.SkinControl.SkinButton();
-            this.timerGetData = new System.Windows.Forms.Timer(this.components);
-            this.timerTime = new System.Windows.Forms.Timer(this.components);
-            this.timerDraw = new System.Windows.Forms.Timer(this.components);
-            this.timerSave = new System.Windows.Forms.Timer(this.components);
             this.panel2.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.skinTabPage1.SuspendLayout();
@@ -161,19 +168,20 @@
             this.groupDataShow.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.skinTabPage2.SuspendLayout();
+            this.panelLocation3.SuspendLayout();
+            this.skinGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.biaoAddressTextbox)).BeginInit();
+            this.skinGroupBox2.SuspendLayout();
             this.skinTabPage3.SuspendLayout();
             this.panelLocation2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFindData)).BeginInit();
             this.skinGroupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mnupMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmupHour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmupDay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmupMonth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmupYear)).BeginInit();
-            this.skinTabPage2.SuspendLayout();
-            this.panelLocation3.SuspendLayout();
-            this.skinGroupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.biaoAddressTextbox)).BeginInit();
-            this.skinGroupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelTime
@@ -256,6 +264,28 @@
             this.labelVersion.TabIndex = 27;
             this.labelVersion.Text = "版本号:";
             // 
+            // timerGetData
+            // 
+            this.timerGetData.Interval = 1000;
+            this.timerGetData.Tick += new System.EventHandler(this.timerGetData_Tick);
+            // 
+            // timerTime
+            // 
+            this.timerTime.Enabled = true;
+            this.timerTime.Interval = 1000;
+            this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
+            // 
+            // timerDraw
+            // 
+            this.timerDraw.Interval = 200;
+            this.timerDraw.Tick += new System.EventHandler(this.timerDraw_Tick);
+            // 
+            // timerSave
+            // 
+            this.timerSave.Enabled = true;
+            this.timerSave.Interval = 3000;
+            this.timerSave.Tick += new System.EventHandler(this.timerSave_Tick);
+            // 
             // MainTabControl
             // 
             this.MainTabControl.AnimatorType = CCWin.SkinControl.AnimationType.HorizSlide;
@@ -277,7 +307,7 @@
             this.MainTabControl.PageHover = ((System.Drawing.Image)(resources.GetObject("MainTabControl.PageHover")));
             this.MainTabControl.PageImagePosition = CCWin.SkinControl.SkinTabControl.ePageImagePosition.Left;
             this.MainTabControl.PageNorml = null;
-            this.MainTabControl.SelectedIndex = 2;
+            this.MainTabControl.SelectedIndex = 0;
             this.MainTabControl.Size = new System.Drawing.Size(1269, 605);
             this.MainTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.MainTabControl.TabIndex = 31;
@@ -324,7 +354,7 @@
             this.groupConnectSet.Size = new System.Drawing.Size(200, 110);
             this.groupConnectSet.TabIndex = 4;
             this.groupConnectSet.TabStop = false;
-            this.groupConnectSet.Text = "通信设置";
+            this.groupConnectSet.Text = "通信端口";
             this.groupConnectSet.TitleBorderColor = System.Drawing.Color.Black;
             this.groupConnectSet.TitleRectBackColor = System.Drawing.Color.DarkGray;
             this.groupConnectSet.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
@@ -583,7 +613,6 @@
             // panelIsAutoMode
             // 
             this.panelIsAutoMode.Controls.Add(this.btnStopCurve);
-            this.panelIsAutoMode.Controls.Add(this.btnStartCurve);
             this.panelIsAutoMode.Controls.Add(this.btnPrintCurve);
             this.panelIsAutoMode.Controls.Add(this.btnClearCurve);
             this.panelIsAutoMode.Location = new System.Drawing.Point(14, 27);
@@ -598,7 +627,7 @@
             this.btnStopCurve.BorderColor = System.Drawing.Color.DarkGray;
             this.btnStopCurve.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btnStopCurve.DownBack = null;
-            this.btnStopCurve.Location = new System.Drawing.Point(8, 44);
+            this.btnStopCurve.Location = new System.Drawing.Point(8, 13);
             this.btnStopCurve.MouseBack = null;
             this.btnStopCurve.Name = "btnStopCurve";
             this.btnStopCurve.NormlBack = null;
@@ -607,23 +636,6 @@
             this.btnStopCurve.Text = "暂停实时曲线";
             this.btnStopCurve.UseVisualStyleBackColor = false;
             this.btnStopCurve.Click += new System.EventHandler(this.btnStopCurve_Click);
-            // 
-            // btnStartCurve
-            // 
-            this.btnStartCurve.BackColor = System.Drawing.Color.DarkGray;
-            this.btnStartCurve.BaseColor = System.Drawing.Color.Gray;
-            this.btnStartCurve.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnStartCurve.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.btnStartCurve.DownBack = null;
-            this.btnStartCurve.Location = new System.Drawing.Point(8, 10);
-            this.btnStartCurve.MouseBack = null;
-            this.btnStartCurve.Name = "btnStartCurve";
-            this.btnStartCurve.NormlBack = null;
-            this.btnStartCurve.Size = new System.Drawing.Size(130, 28);
-            this.btnStartCurve.TabIndex = 7;
-            this.btnStartCurve.Text = "生成实时曲线";
-            this.btnStartCurve.UseVisualStyleBackColor = false;
-            this.btnStartCurve.Click += new System.EventHandler(this.btnStartCurve_Click);
             // 
             // btnPrintCurve
             // 
@@ -649,7 +661,7 @@
             this.btnClearCurve.BorderColor = System.Drawing.Color.DarkGray;
             this.btnClearCurve.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btnClearCurve.DownBack = null;
-            this.btnClearCurve.Location = new System.Drawing.Point(8, 78);
+            this.btnClearCurve.Location = new System.Drawing.Point(8, 62);
             this.btnClearCurve.MouseBack = null;
             this.btnClearCurve.Name = "btnClearCurve";
             this.btnClearCurve.NormlBack = null;
@@ -1510,6 +1522,344 @@
             this.skinLine1.TabIndex = 26;
             this.skinLine1.Text = "skinLine1";
             // 
+            // skinTabPage2
+            // 
+            this.skinTabPage2.BackColor = System.Drawing.Color.DarkGray;
+            this.skinTabPage2.Controls.Add(this.panelLocation3);
+            this.skinTabPage2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.skinTabPage2.Font = new System.Drawing.Font("宋体", 10F);
+            this.skinTabPage2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.skinTabPage2.Location = new System.Drawing.Point(0, 40);
+            this.skinTabPage2.Name = "skinTabPage2";
+            this.skinTabPage2.Size = new System.Drawing.Size(1269, 565);
+            this.skinTabPage2.TabIndex = 1;
+            this.skinTabPage2.TabItemImage = null;
+            this.skinTabPage2.Text = "通信参数";
+            // 
+            // panelLocation3
+            // 
+            this.panelLocation3.Controls.Add(this.skinGroupBox1);
+            this.panelLocation3.Controls.Add(this.skinGroupBox2);
+            this.panelLocation3.Location = new System.Drawing.Point(208, 25);
+            this.panelLocation3.Name = "panelLocation3";
+            this.panelLocation3.Size = new System.Drawing.Size(474, 353);
+            this.panelLocation3.TabIndex = 10;
+            // 
+            // skinGroupBox1
+            // 
+            this.skinGroupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.skinGroupBox1.BorderColor = System.Drawing.Color.Black;
+            this.skinGroupBox1.Controls.Add(this.biaoAddressTextbox);
+            this.skinGroupBox1.Controls.Add(this.protocolComboBox);
+            this.skinGroupBox1.Controls.Add(this.parityComboBox);
+            this.skinGroupBox1.Controls.Add(this.stopBitsComboBox);
+            this.skinGroupBox1.Controls.Add(this.dataBitsComboBox);
+            this.skinGroupBox1.Controls.Add(this.baudComboBox);
+            this.skinGroupBox1.Controls.Add(this.skinLabel18);
+            this.skinGroupBox1.Controls.Add(this.skinLabel33);
+            this.skinGroupBox1.Controls.Add(this.skinLabel19);
+            this.skinGroupBox1.Controls.Add(this.skinLabel17);
+            this.skinGroupBox1.Controls.Add(this.skinLabel16);
+            this.skinGroupBox1.Controls.Add(this.skinLabel15);
+            this.skinGroupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinGroupBox1.ForeColor = System.Drawing.Color.Indigo;
+            this.skinGroupBox1.Location = new System.Drawing.Point(23, 17);
+            this.skinGroupBox1.Name = "skinGroupBox1";
+            this.skinGroupBox1.RectBackColor = System.Drawing.Color.DarkGray;
+            this.skinGroupBox1.RoundStyle = CCWin.SkinClass.RoundStyle.All;
+            this.skinGroupBox1.Size = new System.Drawing.Size(234, 324);
+            this.skinGroupBox1.TabIndex = 9;
+            this.skinGroupBox1.TabStop = false;
+            this.skinGroupBox1.Text = "仪表通信设置";
+            this.skinGroupBox1.TitleBorderColor = System.Drawing.Color.Black;
+            this.skinGroupBox1.TitleRectBackColor = System.Drawing.Color.DarkGray;
+            this.skinGroupBox1.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
+            // 
+            // biaoAddressTextbox
+            // 
+            this.biaoAddressTextbox.Location = new System.Drawing.Point(72, 239);
+            this.biaoAddressTextbox.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.biaoAddressTextbox.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.biaoAddressTextbox.Name = "biaoAddressTextbox";
+            this.biaoAddressTextbox.Size = new System.Drawing.Size(151, 29);
+            this.biaoAddressTextbox.TabIndex = 10;
+            this.biaoAddressTextbox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // protocolComboBox
+            // 
+            this.protocolComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.protocolComboBox.DropBackColor = System.Drawing.Color.Silver;
+            this.protocolComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.protocolComboBox.FormattingEnabled = true;
+            this.protocolComboBox.ItemBorderColor = System.Drawing.Color.SlateGray;
+            this.protocolComboBox.ItemHoverForeColor = System.Drawing.Color.Gray;
+            this.protocolComboBox.Items.AddRange(new object[] {
+            "ModbusRTU",
+            "ModbusASCII"});
+            this.protocolComboBox.Location = new System.Drawing.Point(72, 198);
+            this.protocolComboBox.Name = "protocolComboBox";
+            this.protocolComboBox.Size = new System.Drawing.Size(151, 30);
+            this.protocolComboBox.TabIndex = 8;
+            this.protocolComboBox.WaterText = "";
+            // 
+            // parityComboBox
+            // 
+            this.parityComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.parityComboBox.DropBackColor = System.Drawing.Color.Silver;
+            this.parityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parityComboBox.FormattingEnabled = true;
+            this.parityComboBox.ItemBorderColor = System.Drawing.Color.SlateGray;
+            this.parityComboBox.ItemHoverForeColor = System.Drawing.Color.Gray;
+            this.parityComboBox.Items.AddRange(new object[] {
+            "无",
+            "偶校验",
+            "奇校验"});
+            this.parityComboBox.Location = new System.Drawing.Point(72, 157);
+            this.parityComboBox.Name = "parityComboBox";
+            this.parityComboBox.Size = new System.Drawing.Size(151, 30);
+            this.parityComboBox.TabIndex = 8;
+            this.parityComboBox.WaterText = "";
+            // 
+            // stopBitsComboBox
+            // 
+            this.stopBitsComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.stopBitsComboBox.DropBackColor = System.Drawing.Color.Silver;
+            this.stopBitsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.stopBitsComboBox.FormattingEnabled = true;
+            this.stopBitsComboBox.ItemBorderColor = System.Drawing.Color.SlateGray;
+            this.stopBitsComboBox.ItemHoverForeColor = System.Drawing.Color.Gray;
+            this.stopBitsComboBox.Items.AddRange(new object[] {
+            "1位",
+            "2位",
+            "1.5位"});
+            this.stopBitsComboBox.Location = new System.Drawing.Point(72, 116);
+            this.stopBitsComboBox.Name = "stopBitsComboBox";
+            this.stopBitsComboBox.Size = new System.Drawing.Size(151, 30);
+            this.stopBitsComboBox.TabIndex = 8;
+            this.stopBitsComboBox.WaterText = "";
+            // 
+            // dataBitsComboBox
+            // 
+            this.dataBitsComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.dataBitsComboBox.DropBackColor = System.Drawing.Color.Silver;
+            this.dataBitsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dataBitsComboBox.FormattingEnabled = true;
+            this.dataBitsComboBox.ItemBorderColor = System.Drawing.Color.SlateGray;
+            this.dataBitsComboBox.ItemHoverForeColor = System.Drawing.Color.Gray;
+            this.dataBitsComboBox.Items.AddRange(new object[] {
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.dataBitsComboBox.Location = new System.Drawing.Point(72, 72);
+            this.dataBitsComboBox.Name = "dataBitsComboBox";
+            this.dataBitsComboBox.Size = new System.Drawing.Size(151, 30);
+            this.dataBitsComboBox.TabIndex = 8;
+            this.dataBitsComboBox.WaterText = "";
+            // 
+            // baudComboBox
+            // 
+            this.baudComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.baudComboBox.DropBackColor = System.Drawing.Color.Silver;
+            this.baudComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.baudComboBox.FormattingEnabled = true;
+            this.baudComboBox.ItemBorderColor = System.Drawing.Color.SlateGray;
+            this.baudComboBox.ItemHoverForeColor = System.Drawing.Color.Gray;
+            this.baudComboBox.Items.AddRange(new object[] {
+            "1200",
+            "2400",
+            "4800",
+            "9600",
+            "19200",
+            "38400"});
+            this.baudComboBox.Location = new System.Drawing.Point(72, 28);
+            this.baudComboBox.Name = "baudComboBox";
+            this.baudComboBox.Size = new System.Drawing.Size(151, 30);
+            this.baudComboBox.TabIndex = 8;
+            this.baudComboBox.WaterText = "";
+            // 
+            // skinLabel18
+            // 
+            this.skinLabel18.AutoSize = true;
+            this.skinLabel18.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel18.BorderColor = System.Drawing.Color.White;
+            this.skinLabel18.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel18.Location = new System.Drawing.Point(14, 242);
+            this.skinLabel18.Name = "skinLabel18";
+            this.skinLabel18.Size = new System.Drawing.Size(58, 22);
+            this.skinLabel18.TabIndex = 0;
+            this.skinLabel18.Text = "表地址";
+            // 
+            // skinLabel33
+            // 
+            this.skinLabel33.AutoSize = true;
+            this.skinLabel33.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel33.BorderColor = System.Drawing.Color.White;
+            this.skinLabel33.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel33.Location = new System.Drawing.Point(14, 202);
+            this.skinLabel33.Name = "skinLabel33";
+            this.skinLabel33.Size = new System.Drawing.Size(42, 22);
+            this.skinLabel33.TabIndex = 0;
+            this.skinLabel33.Text = "协议";
+            // 
+            // skinLabel19
+            // 
+            this.skinLabel19.AutoSize = true;
+            this.skinLabel19.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel19.BorderColor = System.Drawing.Color.White;
+            this.skinLabel19.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel19.Location = new System.Drawing.Point(14, 160);
+            this.skinLabel19.Name = "skinLabel19";
+            this.skinLabel19.Size = new System.Drawing.Size(42, 22);
+            this.skinLabel19.TabIndex = 0;
+            this.skinLabel19.Text = "校验";
+            // 
+            // skinLabel17
+            // 
+            this.skinLabel17.AutoSize = true;
+            this.skinLabel17.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel17.BorderColor = System.Drawing.Color.White;
+            this.skinLabel17.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel17.Location = new System.Drawing.Point(14, 119);
+            this.skinLabel17.Name = "skinLabel17";
+            this.skinLabel17.Size = new System.Drawing.Size(58, 22);
+            this.skinLabel17.TabIndex = 0;
+            this.skinLabel17.Text = "停止位";
+            // 
+            // skinLabel16
+            // 
+            this.skinLabel16.AutoSize = true;
+            this.skinLabel16.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel16.BorderColor = System.Drawing.Color.White;
+            this.skinLabel16.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel16.Location = new System.Drawing.Point(14, 75);
+            this.skinLabel16.Name = "skinLabel16";
+            this.skinLabel16.Size = new System.Drawing.Size(58, 22);
+            this.skinLabel16.TabIndex = 0;
+            this.skinLabel16.Text = "数据位";
+            // 
+            // skinLabel15
+            // 
+            this.skinLabel15.AutoSize = true;
+            this.skinLabel15.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel15.BorderColor = System.Drawing.Color.White;
+            this.skinLabel15.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel15.Location = new System.Drawing.Point(14, 32);
+            this.skinLabel15.Name = "skinLabel15";
+            this.skinLabel15.Size = new System.Drawing.Size(58, 22);
+            this.skinLabel15.TabIndex = 0;
+            this.skinLabel15.Text = "波特率";
+            // 
+            // skinGroupBox2
+            // 
+            this.skinGroupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.skinGroupBox2.BorderColor = System.Drawing.Color.Black;
+            this.skinGroupBox2.Controls.Add(this.exEXEPathTextBox);
+            this.skinGroupBox2.Controls.Add(this.findExEXEButton);
+            this.skinGroupBox2.Controls.Add(this.startupExEXEButton);
+            this.skinGroupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinGroupBox2.ForeColor = System.Drawing.Color.Indigo;
+            this.skinGroupBox2.Location = new System.Drawing.Point(263, 17);
+            this.skinGroupBox2.Name = "skinGroupBox2";
+            this.skinGroupBox2.RectBackColor = System.Drawing.Color.DarkGray;
+            this.skinGroupBox2.RoundStyle = CCWin.SkinClass.RoundStyle.All;
+            this.skinGroupBox2.Size = new System.Drawing.Size(188, 324);
+            this.skinGroupBox2.TabIndex = 9;
+            this.skinGroupBox2.TabStop = false;
+            this.skinGroupBox2.Text = "打开Prolink设置";
+            this.skinGroupBox2.TitleBorderColor = System.Drawing.Color.Black;
+            this.skinGroupBox2.TitleRectBackColor = System.Drawing.Color.DarkGray;
+            this.skinGroupBox2.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
+            // 
+            // exEXEPathTextBox
+            // 
+            this.exEXEPathTextBox.BackColor = System.Drawing.Color.Transparent;
+            this.exEXEPathTextBox.DownBack = null;
+            this.exEXEPathTextBox.Icon = null;
+            this.exEXEPathTextBox.IconIsButton = false;
+            this.exEXEPathTextBox.IconMouseState = CCWin.SkinClass.ControlState.Normal;
+            this.exEXEPathTextBox.IsPasswordChat = '\0';
+            this.exEXEPathTextBox.IsSystemPasswordChar = false;
+            this.exEXEPathTextBox.Lines = new string[0];
+            this.exEXEPathTextBox.Location = new System.Drawing.Point(11, 135);
+            this.exEXEPathTextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.exEXEPathTextBox.MaxLength = 32767;
+            this.exEXEPathTextBox.MinimumSize = new System.Drawing.Size(28, 28);
+            this.exEXEPathTextBox.MouseBack = null;
+            this.exEXEPathTextBox.MouseState = CCWin.SkinClass.ControlState.Normal;
+            this.exEXEPathTextBox.Multiline = true;
+            this.exEXEPathTextBox.Name = "exEXEPathTextBox";
+            this.exEXEPathTextBox.NormlBack = null;
+            this.exEXEPathTextBox.Padding = new System.Windows.Forms.Padding(5);
+            this.exEXEPathTextBox.ReadOnly = true;
+            this.exEXEPathTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.exEXEPathTextBox.Size = new System.Drawing.Size(166, 174);
+            // 
+            // 
+            // 
+            this.exEXEPathTextBox.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.exEXEPathTextBox.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.exEXEPathTextBox.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.exEXEPathTextBox.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.exEXEPathTextBox.SkinTxt.Multiline = true;
+            this.exEXEPathTextBox.SkinTxt.Name = "BaseText";
+            this.exEXEPathTextBox.SkinTxt.ReadOnly = true;
+            this.exEXEPathTextBox.SkinTxt.Size = new System.Drawing.Size(156, 164);
+            this.exEXEPathTextBox.SkinTxt.TabIndex = 0;
+            this.exEXEPathTextBox.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.exEXEPathTextBox.SkinTxt.WaterText = "";
+            this.exEXEPathTextBox.TabIndex = 32;
+            this.exEXEPathTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.exEXEPathTextBox.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.exEXEPathTextBox.WaterText = "";
+            this.exEXEPathTextBox.WordWrap = true;
+            // 
+            // findExEXEButton
+            // 
+            this.findExEXEButton.BackColor = System.Drawing.Color.DarkGray;
+            this.findExEXEButton.BaseColor = System.Drawing.Color.Gray;
+            this.findExEXEButton.BorderColor = System.Drawing.Color.DarkGray;
+            this.findExEXEButton.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.findExEXEButton.DownBack = null;
+            this.findExEXEButton.Location = new System.Drawing.Point(11, 80);
+            this.findExEXEButton.MouseBack = null;
+            this.findExEXEButton.Name = "findExEXEButton";
+            this.findExEXEButton.NormlBack = null;
+            this.findExEXEButton.Size = new System.Drawing.Size(165, 42);
+            this.findExEXEButton.TabIndex = 8;
+            this.findExEXEButton.Text = "指定软件路径";
+            this.findExEXEButton.UseVisualStyleBackColor = false;
+            this.findExEXEButton.Click += new System.EventHandler(this.findExEXEButton_Click);
+            // 
+            // startupExEXEButton
+            // 
+            this.startupExEXEButton.BackColor = System.Drawing.Color.DarkGray;
+            this.startupExEXEButton.BaseColor = System.Drawing.Color.Gray;
+            this.startupExEXEButton.BorderColor = System.Drawing.Color.DarkGray;
+            this.startupExEXEButton.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.startupExEXEButton.DownBack = null;
+            this.startupExEXEButton.Location = new System.Drawing.Point(11, 32);
+            this.startupExEXEButton.MouseBack = null;
+            this.startupExEXEButton.Name = "startupExEXEButton";
+            this.startupExEXEButton.NormlBack = null;
+            this.startupExEXEButton.Size = new System.Drawing.Size(165, 42);
+            this.startupExEXEButton.TabIndex = 8;
+            this.startupExEXEButton.Text = "打开\r";
+            this.startupExEXEButton.UseVisualStyleBackColor = false;
+            this.startupExEXEButton.Click += new System.EventHandler(this.startupExEXEButton_Click);
+            // 
             // skinTabPage3
             // 
             this.skinTabPage3.BackColor = System.Drawing.Color.DarkGray;
@@ -1525,12 +1875,66 @@
             // 
             // panelLocation2
             // 
+            this.panelLocation2.Controls.Add(this.dataGridViewFindData);
             this.panelLocation2.Controls.Add(this.skinGroupBox3);
-            this.panelLocation2.Controls.Add(this.textBoxFindResult);
-            this.panelLocation2.Location = new System.Drawing.Point(247, 14);
+            this.panelLocation2.Location = new System.Drawing.Point(95, 35);
             this.panelLocation2.Name = "panelLocation2";
-            this.panelLocation2.Size = new System.Drawing.Size(708, 403);
+            this.panelLocation2.Size = new System.Drawing.Size(1026, 402);
             this.panelLocation2.TabIndex = 36;
+            // 
+            // dataGridViewFindData
+            // 
+            this.dataGridViewFindData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewFindData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6});
+            this.dataGridViewFindData.Location = new System.Drawing.Point(255, 27);
+            this.dataGridViewFindData.Name = "dataGridViewFindData";
+            this.dataGridViewFindData.RowTemplate.Height = 23;
+            this.dataGridViewFindData.RowTemplate.ReadOnly = true;
+            this.dataGridViewFindData.Size = new System.Drawing.Size(745, 359);
+            this.dataGridViewFindData.TabIndex = 37;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "采集时间";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 200;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "密度";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "温度";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "K0";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "K1";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "K2";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             // 
             // skinGroupBox3
             // 
@@ -1555,7 +1959,7 @@
             this.skinGroupBox3.Name = "skinGroupBox3";
             this.skinGroupBox3.RectBackColor = System.Drawing.Color.DarkGray;
             this.skinGroupBox3.RoundStyle = CCWin.SkinClass.RoundStyle.All;
-            this.skinGroupBox3.Size = new System.Drawing.Size(216, 341);
+            this.skinGroupBox3.Size = new System.Drawing.Size(216, 369);
             this.skinGroupBox3.TabIndex = 34;
             this.skinGroupBox3.TabStop = false;
             this.skinGroupBox3.Text = "查询设置";
@@ -1581,7 +1985,7 @@
             this.btnFindData.BorderColor = System.Drawing.Color.DarkGray;
             this.btnFindData.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btnFindData.DownBack = null;
-            this.btnFindData.Location = new System.Drawing.Point(116, 302);
+            this.btnFindData.Location = new System.Drawing.Point(25, 250);
             this.btnFindData.MouseBack = null;
             this.btnFindData.Name = "btnFindData";
             this.btnFindData.NormlBack = null;
@@ -1783,332 +2187,6 @@
             0,
             0});
             // 
-            // textBoxFindResult
-            // 
-            this.textBoxFindResult.Location = new System.Drawing.Point(259, 12);
-            this.textBoxFindResult.Multiline = true;
-            this.textBoxFindResult.Name = "textBoxFindResult";
-            this.textBoxFindResult.ReadOnly = true;
-            this.textBoxFindResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxFindResult.Size = new System.Drawing.Size(423, 374);
-            this.textBoxFindResult.TabIndex = 35;
-            // 
-            // skinTabPage2
-            // 
-            this.skinTabPage2.BackColor = System.Drawing.Color.DarkGray;
-            this.skinTabPage2.Controls.Add(this.panelLocation3);
-            this.skinTabPage2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.skinTabPage2.Font = new System.Drawing.Font("宋体", 10F);
-            this.skinTabPage2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.skinTabPage2.Location = new System.Drawing.Point(0, 40);
-            this.skinTabPage2.Name = "skinTabPage2";
-            this.skinTabPage2.Size = new System.Drawing.Size(1269, 565);
-            this.skinTabPage2.TabIndex = 1;
-            this.skinTabPage2.TabItemImage = null;
-            this.skinTabPage2.Text = "通信参数";
-            // 
-            // panelLocation3
-            // 
-            this.panelLocation3.Controls.Add(this.skinGroupBox1);
-            this.panelLocation3.Controls.Add(this.skinGroupBox2);
-            this.panelLocation3.Location = new System.Drawing.Point(208, 25);
-            this.panelLocation3.Name = "panelLocation3";
-            this.panelLocation3.Size = new System.Drawing.Size(450, 353);
-            this.panelLocation3.TabIndex = 10;
-            // 
-            // skinGroupBox1
-            // 
-            this.skinGroupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.skinGroupBox1.BorderColor = System.Drawing.Color.Black;
-            this.skinGroupBox1.Controls.Add(this.biaoAddressTextbox);
-            this.skinGroupBox1.Controls.Add(this.parityComboBox);
-            this.skinGroupBox1.Controls.Add(this.stopBitsComboBox);
-            this.skinGroupBox1.Controls.Add(this.dataBitsComboBox);
-            this.skinGroupBox1.Controls.Add(this.baudComboBox);
-            this.skinGroupBox1.Controls.Add(this.skinLabel18);
-            this.skinGroupBox1.Controls.Add(this.skinLabel19);
-            this.skinGroupBox1.Controls.Add(this.skinLabel17);
-            this.skinGroupBox1.Controls.Add(this.skinLabel16);
-            this.skinGroupBox1.Controls.Add(this.skinLabel15);
-            this.skinGroupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinGroupBox1.ForeColor = System.Drawing.Color.Indigo;
-            this.skinGroupBox1.Location = new System.Drawing.Point(23, 17);
-            this.skinGroupBox1.Name = "skinGroupBox1";
-            this.skinGroupBox1.RectBackColor = System.Drawing.Color.DarkGray;
-            this.skinGroupBox1.RoundStyle = CCWin.SkinClass.RoundStyle.All;
-            this.skinGroupBox1.Size = new System.Drawing.Size(188, 324);
-            this.skinGroupBox1.TabIndex = 9;
-            this.skinGroupBox1.TabStop = false;
-            this.skinGroupBox1.Text = "仪表通信设置";
-            this.skinGroupBox1.TitleBorderColor = System.Drawing.Color.Black;
-            this.skinGroupBox1.TitleRectBackColor = System.Drawing.Color.DarkGray;
-            this.skinGroupBox1.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
-            // 
-            // biaoAddressTextbox
-            // 
-            this.biaoAddressTextbox.Location = new System.Drawing.Point(72, 198);
-            this.biaoAddressTextbox.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.biaoAddressTextbox.Name = "biaoAddressTextbox";
-            this.biaoAddressTextbox.Size = new System.Drawing.Size(103, 29);
-            this.biaoAddressTextbox.TabIndex = 10;
-            // 
-            // parityComboBox
-            // 
-            this.parityComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.parityComboBox.DropBackColor = System.Drawing.Color.Silver;
-            this.parityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parityComboBox.FormattingEnabled = true;
-            this.parityComboBox.ItemBorderColor = System.Drawing.Color.SlateGray;
-            this.parityComboBox.ItemHoverForeColor = System.Drawing.Color.Gray;
-            this.parityComboBox.Items.AddRange(new object[] {
-            "无",
-            "偶校验",
-            "奇校验"});
-            this.parityComboBox.Location = new System.Drawing.Point(72, 157);
-            this.parityComboBox.Name = "parityComboBox";
-            this.parityComboBox.Size = new System.Drawing.Size(103, 30);
-            this.parityComboBox.TabIndex = 8;
-            this.parityComboBox.WaterText = "";
-            // 
-            // stopBitsComboBox
-            // 
-            this.stopBitsComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.stopBitsComboBox.DropBackColor = System.Drawing.Color.Silver;
-            this.stopBitsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.stopBitsComboBox.FormattingEnabled = true;
-            this.stopBitsComboBox.ItemBorderColor = System.Drawing.Color.SlateGray;
-            this.stopBitsComboBox.ItemHoverForeColor = System.Drawing.Color.Gray;
-            this.stopBitsComboBox.Items.AddRange(new object[] {
-            "无",
-            "1位",
-            "2位",
-            "1.5位"});
-            this.stopBitsComboBox.Location = new System.Drawing.Point(72, 116);
-            this.stopBitsComboBox.Name = "stopBitsComboBox";
-            this.stopBitsComboBox.Size = new System.Drawing.Size(103, 30);
-            this.stopBitsComboBox.TabIndex = 8;
-            this.stopBitsComboBox.WaterText = "";
-            // 
-            // dataBitsComboBox
-            // 
-            this.dataBitsComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.dataBitsComboBox.DropBackColor = System.Drawing.Color.Silver;
-            this.dataBitsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dataBitsComboBox.FormattingEnabled = true;
-            this.dataBitsComboBox.ItemBorderColor = System.Drawing.Color.SlateGray;
-            this.dataBitsComboBox.ItemHoverForeColor = System.Drawing.Color.Gray;
-            this.dataBitsComboBox.Items.AddRange(new object[] {
-            "6",
-            "7",
-            "8",
-            "9"});
-            this.dataBitsComboBox.Location = new System.Drawing.Point(72, 72);
-            this.dataBitsComboBox.Name = "dataBitsComboBox";
-            this.dataBitsComboBox.Size = new System.Drawing.Size(103, 30);
-            this.dataBitsComboBox.TabIndex = 8;
-            this.dataBitsComboBox.WaterText = "";
-            // 
-            // baudComboBox
-            // 
-            this.baudComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.baudComboBox.DropBackColor = System.Drawing.Color.Silver;
-            this.baudComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.baudComboBox.FormattingEnabled = true;
-            this.baudComboBox.ItemBorderColor = System.Drawing.Color.SlateGray;
-            this.baudComboBox.ItemHoverForeColor = System.Drawing.Color.Gray;
-            this.baudComboBox.Items.AddRange(new object[] {
-            "115200",
-            "9600"});
-            this.baudComboBox.Location = new System.Drawing.Point(72, 28);
-            this.baudComboBox.Name = "baudComboBox";
-            this.baudComboBox.Size = new System.Drawing.Size(103, 30);
-            this.baudComboBox.TabIndex = 8;
-            this.baudComboBox.WaterText = "";
-            // 
-            // skinLabel18
-            // 
-            this.skinLabel18.AutoSize = true;
-            this.skinLabel18.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel18.BorderColor = System.Drawing.Color.White;
-            this.skinLabel18.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel18.Location = new System.Drawing.Point(14, 200);
-            this.skinLabel18.Name = "skinLabel18";
-            this.skinLabel18.Size = new System.Drawing.Size(58, 22);
-            this.skinLabel18.TabIndex = 0;
-            this.skinLabel18.Text = "表地址";
-            // 
-            // skinLabel19
-            // 
-            this.skinLabel19.AutoSize = true;
-            this.skinLabel19.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel19.BorderColor = System.Drawing.Color.White;
-            this.skinLabel19.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel19.Location = new System.Drawing.Point(14, 160);
-            this.skinLabel19.Name = "skinLabel19";
-            this.skinLabel19.Size = new System.Drawing.Size(42, 22);
-            this.skinLabel19.TabIndex = 0;
-            this.skinLabel19.Text = "校验";
-            // 
-            // skinLabel17
-            // 
-            this.skinLabel17.AutoSize = true;
-            this.skinLabel17.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel17.BorderColor = System.Drawing.Color.White;
-            this.skinLabel17.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel17.Location = new System.Drawing.Point(14, 119);
-            this.skinLabel17.Name = "skinLabel17";
-            this.skinLabel17.Size = new System.Drawing.Size(58, 22);
-            this.skinLabel17.TabIndex = 0;
-            this.skinLabel17.Text = "停止位";
-            // 
-            // skinLabel16
-            // 
-            this.skinLabel16.AutoSize = true;
-            this.skinLabel16.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel16.BorderColor = System.Drawing.Color.White;
-            this.skinLabel16.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel16.Location = new System.Drawing.Point(14, 75);
-            this.skinLabel16.Name = "skinLabel16";
-            this.skinLabel16.Size = new System.Drawing.Size(58, 22);
-            this.skinLabel16.TabIndex = 0;
-            this.skinLabel16.Text = "数据位";
-            // 
-            // skinLabel15
-            // 
-            this.skinLabel15.AutoSize = true;
-            this.skinLabel15.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel15.BorderColor = System.Drawing.Color.White;
-            this.skinLabel15.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel15.Location = new System.Drawing.Point(14, 32);
-            this.skinLabel15.Name = "skinLabel15";
-            this.skinLabel15.Size = new System.Drawing.Size(58, 22);
-            this.skinLabel15.TabIndex = 0;
-            this.skinLabel15.Text = "波特率";
-            // 
-            // skinGroupBox2
-            // 
-            this.skinGroupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.skinGroupBox2.BorderColor = System.Drawing.Color.Black;
-            this.skinGroupBox2.Controls.Add(this.exEXEPathTextBox);
-            this.skinGroupBox2.Controls.Add(this.findExEXEButton);
-            this.skinGroupBox2.Controls.Add(this.startupExEXEButton);
-            this.skinGroupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinGroupBox2.ForeColor = System.Drawing.Color.Indigo;
-            this.skinGroupBox2.Location = new System.Drawing.Point(231, 17);
-            this.skinGroupBox2.Name = "skinGroupBox2";
-            this.skinGroupBox2.RectBackColor = System.Drawing.Color.DarkGray;
-            this.skinGroupBox2.RoundStyle = CCWin.SkinClass.RoundStyle.All;
-            this.skinGroupBox2.Size = new System.Drawing.Size(188, 324);
-            this.skinGroupBox2.TabIndex = 9;
-            this.skinGroupBox2.TabStop = false;
-            this.skinGroupBox2.Text = "打开Prolink设置";
-            this.skinGroupBox2.TitleBorderColor = System.Drawing.Color.Black;
-            this.skinGroupBox2.TitleRectBackColor = System.Drawing.Color.DarkGray;
-            this.skinGroupBox2.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
-            // 
-            // exEXEPathTextBox
-            // 
-            this.exEXEPathTextBox.BackColor = System.Drawing.Color.Transparent;
-            this.exEXEPathTextBox.DownBack = null;
-            this.exEXEPathTextBox.Icon = null;
-            this.exEXEPathTextBox.IconIsButton = false;
-            this.exEXEPathTextBox.IconMouseState = CCWin.SkinClass.ControlState.Normal;
-            this.exEXEPathTextBox.IsPasswordChat = '\0';
-            this.exEXEPathTextBox.IsSystemPasswordChar = false;
-            this.exEXEPathTextBox.Lines = new string[0];
-            this.exEXEPathTextBox.Location = new System.Drawing.Point(11, 135);
-            this.exEXEPathTextBox.Margin = new System.Windows.Forms.Padding(0);
-            this.exEXEPathTextBox.MaxLength = 32767;
-            this.exEXEPathTextBox.MinimumSize = new System.Drawing.Size(28, 28);
-            this.exEXEPathTextBox.MouseBack = null;
-            this.exEXEPathTextBox.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.exEXEPathTextBox.Multiline = true;
-            this.exEXEPathTextBox.Name = "exEXEPathTextBox";
-            this.exEXEPathTextBox.NormlBack = null;
-            this.exEXEPathTextBox.Padding = new System.Windows.Forms.Padding(5);
-            this.exEXEPathTextBox.ReadOnly = true;
-            this.exEXEPathTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.exEXEPathTextBox.Size = new System.Drawing.Size(166, 174);
-            // 
-            // 
-            // 
-            this.exEXEPathTextBox.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.exEXEPathTextBox.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.exEXEPathTextBox.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
-            this.exEXEPathTextBox.SkinTxt.Location = new System.Drawing.Point(5, 5);
-            this.exEXEPathTextBox.SkinTxt.Multiline = true;
-            this.exEXEPathTextBox.SkinTxt.Name = "BaseText";
-            this.exEXEPathTextBox.SkinTxt.ReadOnly = true;
-            this.exEXEPathTextBox.SkinTxt.Size = new System.Drawing.Size(156, 164);
-            this.exEXEPathTextBox.SkinTxt.TabIndex = 0;
-            this.exEXEPathTextBox.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.exEXEPathTextBox.SkinTxt.WaterText = "";
-            this.exEXEPathTextBox.TabIndex = 32;
-            this.exEXEPathTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.exEXEPathTextBox.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.exEXEPathTextBox.WaterText = "";
-            this.exEXEPathTextBox.WordWrap = true;
-            // 
-            // findExEXEButton
-            // 
-            this.findExEXEButton.BackColor = System.Drawing.Color.DarkGray;
-            this.findExEXEButton.BaseColor = System.Drawing.Color.Gray;
-            this.findExEXEButton.BorderColor = System.Drawing.Color.DarkGray;
-            this.findExEXEButton.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.findExEXEButton.DownBack = null;
-            this.findExEXEButton.Location = new System.Drawing.Point(11, 80);
-            this.findExEXEButton.MouseBack = null;
-            this.findExEXEButton.Name = "findExEXEButton";
-            this.findExEXEButton.NormlBack = null;
-            this.findExEXEButton.Size = new System.Drawing.Size(165, 42);
-            this.findExEXEButton.TabIndex = 8;
-            this.findExEXEButton.Text = "指定软件路径";
-            this.findExEXEButton.UseVisualStyleBackColor = false;
-            this.findExEXEButton.Click += new System.EventHandler(this.findExEXEButton_Click);
-            // 
-            // startupExEXEButton
-            // 
-            this.startupExEXEButton.BackColor = System.Drawing.Color.DarkGray;
-            this.startupExEXEButton.BaseColor = System.Drawing.Color.Gray;
-            this.startupExEXEButton.BorderColor = System.Drawing.Color.DarkGray;
-            this.startupExEXEButton.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.startupExEXEButton.DownBack = null;
-            this.startupExEXEButton.Location = new System.Drawing.Point(11, 32);
-            this.startupExEXEButton.MouseBack = null;
-            this.startupExEXEButton.Name = "startupExEXEButton";
-            this.startupExEXEButton.NormlBack = null;
-            this.startupExEXEButton.Size = new System.Drawing.Size(165, 42);
-            this.startupExEXEButton.TabIndex = 8;
-            this.startupExEXEButton.Text = "打开\r";
-            this.startupExEXEButton.UseVisualStyleBackColor = false;
-            this.startupExEXEButton.Click += new System.EventHandler(this.startupExEXEButton_Click);
-            // 
-            // timerGetData
-            // 
-            this.timerGetData.Interval = 1000;
-            this.timerGetData.Tick += new System.EventHandler(this.timerGetData_Tick);
-            // 
-            // timerTime
-            // 
-            this.timerTime.Enabled = true;
-            this.timerTime.Interval = 1000;
-            this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
-            // 
-            // timerDraw
-            // 
-            this.timerDraw.Interval = 200;
-            this.timerDraw.Tick += new System.EventHandler(this.timerDraw_Tick);
-            // 
-            // timerSave
-            // 
-            this.timerSave.Enabled = true;
-            this.timerSave.Interval = 3000;
-            this.timerSave.Tick += new System.EventHandler(this.timerSave_Tick);
-            // 
             // Form_MainShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2158,9 +2236,15 @@
             this.groupDataShow.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.skinTabPage2.ResumeLayout(false);
+            this.panelLocation3.ResumeLayout(false);
+            this.skinGroupBox1.ResumeLayout(false);
+            this.skinGroupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.biaoAddressTextbox)).EndInit();
+            this.skinGroupBox2.ResumeLayout(false);
             this.skinTabPage3.ResumeLayout(false);
             this.panelLocation2.ResumeLayout(false);
-            this.panelLocation2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFindData)).EndInit();
             this.skinGroupBox3.ResumeLayout(false);
             this.skinGroupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mnupMin)).EndInit();
@@ -2168,12 +2252,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nmupDay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmupMonth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmupYear)).EndInit();
-            this.skinTabPage2.ResumeLayout(false);
-            this.panelLocation3.ResumeLayout(false);
-            this.skinGroupBox1.ResumeLayout(false);
-            this.skinGroupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.biaoAddressTextbox)).EndInit();
-            this.skinGroupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2202,7 +2280,6 @@
         private System.Windows.Forms.Panel panelIsAutoMode;
         private CCWin.SkinControl.SkinTabControl MainTabControl;
         private CCWin.SkinControl.SkinComboBox comcmb;
-        private CCWin.SkinControl.SkinButton btnStartCurve;
         private CCWin.SkinControl.SkinButton btnStopCurve;
         private CCWin.SkinControl.SkinLabel skinLabel2;
         private CCWin.SkinControl.SkinLabel skinLabel3;
@@ -2282,7 +2359,6 @@
         private CCWin.SkinControl.SkinNumericUpDown nmupDay;
         private CCWin.SkinControl.SkinNumericUpDown nmupMonth;
         private CCWin.SkinControl.SkinNumericUpDown nmupYear;
-        private System.Windows.Forms.TextBox textBoxFindResult;
         private CCWin.SkinControl.SkinLabel skinLabel32;
         private CCWin.SkinControl.SkinLabel skinLabel31;
         private CCWin.SkinControl.SkinNumericUpDown mnupMin;
@@ -2295,6 +2371,15 @@
         private System.Windows.Forms.Panel panelLocation3;
         private System.Windows.Forms.Panel panelLocation2;
         private System.Windows.Forms.Panel panelLocation1;
+        private System.Windows.Forms.DataGridView dataGridViewFindData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private CCWin.SkinControl.SkinComboBox protocolComboBox;
+        private CCWin.SkinControl.SkinLabel skinLabel33;
     }
 }
 

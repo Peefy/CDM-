@@ -286,7 +286,7 @@ namespace Modbus
             }
             OnException?.Invoke(id, unit, function, exception);
         }
-
+        
         internal static ushort SwapUInt16(ushort inValue)
         {
             return (ushort)(((inValue & 0xff00) >> 8) |

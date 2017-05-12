@@ -94,6 +94,7 @@
     <Compile Include="CDM\Sqlite\BaseSqliteModel.cs" />
     <Compile Include="CDM\Sqlite\ComWithSqlite.cs" />
     <Compile Include="CDM\Sqlite\GatherSave.cs" />
+    <Compile Include="CDM\Sqlite\UserModel.cs" />
     <Compile Include="CDM\ZedGraghUtils.cs" />
     <Compile Include="Form_FindData.cs">
       <SubType>Form</SubType>
@@ -106,6 +107,18 @@
     </Compile>
     <Compile Include="Form_MainShow.Designer.cs">
       <DependentUpon>Form_MainShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_SerialConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_SerialConfig.Designer.cs">
+      <DependentUpon>Form_SerialConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_UserConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_UserConfig.Designer.cs">
+      <DependentUpon>Form_UserConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="类\AppInfo.cs" />
     <Compile Include="类\BitConverterHelper.cs" />
@@ -153,8 +166,14 @@
     <EmbeddedResource Include="Form_MainShow.resx">
       <DependentUpon>Form_MainShow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_SerialConfig.resx">
+      <DependentUpon>Form_SerialConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Splash.resx">
       <DependentUpon>Form_Splash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_UserConfig.resx">
+      <DependentUpon>Form_UserConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

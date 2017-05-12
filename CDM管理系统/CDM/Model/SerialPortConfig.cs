@@ -8,11 +8,12 @@ namespace 流量计检定上位机.CDM.Model
 {
     public class SerialPortConfig
     {
-        public int BaudRateIndex { get; set; } = 1;
-        public int StopBitsIndex { get; set; } = 1;
+        public int BaudRateIndex { get; set; } = 3;
+        public int StopBitsIndex { get; set; } = 0;
         public int DataBitsIndex { get; set; } = 2;
         public int ParityIndex { get; set; } = 1;
         public decimal BiaoAddressValue { get; set; } = 1;
+        public int ProtocolIndex { get; set; } = 0;
 
         public bool IsOpen { get; set; }
         public bool IsListening { get; set; }
@@ -32,8 +33,12 @@ namespace 流量计检定上位机.CDM.Model
             {
                 switch (BaudRateIndex)
                 {
-                    case 0: return 115200;
-                    case 1: return 9600;
+                    case 0: return 1200;
+                    case 1: return 2400;
+                    case 2: return 4800;
+                    case 3: return 9600;
+                    case 4: return 19200;
+                    case 5: return 38400;
                     default: return 9600;
                 }
             }
@@ -45,10 +50,9 @@ namespace 流量计检定上位机.CDM.Model
             {
                 switch (StopBitsIndex)
                 {
-                    case 0: return StopBits.None;
-                    case 1: return StopBits.One;
-                    case 2: return StopBits.Two;
-                    case 3: return StopBits.OnePointFive;
+                    case 0: return StopBits.One;
+                    case 1: return StopBits.Two;
+                    case 2: return StopBits.OnePointFive;
                     default: return StopBits.One;
                 }
             }

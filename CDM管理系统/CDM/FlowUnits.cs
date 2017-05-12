@@ -4,6 +4,9 @@ using System.Text;
 
 namespace 流量计检定上位机.CDM
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class FlowUnits
     {
         public static string[] ToTalStrings { get; set; } =

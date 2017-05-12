@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace 流量计检定上位机.CDM.Model
 {
+    /// <summary>
+    /// 需要的读CDM的地址
+    /// </summary>
     public static class AddressConfig
     {
         public static ushort Density = 249;

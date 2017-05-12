@@ -67,6 +67,7 @@
             this.skinLabel4.Size = new System.Drawing.Size(75, 28);
             this.skinLabel4.TabIndex = 0;
             this.skinLabel4.Text = "用户名";
+            this.skinLabel4.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // skinLabel5
             // 
@@ -80,6 +81,7 @@
             this.skinLabel5.Size = new System.Drawing.Size(72, 28);
             this.skinLabel5.TabIndex = 0;
             this.skinLabel5.Text = "密   码";
+            this.skinLabel5.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnLogIn
             // 
@@ -89,11 +91,11 @@
             this.btnLogIn.DownBack = null;
             this.btnLogIn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnLogIn.ForeColor = System.Drawing.Color.Purple;
-            this.btnLogIn.Location = new System.Drawing.Point(256, 163);
+            this.btnLogIn.Location = new System.Drawing.Point(243, 163);
             this.btnLogIn.MouseBack = null;
             this.btnLogIn.Name = "btnLogIn";
             this.btnLogIn.NormlBack = null;
-            this.btnLogIn.Size = new System.Drawing.Size(69, 28);
+            this.btnLogIn.Size = new System.Drawing.Size(82, 40);
             this.btnLogIn.TabIndex = 3;
             this.btnLogIn.Text = "登 陆";
             this.btnLogIn.UseVisualStyleBackColor = false;
@@ -111,7 +113,7 @@
             this.btnLogOut.MouseBack = null;
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.NormlBack = null;
-            this.btnLogOut.Size = new System.Drawing.Size(64, 28);
+            this.btnLogOut.Size = new System.Drawing.Size(81, 40);
             this.btnLogOut.TabIndex = 3;
             this.btnLogOut.Text = "退 出";
             this.btnLogOut.UseVisualStyleBackColor = false;
@@ -123,15 +125,15 @@
             this.chkSavePWD.BackColor = System.Drawing.Color.Transparent;
             this.chkSavePWD.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.chkSavePWD.DownBack = null;
-            this.chkSavePWD.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.chkSavePWD.Location = new System.Drawing.Point(144, 165);
+            this.chkSavePWD.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.chkSavePWD.Location = new System.Drawing.Point(137, 170);
             this.chkSavePWD.MouseBack = null;
             this.chkSavePWD.Name = "chkSavePWD";
             this.chkSavePWD.NormlBack = null;
             this.chkSavePWD.SelectedDownBack = null;
             this.chkSavePWD.SelectedMouseBack = null;
             this.chkSavePWD.SelectedNormlBack = null;
-            this.chkSavePWD.Size = new System.Drawing.Size(93, 25);
+            this.chkSavePWD.Size = new System.Drawing.Size(101, 28);
             this.chkSavePWD.TabIndex = 4;
             this.chkSavePWD.Text = "记住密码";
             this.chkSavePWD.UseVisualStyleBackColor = false;
@@ -158,7 +160,7 @@
             this.txbUserName.Padding = new System.Windows.Forms.Padding(5);
             this.txbUserName.ReadOnly = false;
             this.txbUserName.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txbUserName.Size = new System.Drawing.Size(185, 28);
+            this.txbUserName.Size = new System.Drawing.Size(202, 28);
             // 
             // 
             // 
@@ -167,7 +169,7 @@
             this.txbUserName.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
             this.txbUserName.SkinTxt.Location = new System.Drawing.Point(5, 5);
             this.txbUserName.SkinTxt.Name = "BaseText";
-            this.txbUserName.SkinTxt.Size = new System.Drawing.Size(175, 18);
+            this.txbUserName.SkinTxt.Size = new System.Drawing.Size(192, 18);
             this.txbUserName.SkinTxt.TabIndex = 0;
             this.txbUserName.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txbUserName.SkinTxt.WaterText = "请输入用户名";
@@ -199,7 +201,7 @@
             this.txbPassWord.Padding = new System.Windows.Forms.Padding(5);
             this.txbPassWord.ReadOnly = false;
             this.txbPassWord.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txbPassWord.Size = new System.Drawing.Size(185, 28);
+            this.txbPassWord.Size = new System.Drawing.Size(202, 28);
             // 
             // 
             // 
@@ -209,7 +211,7 @@
             this.txbPassWord.SkinTxt.Location = new System.Drawing.Point(5, 5);
             this.txbPassWord.SkinTxt.Name = "BaseText";
             this.txbPassWord.SkinTxt.PasswordChar = '●';
-            this.txbPassWord.SkinTxt.Size = new System.Drawing.Size(175, 18);
+            this.txbPassWord.SkinTxt.Size = new System.Drawing.Size(192, 18);
             this.txbPassWord.SkinTxt.TabIndex = 0;
             this.txbPassWord.SkinTxt.UseSystemPasswordChar = true;
             this.txbPassWord.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
@@ -222,7 +224,7 @@
             // 
             // RollingBar
             // 
-            this.RollingBar.Location = new System.Drawing.Point(210, 206);
+            this.RollingBar.Location = new System.Drawing.Point(212, 206);
             this.RollingBar.Name = "RollingBar";
             this.RollingBar.Radius2 = 24;
             this.RollingBar.Size = new System.Drawing.Size(97, 43);
@@ -242,9 +244,9 @@
             // 
             this.prbLoading.BackColor = System.Drawing.Color.White;
             this.prbLoading.ForeColor = System.Drawing.Color.Red;
-            this.prbLoading.Location = new System.Drawing.Point(241, 255);
+            this.prbLoading.Location = new System.Drawing.Point(0, 251);
             this.prbLoading.Name = "prbLoading";
-            this.prbLoading.Size = new System.Drawing.Size(318, 6);
+            this.prbLoading.Size = new System.Drawing.Size(570, 10);
             this.prbLoading.TabIndex = 9;
             this.prbLoading.UseWaitCursor = true;
             this.prbLoading.Visible = false;
@@ -254,7 +256,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(558, 262);
+            this.ClientSize = new System.Drawing.Size(568, 262);
             this.ControlBox = false;
             this.Controls.Add(this.RollingBar);
             this.Controls.Add(this.txbPassWord);

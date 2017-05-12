@@ -199,5 +199,14 @@ namespace 流量计检定上位机
             }  
         }
 
+        private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formMainShow.用户管理ToolStripMenuItem_Click(sender, e);
+        }
+
+        private void 串口连接ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formMainShow.串口连接ToolStripMenuItem_Click(sender,e);
+        }
     }
 }
