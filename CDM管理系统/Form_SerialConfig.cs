@@ -26,16 +26,61 @@ namespace CDM管理系统
         {
             InitializeComponent();
             mSerialPortConfig = pSerrialPortConfig;
+            
         }
 
         private void Form_SerialConfig_Load(object sender, EventArgs e)
         {
-            #region Serialinit
+            #region SerialInit
             string[] ports = SerialPort.GetPortNames();
             Array.Sort(ports);
             comcmb.Items.Clear();
             comcmb.Items.AddRange(ports);
             comcmb.SelectedIndex = comcmb.Items.Count > 0 ? 0 : -1;
+            #endregion
+            #region DataInit
+            foreach (var control in protocolGroupBox.Controls)
+            {
+                if (control is RadioButton radio)
+                {
+                    var index = Convert.ToInt32(radio.Tag);
+                    if (index == mSerialPortConfig.ProtocolIndex)
+                        radio.Checked = true;
+                }
+            }
+
+            foreach (var control in jiaoyanGroupBox.Controls)
+            {
+                if (control is RadioButton radio)
+                {
+                    var index = Convert.ToInt32(radio.Tag);
+                    if (index == mSerialPortConfig.ParityIndex)
+                        radio.Checked = true;
+                }
+            }
+
+            foreach (var control in stopbitsGroupBox.Controls)
+            {
+                if (control is RadioButton radio)
+                {
+                    var index = Convert.ToInt32(radio.Tag);
+                    if (index == mSerialPortConfig.StopBitsIndex)
+                        radio.Checked = true;
+                }
+            }
+
+            foreach (var control in baudrateGroupBox.Controls)
+            {
+                if (control is RadioButton radio)
+                {
+                    var index = Convert.ToInt32(radio.Tag);
+                    if (index == mSerialPortConfig.BaudRateIndex)
+                        radio.Checked = true;
+                }
+            }
+
+            nmudSlaveAdderss.Value = mSerialPortConfig.BiaoAddressValue;
+
             #endregion
         }
 
@@ -53,7 +98,7 @@ namespace CDM管理系统
                 {
                     if(radio.Checked == true)
                     {
-                        var index = Convert.ToInt32( radio.Tag);
+                        var index = Convert.ToInt32(radio.Tag);
                         mSerialPortConfig.ProtocolIndex = index;
                         break;
                     }
@@ -98,7 +143,7 @@ namespace CDM管理系统
                     }
                 }
             }
-
+            mSerialPortConfig.BiaoAddressValue = nmudSlaveAdderss.Value;
 
             this.DialogResult = DialogResult.OK;
         }

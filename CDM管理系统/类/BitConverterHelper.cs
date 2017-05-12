@@ -19,6 +19,7 @@ namespace 流量计检定上位机
         public static Single ToSingle(byte[] values, int startindex)
         {
             byte[] bytes = { values[startindex + 1], values[startindex + 0], values[startindex + 3], values[startindex + 2 ] };
+            //byte[] bytes = { values[startindex + 0], values[startindex + 1], values[startindex + 2], values[startindex + 3] };
             return BitConverter.ToSingle(bytes, 0);
         }
           

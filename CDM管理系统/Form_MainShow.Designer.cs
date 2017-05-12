@@ -87,8 +87,8 @@
             this.temUp = new CCWin.SkinControl.SkinTextBox();
             this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
             this.groupDataShow = new CCWin.SkinControl.SkinGroupBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxSensor = new System.Windows.Forms.PictureBox();
+            this.pictureBoxDriveGain = new System.Windows.Forms.PictureBox();
             this.flowUnitsComboBox = new CCWin.SkinControl.SkinComboBox();
             this.skinLabel14 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel4 = new CCWin.SkinControl.SkinLabel();
@@ -166,8 +166,8 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.temWarningFlag)).BeginInit();
             this.groupDataShow.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSensor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDriveGain)).BeginInit();
             this.skinTabPage2.SuspendLayout();
             this.panelLocation3.SuspendLayout();
             this.skinGroupBox1.SuspendLayout();
@@ -224,9 +224,9 @@
             this.labelStatus.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.labelStatus.Location = new System.Drawing.Point(6, 19);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(37, 20);
+            this.labelStatus.Size = new System.Drawing.Size(82, 20);
             this.labelStatus.TabIndex = 29;
-            this.labelStatus.Text = "状态";
+            this.labelStatus.Text = "状态:未连接";
             // 
             // panel2
             // 
@@ -282,7 +282,6 @@
             // 
             // timerSave
             // 
-            this.timerSave.Enabled = true;
             this.timerSave.Interval = 3000;
             this.timerSave.Tick += new System.EventHandler(this.timerSave_Tick);
             // 
@@ -1102,8 +1101,8 @@
             // 
             this.groupDataShow.BackColor = System.Drawing.Color.Transparent;
             this.groupDataShow.BorderColor = System.Drawing.Color.Black;
-            this.groupDataShow.Controls.Add(this.pictureBox2);
-            this.groupDataShow.Controls.Add(this.pictureBox1);
+            this.groupDataShow.Controls.Add(this.pictureBoxSensor);
+            this.groupDataShow.Controls.Add(this.pictureBoxDriveGain);
             this.groupDataShow.Controls.Add(this.flowUnitsComboBox);
             this.groupDataShow.Controls.Add(this.skinLabel14);
             this.groupDataShow.Controls.Add(this.skinLabel4);
@@ -1140,23 +1139,23 @@
             this.groupDataShow.TitleRectBackColor = System.Drawing.Color.DarkGray;
             this.groupDataShow.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
             // 
-            // pictureBox2
+            // pictureBoxSensor
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Lime;
-            this.pictureBox2.Location = new System.Drawing.Point(122, 359);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(44, 18);
-            this.pictureBox2.TabIndex = 32;
-            this.pictureBox2.TabStop = false;
+            this.pictureBoxSensor.BackColor = System.Drawing.Color.Red;
+            this.pictureBoxSensor.Location = new System.Drawing.Point(122, 359);
+            this.pictureBoxSensor.Name = "pictureBoxSensor";
+            this.pictureBoxSensor.Size = new System.Drawing.Size(44, 18);
+            this.pictureBoxSensor.TabIndex = 32;
+            this.pictureBoxSensor.TabStop = false;
             // 
-            // pictureBox1
+            // pictureBoxDriveGain
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Red;
-            this.pictureBox1.Location = new System.Drawing.Point(122, 335);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(44, 18);
-            this.pictureBox1.TabIndex = 32;
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxDriveGain.BackColor = System.Drawing.Color.Red;
+            this.pictureBoxDriveGain.Location = new System.Drawing.Point(122, 335);
+            this.pictureBoxDriveGain.Name = "pictureBoxDriveGain";
+            this.pictureBoxDriveGain.Size = new System.Drawing.Size(44, 18);
+            this.pictureBoxDriveGain.TabIndex = 32;
+            this.pictureBoxDriveGain.TabStop = false;
             // 
             // flowUnitsComboBox
             // 
@@ -1168,9 +1167,9 @@
             this.flowUnitsComboBox.ItemHoverForeColor = System.Drawing.Color.Gray;
             this.flowUnitsComboBox.Items.AddRange(new object[] {
             "kg/m3 (千克/立方米)",
-            "g/l (克/升)",
-            "g/ml (克/毫升)",
-            "kg/l (千克/升)",
+            "g/l (克/升)            ",
+            "g/ml (克/毫升)          ",
+            "kg/l (千克/升)       ",
             "g/cm3 (克/立方厘米)"});
             this.flowUnitsComboBox.Location = new System.Drawing.Point(12, 175);
             this.flowUnitsComboBox.Name = "flowUnitsComboBox";
@@ -1401,11 +1400,12 @@
             this.LabelTemp.BackColor = System.Drawing.Color.Transparent;
             this.LabelTemp.BorderColor = System.Drawing.Color.White;
             this.LabelTemp.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.LabelTemp.Location = new System.Drawing.Point(10, 286);
+            this.LabelTemp.Location = new System.Drawing.Point(12, 286);
             this.LabelTemp.Name = "LabelTemp";
             this.LabelTemp.Size = new System.Drawing.Size(85, 22);
             this.LabelTemp.TabIndex = 27;
             this.LabelTemp.Text = "9999.999";
+            this.LabelTemp.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // labelMidu
             // 
@@ -1413,11 +1413,12 @@
             this.labelMidu.BackColor = System.Drawing.Color.Transparent;
             this.labelMidu.BorderColor = System.Drawing.Color.White;
             this.labelMidu.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.labelMidu.Location = new System.Drawing.Point(7, 235);
+            this.labelMidu.Location = new System.Drawing.Point(13, 235);
             this.labelMidu.Name = "labelMidu";
             this.labelMidu.Size = new System.Drawing.Size(85, 22);
             this.labelMidu.TabIndex = 27;
             this.labelMidu.Text = "9999.999";
+            this.labelMidu.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // flowUnitsLabel
             // 
@@ -1425,7 +1426,7 @@
             this.flowUnitsLabel.BackColor = System.Drawing.Color.Transparent;
             this.flowUnitsLabel.BorderColor = System.Drawing.Color.White;
             this.flowUnitsLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.flowUnitsLabel.Location = new System.Drawing.Point(93, 234);
+            this.flowUnitsLabel.Location = new System.Drawing.Point(96, 234);
             this.flowUnitsLabel.Name = "flowUnitsLabel";
             this.flowUnitsLabel.Size = new System.Drawing.Size(98, 22);
             this.flowUnitsLabel.TabIndex = 27;
@@ -1879,7 +1880,7 @@
             this.panelLocation2.Controls.Add(this.skinGroupBox3);
             this.panelLocation2.Location = new System.Drawing.Point(95, 35);
             this.panelLocation2.Name = "panelLocation2";
-            this.panelLocation2.Size = new System.Drawing.Size(1026, 402);
+            this.panelLocation2.Size = new System.Drawing.Size(1026, 499);
             this.panelLocation2.TabIndex = 36;
             // 
             // dataGridViewFindData
@@ -1896,7 +1897,7 @@
             this.dataGridViewFindData.Name = "dataGridViewFindData";
             this.dataGridViewFindData.RowTemplate.Height = 23;
             this.dataGridViewFindData.RowTemplate.ReadOnly = true;
-            this.dataGridViewFindData.Size = new System.Drawing.Size(745, 359);
+            this.dataGridViewFindData.Size = new System.Drawing.Size(745, 455);
             this.dataGridViewFindData.TabIndex = 37;
             // 
             // Column1
@@ -1959,7 +1960,7 @@
             this.skinGroupBox3.Name = "skinGroupBox3";
             this.skinGroupBox3.RectBackColor = System.Drawing.Color.DarkGray;
             this.skinGroupBox3.RoundStyle = CCWin.SkinClass.RoundStyle.All;
-            this.skinGroupBox3.Size = new System.Drawing.Size(216, 369);
+            this.skinGroupBox3.Size = new System.Drawing.Size(216, 465);
             this.skinGroupBox3.TabIndex = 34;
             this.skinGroupBox3.TabStop = false;
             this.skinGroupBox3.Text = "查询设置";
@@ -1972,10 +1973,11 @@
             this.isFindMin.AutoSize = true;
             this.isFindMin.Checked = true;
             this.isFindMin.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.isFindMin.Location = new System.Drawing.Point(177, 220);
+            this.isFindMin.Location = new System.Drawing.Point(25, 246);
             this.isFindMin.Name = "isFindMin";
-            this.isFindMin.Size = new System.Drawing.Size(15, 14);
+            this.isFindMin.Size = new System.Drawing.Size(141, 26);
             this.isFindMin.TabIndex = 36;
+            this.isFindMin.Text = "是否按分钟查询";
             this.isFindMin.UseVisualStyleBackColor = true;
             // 
             // btnFindData
@@ -1985,7 +1987,7 @@
             this.btnFindData.BorderColor = System.Drawing.Color.DarkGray;
             this.btnFindData.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btnFindData.DownBack = null;
-            this.btnFindData.Location = new System.Drawing.Point(25, 250);
+            this.btnFindData.Location = new System.Drawing.Point(25, 278);
             this.btnFindData.MouseBack = null;
             this.btnFindData.Name = "btnFindData";
             this.btnFindData.NormlBack = null;
@@ -2234,8 +2236,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.temWarningFlag)).EndInit();
             this.groupDataShow.ResumeLayout(false);
             this.groupDataShow.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSensor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDriveGain)).EndInit();
             this.skinTabPage2.ResumeLayout(false);
             this.panelLocation3.ResumeLayout(false);
             this.skinGroupBox1.ResumeLayout(false);
@@ -2310,8 +2312,8 @@
         private CCWin.SkinControl.SkinLabel skinLabel4;
         private CCWin.SkinControl.SkinLabel skinLabel13;
         private CCWin.SkinControl.SkinLine skinLine4;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBoxSensor;
+        private System.Windows.Forms.PictureBox pictureBoxDriveGain;
         private CCWin.SkinControl.SkinGroupBox skinGroupBox1;
         private CCWin.SkinControl.SkinNumericUpDown biaoAddressTextbox;
         private CCWin.SkinControl.SkinButton startupExEXEButton;

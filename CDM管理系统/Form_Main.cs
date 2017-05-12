@@ -208,5 +208,15 @@ namespace 流量计检定上位机
         {
             formMainShow.串口连接ToolStripMenuItem_Click(sender,e);
         }
+
+        private void timerGetData_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            formMainShow.串口连接ToolStripMenuItem_Click(sender, e);
+        }
     }
 }

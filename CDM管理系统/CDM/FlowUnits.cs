@@ -9,6 +9,9 @@ namespace 流量计检定上位机.CDM
     /// </summary>
     public class FlowUnits
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static string[] ToTalStrings { get; set; } =
         {
             "千克/立方米",

@@ -37,6 +37,7 @@
             this.viewMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolBarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.用户管理ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.RegisterMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
@@ -71,8 +72,9 @@
             this.MenuItemGenerateExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.保存数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查询数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.用户管理ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.串口连接ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.MenuShowDemarcate.SuspendLayout();
@@ -148,11 +150,19 @@
             // toolsMenu
             // 
             this.toolsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.用户管理ToolStripMenuItem1,
-            this.串口连接ToolStripMenuItem});
+            this.串口连接ToolStripMenuItem,
+            this.用户管理ToolStripMenuItem1});
             this.toolsMenu.Name = "toolsMenu";
             this.toolsMenu.Size = new System.Drawing.Size(59, 21);
             this.toolsMenu.Text = "设置(&S)";
+            // 
+            // 用户管理ToolStripMenuItem1
+            // 
+            this.用户管理ToolStripMenuItem1.BackColor = System.Drawing.Color.DarkGray;
+            this.用户管理ToolStripMenuItem1.Name = "用户管理ToolStripMenuItem1";
+            this.用户管理ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.用户管理ToolStripMenuItem1.Text = "用户管理";
+            this.用户管理ToolStripMenuItem1.Click += new System.EventHandler(this.用户管理ToolStripMenuItem_Click);
             // 
             // helpMenu
             // 
@@ -183,7 +193,9 @@
             this.toolStripButton4,
             this.toolStripSeparator4,
             this.toolStripButton5,
-            this.toolStripButton6});
+            this.toolStripButton6,
+            this.toolStripSeparator3,
+            this.toolStripButton1});
             this.toolStrip.Location = new System.Drawing.Point(4, 53);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(1264, 25);
@@ -209,6 +221,7 @@
             // 
             this.timerGetData.Enabled = true;
             this.timerGetData.Interval = 80;
+            this.timerGetData.Tick += new System.EventHandler(this.timerGetData_Tick);
             // 
             // timerShowTime
             // 
@@ -457,21 +470,29 @@
             this.查询数据ToolStripMenuItem.Text = "查询数据";
             this.查询数据ToolStripMenuItem.Click += new System.EventHandler(this.查询数据ToolStripMenuItem_Click);
             // 
-            // 用户管理ToolStripMenuItem1
-            // 
-            this.用户管理ToolStripMenuItem1.BackColor = System.Drawing.Color.DarkGray;
-            this.用户管理ToolStripMenuItem1.Name = "用户管理ToolStripMenuItem1";
-            this.用户管理ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.用户管理ToolStripMenuItem1.Text = "用户管理";
-            this.用户管理ToolStripMenuItem1.Click += new System.EventHandler(this.用户管理ToolStripMenuItem_Click);
-            // 
             // 串口连接ToolStripMenuItem
             // 
             this.串口连接ToolStripMenuItem.BackColor = System.Drawing.Color.DarkGray;
+            this.串口连接ToolStripMenuItem.Image = global::CDM管理系统.Properties.Resources.Port_32px_530255_easyicon_net;
             this.串口连接ToolStripMenuItem.Name = "串口连接ToolStripMenuItem";
             this.串口连接ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.串口连接ToolStripMenuItem.Text = "串口连接";
             this.串口连接ToolStripMenuItem.Click += new System.EventHandler(this.串口连接ToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::CDM管理系统.Properties.Resources.Port_32px_530255_easyicon_net;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "串口连接";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // Form_Main
             // 
@@ -552,6 +573,8 @@
         private System.Windows.Forms.ToolStripMenuItem RegisterMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 用户管理ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 串口连接ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 

@@ -121,7 +121,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(16, 90);
+            this.radioButton2.Location = new System.Drawing.Point(16, 95);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(59, 16);
             this.radioButton2.TabIndex = 0;
@@ -147,7 +147,7 @@
             this.stopbitsGroupBox.Controls.Add(this.radioButton6);
             this.stopbitsGroupBox.Location = new System.Drawing.Point(225, 12);
             this.stopbitsGroupBox.Name = "stopbitsGroupBox";
-            this.stopbitsGroupBox.Size = new System.Drawing.Size(116, 202);
+            this.stopbitsGroupBox.Size = new System.Drawing.Size(116, 200);
             this.stopbitsGroupBox.TabIndex = 0;
             this.stopbitsGroupBox.TabStop = false;
             this.stopbitsGroupBox.Text = "停止位";
@@ -166,7 +166,7 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(16, 87);
+            this.radioButton5.Location = new System.Drawing.Point(16, 95);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(89, 16);
             this.radioButton5.TabIndex = 0;
@@ -178,10 +178,11 @@
             // 
             this.radioButton6.AutoSize = true;
             this.radioButton6.Checked = true;
-            this.radioButton6.Location = new System.Drawing.Point(16, 30);
+            this.radioButton6.Location = new System.Drawing.Point(16, 25);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(77, 16);
             this.radioButton6.TabIndex = 0;
+            this.radioButton6.TabStop = true;
             this.radioButton6.Tag = "0";
             this.radioButton6.Text = "1个停止位";
             this.radioButton6.UseVisualStyleBackColor = true;
@@ -196,7 +197,7 @@
             this.baudrateGroupBox.Controls.Add(this.radioButton9);
             this.baudrateGroupBox.Location = new System.Drawing.Point(347, 13);
             this.baudrateGroupBox.Name = "baudrateGroupBox";
-            this.baudrateGroupBox.Size = new System.Drawing.Size(100, 200);
+            this.baudrateGroupBox.Size = new System.Drawing.Size(100, 199);
             this.baudrateGroupBox.TabIndex = 0;
             this.baudrateGroupBox.TabStop = false;
             this.baudrateGroupBox.Text = "波特率";
@@ -226,7 +227,7 @@
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(16, 88);
+            this.radioButton7.Location = new System.Drawing.Point(16, 85);
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(47, 16);
             this.radioButton7.TabIndex = 0;
@@ -238,7 +239,7 @@
             // 
             this.radioButton10.AutoSize = true;
             this.radioButton10.Checked = true;
-            this.radioButton10.Location = new System.Drawing.Point(16, 116);
+            this.radioButton10.Location = new System.Drawing.Point(16, 115);
             this.radioButton10.Name = "radioButton10";
             this.radioButton10.Size = new System.Drawing.Size(47, 16);
             this.radioButton10.TabIndex = 0;
@@ -250,7 +251,7 @@
             // radioButton8
             // 
             this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(16, 56);
+            this.radioButton8.Location = new System.Drawing.Point(16, 55);
             this.radioButton8.Name = "radioButton8";
             this.radioButton8.Size = new System.Drawing.Size(47, 16);
             this.radioButton8.TabIndex = 0;
@@ -277,7 +278,7 @@
             this.groupBox5.Controls.Add(this.nmudSlaveAdderss);
             this.groupBox5.Location = new System.Drawing.Point(453, 13);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(126, 201);
+            this.groupBox5.Size = new System.Drawing.Size(126, 199);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "连接";
@@ -313,7 +314,7 @@
             // 
             // nmudSlaveAdderss
             // 
-            this.nmudSlaveAdderss.Location = new System.Drawing.Point(53, 21);
+            this.nmudSlaveAdderss.Location = new System.Drawing.Point(53, 22);
             this.nmudSlaveAdderss.Maximum = new decimal(new int[] {
             255,
             0,
@@ -347,7 +348,7 @@
             // radioButton14
             // 
             this.radioButton14.AutoSize = true;
-            this.radioButton14.Location = new System.Drawing.Point(10, 59);
+            this.radioButton14.Location = new System.Drawing.Point(11, 59);
             this.radioButton14.Name = "radioButton14";
             this.radioButton14.Size = new System.Drawing.Size(89, 16);
             this.radioButton14.TabIndex = 0;
@@ -372,7 +373,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(594, 226);
+            this.ClientSize = new System.Drawing.Size(594, 217);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.baudrateGroupBox);
             this.Controls.Add(this.stopbitsGroupBox);

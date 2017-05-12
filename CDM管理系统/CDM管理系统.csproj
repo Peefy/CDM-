@@ -199,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\Port_32px_530255_easyicon.net.png" />
     <None Include="Resources\start.png" />
     <None Include="Resources\shop-open.png" />
     <None Include="Resources\save.png" />

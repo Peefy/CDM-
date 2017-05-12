@@ -57,6 +57,8 @@ namespace 流量计检定上位机
 
         public double TimeDraw_s => timerDraw.Interval / 1000.0;
 
+        public byte SlaveAddress => (byte)(biaoAddressTextbox.Value);
+
         #endregion
         #region 主窗体初始化
         public Form_MainShow(Form_Main formmain)
@@ -104,7 +106,7 @@ namespace 流量计检定上位机
                 YMin = 0,
                 YMax = 100,
             });
-            timerDraw.Enabled = true;
+            //timerDraw.Enabled = true;
 
             #endregion            
             #region FileInit
@@ -123,7 +125,7 @@ namespace 流量计检定上位机
             nmupHour.Value = timeNow.Hour;
             mnupMin.Value = timeNow.Minute;
 
-            flowUnitsComboBox.SelectedIndex = 0;
+            //flowUnitsComboBox.SelectedIndex = 0;
             MainTabControl.SelectedIndex = 0;
 
             OpenFileRenewData();
@@ -161,8 +163,7 @@ namespace 流量计检定上位机
 
         public void 串口连接ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowSerialConfigForm();
-            
+            ShowSerialConfigForm();          
         }
 
         private void ShowSerialConfigForm()
@@ -238,7 +239,7 @@ namespace 流量计检定上位机
             serialPortConfig.ProtocolIndex = protocolComboBox.SelectedIndex;
             serialPortConfig.BiaoAddressValue = biaoAddressTextbox.Value;
             serialPortConfig.ProLinkPath = exEXEPathTextBox.Text;
-
+            serialPortConfig.FlowUnitsSelectIndex = flowUnitsComboBox.SelectedIndex;
             serialPortConfig.K0Value = K0_XiShu.Value;
             serialPortConfig.K1Value = K1_XiShu.Value;
             serialPortConfig.K2Value = K2_XiShu.Value;
@@ -262,6 +263,8 @@ namespace 流量计检定上位机
             biaoAddressTextbox.Value = serialPortConfig.BiaoAddressValue;
             exEXEPathTextBox.Text = serialPortConfig.ProLinkPath;
 
+            flowUnitsComboBox.SelectedIndex = serialPortConfig.FlowUnitsSelectIndex;
+
             K0_XiShu.Value = serialPortConfig.K0Value;
             K1_XiShu.Value = serialPortConfig.K1Value;
             K2_XiShu.Value = serialPortConfig.K2Value;
@@ -269,6 +272,9 @@ namespace 流量计检定上位机
             K0_TextBox.Text = K0_XiShu.Value.ToString();
             K1_TextBox.Text = K1_XiShu.Value.ToString();
             K2_TextBox.Text = K2_XiShu.Value.ToString();
+
+
+
         }
 
         protected override void OnMouseWheel(MouseEventArgs e)
@@ -369,6 +375,7 @@ namespace 流量计检定上位机
                 serialPortConfig, openFileDialog) == true)
             {
                 OpenFileRenewData();
+                btnChangeUpDown_Click(null, null);
                 MessageBox.Show("读取参数成功!");
             }
         }
@@ -472,8 +479,11 @@ namespace 流量计检定上位机
                     master.Transport.Retries = 1;   
                     master.Transport.ReadTimeout = 300; //milliseconds
                     timerGetData.Enabled = true;
-                    MessageBox.Show("串口打开成功！");
                     labelStatus.Text = "端口打开成功！";
+                    timerDraw.Enabled = true;
+                    timerSave.Enabled = true;
+                    MessageBox.Show("串口打开成功！");
+                    
                 }
                 catch(Exception ex)
                 {
@@ -603,7 +613,7 @@ namespace 流量计检定上位机
                 zedGraphUtilsDes.RenewDataUpDown(desup, desdown);
             }
 
-            ModbusSetK012();
+            //ModbusSetK012();
 
         }
 
@@ -620,8 +630,17 @@ namespace 流量计检定上位机
                 ushorts = BitConverterHelper.SingleToUShort(K2_XiShu.Value);
                 sendUShort = BitConverterHelper.UShortConnect(sendUShort, ushorts);
 
-                master?.WriteMultipleRegisters(Convert.ToByte(serialPortConfig.BiaoAddressValue),
-                    CDM.Model.AddressConfig.K0, sendUShort);
+                try
+                {
+                    master?.WriteMultipleRegisters(SlaveAddress,
+                      (ushort)(CDM.Model.AddressConfig.K0 - 1), sendUShort);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            
+
             }
 
         }
@@ -629,8 +648,11 @@ namespace 流量计检定上位机
         private void flowUnitsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var comboBox = sender as SkinComboBox;
-            flowUnitsLabel.Text = CDM.FlowUnits.ToTalStrings[comboBox.SelectedIndex];
-
+            var index = comboBox.SelectedIndex;
+            flowUnitsLabel.Text = CDM.FlowUnits.ToTalStrings[index];
+            ushort[] desUnitCode = { 92, 97, 95, 96, 91 };
+            master?.WriteMultipleRegisters(1, 39,
+                new ushort[] { desUnitCode[index] });
         }
 
         private void labelYmax_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -780,8 +802,11 @@ namespace 流量计检定上位机
         {
             byte slaveID = Convert.ToByte(serialPortConfig.BiaoAddressValue);
             ushort startAddress = (ushort)dataAddress;
-            ushort numofPoints = 4;  //数据帧中 word 的数量
+            ushort numofPoints = 20;  //数据帧中 word 的数量
             ushort[] holdingregister = master.ReadInputRegisters(slaveID, startAddress, numofPoints);
+
+            
+
             byte[] bytes = { };
             for (int i = 0; i < numofPoints; i++)
             {
@@ -789,11 +814,23 @@ namespace 流量计检定上位机
                 byteTemp = BitConverter.GetBytes(holdingregister[i]);
                 bytes = BitConverterHelper.BytesConnect(bytes, byteTemp);
             }
-            float val = BitConverterHelper.ToSingle(bytes, 0);
-            //labelStatus.Text = bytes[0].ToString();
-            des = (float)(Math.Round(val, 3));
-            val = BitConverterHelper.ToSingle(bytes, 4);
-            tem = (float)(Math.Round(val, 3));
+            //string str = "";
+            //foreach(var num in bytes)
+            //{
+            //    str += num + " ";
+            //}
+            //labelStatus.Text = str;
+            List<byte> tmp = new List<byte>();
+            tmp.AddRange(BitConverter.GetBytes(holdingregister[0]));
+            tmp.AddRange(BitConverter.GetBytes(holdingregister[1]));
+            var result = BitConverter.ToSingle(tmp.ToArray(), 0);
+            des = (float)(Math.Round(result, 3));
+
+            tmp = new List<byte>();
+            tmp.AddRange(BitConverter.GetBytes(holdingregister[2]));
+            tmp.AddRange(BitConverter.GetBytes(holdingregister[3]));
+            result = BitConverter.ToSingle(tmp.ToArray(), 0);
+            tem = (float)(Math.Round(result, 5));
         }
 
         private void timerSave_Tick(object sender, EventArgs e)
@@ -894,12 +931,17 @@ namespace 流量计检定上位机
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void timerGetData_Tick(object sender, EventArgs e)
-        { 
-
-            //GetDesTemData(CDM.Model.AddressConfig.Density, out var dea, out var ta);
+        {
+          
             try
             {
-                GetDesTemData(CDM.Model.AddressConfig.Density, out var des, out var tem);
+                //GetDesTemData(250, out var des, out var tem);
+                //地址减一读
+                GetDesTemData(CDM.Model.AddressConfig.Density - 1, out var des, out var tem);
+                var datas = master?.ReadInputRegisters(SlaveAddress, 
+                    (ushort)(CDM.Model.AddressConfig.BitsDefine - 1), 1);
+                pictureBoxDriveGain.BackColor = (((datas[0]) >> (5)) & 0x01) == 1 ? Color.Red : Color.Lime;
+                pictureBoxSensor.BackColor = (((datas[0]) >> (10)) & 0x01) == 1 ? Color.Red : Color.Lime;
                 paraDensity.Value = des;
                 paraTem.Value = tem;
                 labelMidu.Text = paraDensity.Value.ToString();
@@ -911,16 +953,11 @@ namespace 流量计检定上位机
                 timerGetData.Enabled = false;
                 timerGetData.Stop();
                 btnConnect.Text = "打开";
-                //Connection exception
-                //No response from server.
-                //The server maybe close the com port, or response timeout.
                 if (exception.Source.Equals("System"))
                 {
                     MessageBox.Show(DateTime.Now.ToString() + " " + "通信超时");
                     labelStatus.Text = "通信超时";
                 }
-                //The server return error code.
-                //You can get the function code and exception code.
                 if (exception.Source.Equals("nModbusPC"))
                 {
     
@@ -958,7 +995,7 @@ namespace 流量计检定上位机
                     //this.formMain.Close();
 
                 }
-                labelStatus.Text = exception.Message.ToString();
+                //labelStatus.Text = exception.Message.ToString();
             }          
         }
         #endregion

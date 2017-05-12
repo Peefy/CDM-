@@ -47,6 +47,7 @@ namespace 流量计检定上位机.CDM.Service
             w.Write(ser.K2Value);
 
             w.Write(ser.ProtocolIndex);
+            w.Write(ser.FlowUnitsSelectIndex);
 
             w.Flush();
             w.Close();
@@ -98,7 +99,7 @@ namespace 流量计检定上位机.CDM.Service
                     ser.K2Value = r.ReadSingle();
 
                     ser.ProtocolIndex = r.ReadInt32();
-
+                    ser.FlowUnitsSelectIndex = r.ReadInt32();
                 }
                 fs.Close();
             }
@@ -150,6 +151,7 @@ namespace 流量计检定上位机.CDM.Service
                     w.Write(ser.K2Value);
 
                     w.Write(ser.ProtocolIndex);
+                    w.Write(ser.FlowUnitsSelectIndex);
 
                     w.Flush();
                     w.Close();
@@ -210,7 +212,7 @@ namespace 流量计检定上位机.CDM.Service
                         ser.K2Value = r.ReadSingle();
 
                         ser.ProtocolIndex = r.ReadInt32();
-                        
+                        ser.FlowUnitsSelectIndex = r.ReadInt32();
 
                         r.Close();
                         fs.Close();
