@@ -38,8 +38,6 @@
             this.toolBarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.用户管理ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.RegisterMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -89,8 +87,7 @@
             this.fileMenu,
             this.toolMenu,
             this.viewMenu,
-            this.toolsMenu,
-            this.helpMenu});
+            this.toolsMenu});
             this.menuStrip.Location = new System.Drawing.Point(4, 28);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1264, 25);
@@ -164,22 +161,6 @@
             this.用户管理ToolStripMenuItem1.Text = "用户管理";
             this.用户管理ToolStripMenuItem1.Click += new System.EventHandler(this.用户管理ToolStripMenuItem_Click);
             // 
-            // helpMenu
-            // 
-            this.helpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.RegisterMenuItem});
-            this.helpMenu.Name = "helpMenu";
-            this.helpMenu.Size = new System.Drawing.Size(61, 21);
-            this.helpMenu.Text = "帮助(&H)";
-            // 
-            // RegisterMenuItem
-            // 
-            this.RegisterMenuItem.BackColor = System.Drawing.Color.DarkGray;
-            this.RegisterMenuItem.Name = "RegisterMenuItem";
-            this.RegisterMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.RegisterMenuItem.Text = "使用说明";
-            this.RegisterMenuItem.Click += new System.EventHandler(this.RegisterMenuItem_Click);
-            // 
             // toolStrip
             // 
             this.toolStrip.BackColor = System.Drawing.Color.DarkGray;
@@ -227,6 +208,7 @@
             // 
             this.timerShowTime.Enabled = true;
             this.timerShowTime.Interval = 1000;
+            this.timerShowTime.Tick += new System.EventHandler(this.timerShowTime_Tick);
             // 
             // printDialog
             // 
@@ -569,8 +551,6 @@
         private CCWin.SkinControl.SkinButton btnRegister;
         private CCWin.SkinControl.SkinTextBox labelRegister;
         private CCWin.SkinControl.SkinLabel skinLabel1;
-        private System.Windows.Forms.ToolStripMenuItem helpMenu;
-        private System.Windows.Forms.ToolStripMenuItem RegisterMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 用户管理ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 串口连接ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;

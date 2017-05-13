@@ -137,6 +137,7 @@
             this.chkSavePWD.TabIndex = 4;
             this.chkSavePWD.Text = "记住密码";
             this.chkSavePWD.UseVisualStyleBackColor = false;
+//            this.chkSavePWD.CheckedChanged += new System.EventHandler(this.chkSavePWD_CheckedChanged);
             // 
             // txbUserName
             // 

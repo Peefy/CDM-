@@ -10,7 +10,7 @@ namespace 流量计检定上位机.CDM.Service
     {
         const string ParaSaveFilter = "参数保存文件（*.para）|*.para";
 
-        static string savePath = "C:\\Program Files\\dugu\\CDM";
+        static string savePath = "C:\\Program Files\\dugu\\CDMV1";
         static string userConfigFileName = "\\\\user.uni";
 
         public static void SaveUserConfig(CDM.ZedGraghUtils des,CDM.ZedGraghUtils tem,Model.SerialPortConfig ser)

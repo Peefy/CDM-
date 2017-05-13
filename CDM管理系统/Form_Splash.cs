@@ -18,6 +18,8 @@ namespace 流量计检定上位机
             InitializeComponent();
             this.Cursor = Cursors.Default;
             btnLogIn.Focus();
+            this.Focus();
+            txbUserName.Select();
         }
 
         private void Form_Splash_Load(object sender, EventArgs e)
@@ -104,25 +106,32 @@ namespace 流量计检定上位机
             {
                 FirstFlag = false;
                 //登入成功
-                #region 注册表写入用户名跟密码
-
                 RegistryKey rsg = null;
                 rsg = Registry.Users.OpenSubKey(LoginInfo.RegeditPathString, true);//true表示可以修改
-                rsg.SetValue("username", userName);//写入注册表
-                rsg.SetValue("password", passWord);//写入注册表
-                rsg.SetValue("issavepsd", chkSavePWD.Checked);//写入注册表
-                rsg.SetValue("first", FirstFlag);//写入注册表
-                rsg.Close();
-                #endregion
+                if (LoginInfo.IsManager == false)
+                {
+                    #region 注册表写入用户名跟密码
+                    rsg.SetValue("username", userName);//写入注册表
+                    rsg.SetValue("password", passWord);//写入注册表
+                    rsg.SetValue("issavepsd", chkSavePWD.Checked);//写入注册表
+                    rsg.SetValue("first", FirstFlag);//写入注册表                 
+                    #endregion
+                }
+                else
+                {
+                    rsg.SetValue("issavepsd", chkSavePWD.Checked);//写入注册表
+                    rsg.SetValue("first", FirstFlag);//写入注册表
+                }
+                
                 btnLogIn.Enabled = false;
                 btnLogOut.Enabled = false;
                 RollingBar.Visible = true;
                 RollingBar.StartRolling();
                 Thread thread = new Thread(new ThreadStart(Send));
                 thread.Start();
-                LoginInfo.UserName = userName;
-                LoginInfo.PassWord = passWord;
-     
+                LoginInfo.UserName = rsg.GetValue("username") as string ?? "管理员";
+                LoginInfo.PassWord = rsg.GetValue("password") as string ?? "dugu";
+                rsg.Close();
             }
             else
             {
@@ -203,5 +212,6 @@ namespace 流量计检定上位机
                 btnLogIn_Click(null, null);
             }
         }
+
     }
 }

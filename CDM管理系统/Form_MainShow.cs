@@ -158,7 +158,7 @@ namespace 流量计检定上位机
 
         public void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Form_UserConfig().ShowDialog();
+            new Form_UserConfig(ComWithSqliteServer).ShowDialog();
         }
 
         public void 串口连接ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -434,7 +434,7 @@ namespace 流量计检定上位机
 
         public void 保存数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            ClosingSaveData();
         }
 
         #endregion
@@ -476,7 +476,7 @@ namespace 流量计检定上位机
                         master = ModbusSerialMaster.CreateRtu(serialPort);
                     else
                         master = ModbusSerialMaster.CreateAscii(serialPort);
-                    master.Transport.Retries = 1;   
+                    master.Transport.Retries = 0;   
                     master.Transport.ReadTimeout = 300; //milliseconds
                     timerGetData.Enabled = true;
                     labelStatus.Text = "端口打开成功！";

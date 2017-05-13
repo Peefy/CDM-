@@ -21,13 +21,13 @@ namespace 流量计检定上位机
                 registerString = rsg.GetValue("register").ToString();
             }
             rsg.Close();
-            return registerString == getRNum_md5(LoginInfo.UserName + RegFreeList);
+            return registerString == getRNum_md5("dugu" + RegFreeList);
          
         }
 
         public static bool RegisterING(string mNum)
         {
-            var md5 = getRNum_md5(LoginInfo.UserName + RegFreeList);
+            var md5 = getRNum_md5("dugu" + RegFreeList);
             if(mNum == md5)
             {
                 RegistryKey rsg = null;
@@ -52,7 +52,7 @@ namespace 流量计检定上位机
 
         public static string GetFreeRegisterNum()
         {
-            return getRNum_md5(LoginInfo.UserName + RegFreeList);
+            return getRNum_md5("dugu" + RegFreeList);
         }
 
     }
