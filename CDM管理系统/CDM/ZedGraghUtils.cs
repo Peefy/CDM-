@@ -8,6 +8,7 @@ namespace 流量计检定上位机.CDM
 {
     public class ZedGraghUtils
     {
+        bool enableDraw = true;
         int tickStart;
         double DataUpDragInit;
         double DataDownDragInit;
@@ -44,6 +45,12 @@ namespace 流量计检定上位机.CDM
             {
                 zedgraphControl.GraphPane.YAxis.Scale.Min = value;
             }
+        }
+
+        public bool EnableDraw
+        {
+            get => enableDraw;
+            set => enableDraw = value;
         }
 
         public bool IsWarning
@@ -284,7 +291,12 @@ namespace 流量计检定上位机.CDM
 
         public void Start()
         {
-            //tickStart = Environment.TickCount;
+            enableDraw = true;
+        }
+
+        public void Stop()
+        {
+            enableDraw = false;
         }
 
         public void Clear()
@@ -311,33 +323,35 @@ namespace 流量计检定上位机.CDM
 
         public void TimeDraw(double addData)
         {
-            if (zedgraphControl.GraphPane.CurveList.Count <= 0)
-                return;
-            LineItem curve = zedgraphControl.GraphPane.CurveList[0] as LineItem;
-            if (curve == null)
-                return;
-            IPointListEdit list = curve.Points as IPointListEdit;
-            if (list == null)
-                return;
-            double time = (Environment.TickCount - tickStart) / 1000.0;
-            //list.Add(time,new Random().Next(7));
-            list.Add(time, addData);
-            Scale xScale = zedgraphControl.GraphPane.XAxis.Scale;
-            if(formMain.CurveFollow == false)
+            if (enableDraw == true)
             {
-                if (time > xScale.Max - xScale.MajorStep)
+                if (zedgraphControl.GraphPane.CurveList.Count <= 0)
+                    return;
+                LineItem curve = zedgraphControl.GraphPane.CurveList[0] as LineItem;
+                if (curve == null)
+                    return;
+                IPointListEdit list = curve.Points as IPointListEdit;
+                if (list == null)
+                    return;
+                double time = (Environment.TickCount - tickStart) / 1000.0;
+                list.Add(time, addData);
+                Scale xScale = zedgraphControl.GraphPane.XAxis.Scale;
+                if (formMain.CurveFollow == false)
                 {
-                    xScale.Min += 150;
-                    xScale.Max += 150;
+                    if (time > xScale.Max - xScale.MajorStep)
+                    {
+                        xScale.Min += 150;
+                        xScale.Max += 150;
+                    }
                 }
+                else
+                {
+                    xScale.Min = xScale.Min + formMain.TimeDraw_s;
+                    xScale.Max = xScale.Max + formMain.TimeDraw_s;
+                }
+                zedgraphControl.AxisChange();
+                zedgraphControl.Invalidate();
             }
-            else 
-            {
-                xScale.Min = xScale.Min + formMain.TimeDraw_s;
-                xScale.Max = xScale.Max + formMain.TimeDraw_s;
-            }
-            zedgraphControl.AxisChange();
-            zedgraphControl.Invalidate();
         }
 
         public void RenewDataUpDownDragRenew()

@@ -478,7 +478,7 @@ namespace 流量计检定上位机
         #region 保存查询数据
         public void 查询数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MainTabControl.SelectedIndex = 2;
+            MainTabControl.SelectedIndex = 1;
         }
 
         public void 保存数据ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -597,12 +597,15 @@ namespace 流量计检定上位机
             timerDraw.Enabled = true;
         }
 
+        bool enableDraw = true;
         private void btnStopCurve_Click(object sender, EventArgs e)
         {
             var btn = sender as SkinButton;
-            timerDraw.Enabled = !timerDraw.Enabled;
-            btn.Text = timerDraw.Enabled == true ? "暂停实时曲线" : "开始实时曲线";
-
+            enableDraw = !enableDraw;
+            btn.Text = enableDraw == true ? "暂停实时曲线" : "开始实时曲线";
+            zedGraphUtilsDes.EnableDraw = enableDraw;
+            zedGraphUtilsTem.EnableDraw = enableDraw;
+            zedGraphUtilsDriveGain.EnableDraw = enableDraw;
         }
 
         private void btnClearCurve_Click(object sender, EventArgs e)

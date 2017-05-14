@@ -54,6 +54,8 @@
             this.skinTabPage1 = new CCWin.SkinControl.SkinTabPage();
             this.exEXEPathTextBox = new CCWin.SkinControl.SkinTextBox();
             this.panelLocation1 = new System.Windows.Forms.Panel();
+            this.labelConnect = new System.Windows.Forms.Label();
+            this.pictureBoxConnect = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnOpenConnect = new CCWin.SkinControl.SkinButton();
             this.skinLabel35 = new CCWin.SkinControl.SkinLabel();
@@ -164,13 +166,12 @@
             this.nmupDay = new CCWin.SkinControl.SkinNumericUpDown();
             this.nmupMonth = new CCWin.SkinControl.SkinNumericUpDown();
             this.nmupYear = new CCWin.SkinControl.SkinNumericUpDown();
-            this.pictureBoxConnect = new System.Windows.Forms.PictureBox();
-            this.labelConnect = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.groupConnectSet.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.skinTabPage1.SuspendLayout();
             this.panelLocation1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConnect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupSetDemarcate.SuspendLayout();
@@ -198,7 +199,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nmupDay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmupMonth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmupYear)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConnect)).BeginInit();
             this.SuspendLayout();
             // 
             // labelTime
@@ -254,7 +254,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(4, 673);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1298, 50);
+            this.panel2.Size = new System.Drawing.Size(1332, 50);
             this.panel2.TabIndex = 30;
             // 
             // skinLabel12
@@ -489,6 +489,24 @@
             this.panelLocation1.Name = "panelLocation1";
             this.panelLocation1.Size = new System.Drawing.Size(1258, 553);
             this.panelLocation1.TabIndex = 7;
+            // 
+            // labelConnect
+            // 
+            this.labelConnect.AutoSize = true;
+            this.labelConnect.Location = new System.Drawing.Point(83, 78);
+            this.labelConnect.Name = "labelConnect";
+            this.labelConnect.Size = new System.Drawing.Size(49, 14);
+            this.labelConnect.TabIndex = 36;
+            this.labelConnect.Text = "未连接";
+            // 
+            // pictureBoxConnect
+            // 
+            this.pictureBoxConnect.BackColor = System.Drawing.Color.Red;
+            this.pictureBoxConnect.Location = new System.Drawing.Point(60, 76);
+            this.pictureBoxConnect.Name = "pictureBoxConnect";
+            this.pictureBoxConnect.Size = new System.Drawing.Size(18, 18);
+            this.pictureBoxConnect.TabIndex = 35;
+            this.pictureBoxConnect.TabStop = false;
             // 
             // pictureBox2
             // 
@@ -2347,31 +2365,13 @@
             0,
             0});
             // 
-            // pictureBoxConnect
-            // 
-            this.pictureBoxConnect.BackColor = System.Drawing.Color.Red;
-            this.pictureBoxConnect.Location = new System.Drawing.Point(60, 76);
-            this.pictureBoxConnect.Name = "pictureBoxConnect";
-            this.pictureBoxConnect.Size = new System.Drawing.Size(18, 18);
-            this.pictureBoxConnect.TabIndex = 35;
-            this.pictureBoxConnect.TabStop = false;
-            // 
-            // labelConnect
-            // 
-            this.labelConnect.AutoSize = true;
-            this.labelConnect.Location = new System.Drawing.Point(83, 78);
-            this.labelConnect.Name = "labelConnect";
-            this.labelConnect.Size = new System.Drawing.Size(49, 14);
-            this.labelConnect.TabIndex = 36;
-            this.labelConnect.Text = "未连接";
-            // 
             // Form_MainShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(1323, 727);
+            this.ClientSize = new System.Drawing.Size(1357, 727);
             this.ControlBox = false;
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.panel2);
@@ -2402,6 +2402,7 @@
             this.skinTabPage1.ResumeLayout(false);
             this.panelLocation1.ResumeLayout(false);
             this.panelLocation1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConnect)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupSetDemarcate.ResumeLayout(false);
@@ -2436,7 +2437,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nmupDay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmupMonth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmupYear)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConnect)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
