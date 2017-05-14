@@ -10,10 +10,14 @@ using CCWin.SkinControl;
 using System.Collections.Generic;
 using 流量计检定上位机.CDM;
 using CDM管理系统;
+using CDM.Model;
+
+using CDM管理系统.CDM.Helpers;
 
 namespace 流量计检定上位机
 {
     public partial class Form_MainShow : CCWin.CCSkinMain
+
     {
         #region 变量
 
@@ -25,10 +29,15 @@ namespace 流量计检定上位机
 
         CDM.ZedGraghUtils zedGraphUtilsDes;
         CDM.ZedGraghUtils zedGraphUtilsTem;
+        CDM.ZedGraghUtils zedGraphUtilsDriveGain;
+
         CDM.ChartParameters paras = new CDM.ChartParameters();
-        CDM.Model.SerialPortConfig serialPortConfig = new CDM.Model.SerialPortConfig();
-        CDM.Para paraDensity = new CDM.Para() { Value = 1,Up = 10000,Down = 0};
-        CDM.Para paraTem = new CDM.Para() { Value = 1 ,Up = 10000,Down = 0};
+        SerialPortConfig serialPortConfig = new SerialPortConfig();
+
+        CDM.Para paraDensity = new CDM.Para() { Value = 1,Up = 100000,Down = 0};
+        CDM.Para paraTem = new CDM.Para() { Value = 1 ,Up = 100000,Down = 0};
+        CDM.Para paraDriveGain = new CDM.Para() { Value = 1, Up = 100000, Down = 0 };
+
         CDM.Para K0_XiShu = new CDM.Para() {Up = 1.2f,Down = 0.8f };
         CDM.Para K1_XiShu = new CDM.Para() { Up = 1.3f, Down = 0.7f };
         CDM.Para K2_XiShu = new CDM.Para() { Up = 1.4f, Down = 0.6f };
@@ -41,15 +50,19 @@ namespace 流量计检定上位机
         SerialPort serialPort = new SerialPort(); 
         //Modbus Rtu Master
         ModbusSerialMaster master;
+
         public SkinTextBox LabelYMax => labelYmax;
         public SkinTextBox LabelYMin => labelYmin;
         public SkinTextBox DesDown => desDown;
         public SkinTextBox DesUp => desUp;
         public SkinTextBox TemDown => temDown;
         public SkinTextBox TemUp => temUp;
+        public SkinTextBox DrgDown => drgDown;
+        public SkinTextBox DrgUp => drgUp;
 
         public ZedGraghUtils ZedGraphUtilsDes => zedGraphUtilsDes;
         public ZedGraghUtils ZedGraphUtilsTem => zedGraphUtilsTem;
+        public ZedGraghUtils ZedGraphUtilsDriveGain => zedGraphUtilsDriveGain;
 
         public TabControl TabControl => tabControl1;
         public bool GraphEnable => timerDraw.Enabled;
@@ -71,6 +84,11 @@ namespace 流量计检定上位机
             {
                 DataDown = 10,
                 DataUp = 50,
+            };
+            zedGraphUtilsDriveGain = new CDM.ZedGraghUtils(zedGraphControl3, this)
+            {
+                DataDown = 0.5f,
+                DataUp = 3,
             };
             SaveDatas = new List<CDM.Sqlite.GatherSave>();
 
@@ -106,11 +124,20 @@ namespace 流量计检定上位机
                 YMin = 0,
                 YMax = 100,
             });
+            zedGraphUtilsDriveGain.Init(new ChartParameters()
+            {
+                YTitle = "驱动增益",
+                CurveName = "驱动增益",
+                TotalTitle = "驱动增益曲线",
+                YMin = 0,
+                YMax = 4,
+            });
             //timerDraw.Enabled = true;
 
             #endregion            
             #region FileInit
-            CDM.Service.FileService.ReadUserConfig(zedGraphUtilsDes, zedGraphUtilsTem,serialPortConfig);
+            CDM.Service.FileService.ReadUserConfig(zedGraphUtilsDes, zedGraphUtilsTem,
+                zedGraphUtilsDriveGain,serialPortConfig);
 
             #endregion            
             #region DataInit
@@ -169,7 +196,8 @@ namespace 流量计检定上位机
         private void ShowSerialConfigForm()
         {
             var form = new Form_SerialConfig(serialPortConfig);
-            if (form.ShowDialog() == DialogResult.OK)
+            var result = form.ShowDialog();
+            if (result == DialogResult.OK)
             {
                 baudComboBox.SelectedIndex = serialPortConfig.BaudRateIndex;
                 stopBitsComboBox.SelectedIndex = serialPortConfig.StopBitsIndex;
@@ -179,6 +207,23 @@ namespace 流量计检定上位机
                 comcmb.Text = form.ComText;
                 btnConnect_Click(null, null);
             }
+            else if(result == DialogResult.Ignore)
+            {
+                master = null;
+                serialPort?.Close();
+                serialPort?.Dispose();
+                timerDraw.Enabled = false;
+                timerSave.Enabled = false;
+                labelConnect.Text = "未连接";
+                pictureBoxConnect.BackColor = Color.Red;
+                serialPortConfig.PortIsOpen = false;
+                labelStatus.Text = "端口关闭";
+            }
+        }
+
+        public void 参数设定ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Form_ParaSetting(master, SlaveAddress).ShowDialog();
         }
 
         #endregion
@@ -187,8 +232,8 @@ namespace 流量计检定上位机
         private void Form_Main_Resize(object sender, EventArgs e)
         {
             MainTabControl.Width = Width - 10;
-            panelLocation3.Location = new Point(MainTabControl.Width / 2 - panelLocation3.Width / 2, 
-                MainTabControl.Height / 2 - panelLocation3.Height / 2);
+            //panelLocation3.Location = new Point(MainTabControl.Width / 2 - panelLocation3.Width / 2, 
+              //  MainTabControl.Height / 2 - panelLocation3.Height / 2);
             panelLocation2.Location = new Point(MainTabControl.Width / 2 - panelLocation2.Width / 2,
                 MainTabControl.Height / 2 - panelLocation2.Height / 2);
             panelLocation1.Location = new Point(MainTabControl.Width / 2 - panelLocation1.Width / 2,
@@ -226,7 +271,8 @@ namespace 流量计检定上位机
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             ClosingSaveData();
-            CDM.Service.FileService.SaveUserConfig(zedGraphUtilsDes, zedGraphUtilsTem,serialPortConfig);
+            CDM.Service.FileService.SaveUserConfig(zedGraphUtilsDes, zedGraphUtilsTem,
+                zedGraphUtilsDriveGain,serialPortConfig);
             base.OnFormClosing(e);
         }
 
@@ -239,15 +285,16 @@ namespace 流量计检定上位机
             serialPortConfig.ProtocolIndex = protocolComboBox.SelectedIndex;
             serialPortConfig.BiaoAddressValue = biaoAddressTextbox.Value;
             serialPortConfig.ProLinkPath = exEXEPathTextBox.Text;
-            serialPortConfig.FlowUnitsSelectIndex = flowUnitsComboBox.SelectedIndex;
+            serialPortConfig.DesUnitsSelectIndex = flowUnitsComboBox.SelectedIndex;
+            serialPortConfig.TemUnitsSelectIndex = temUnitsComboBox.SelectedIndex;
             serialPortConfig.K0Value = K0_XiShu.Value;
             serialPortConfig.K1Value = K1_XiShu.Value;
             serialPortConfig.K2Value = K2_XiShu.Value;
 
             serialPortConfig.DesValueAddress =
-                CDM.Model.AddressConfig.Density;
+                AddressConfig.Density;
             serialPortConfig.TemValueAddress =
-                CDM.Model.AddressConfig.Temperature;
+                AddressConfig.Temperature;
 
         }
 
@@ -255,6 +302,7 @@ namespace 流量计检定上位机
         {
             zedGraphUtilsDes.RenewDataUpDown();
             zedGraphUtilsTem.RenewDataUpDown();
+            zedGraphUtilsDriveGain.RenewDataUpDown();
             baudComboBox.SelectedIndex = serialPortConfig.BaudRateIndex;
             stopBitsComboBox.SelectedIndex = serialPortConfig.StopBitsIndex;
             dataBitsComboBox.SelectedIndex = serialPortConfig.DataBitsIndex;
@@ -263,15 +311,16 @@ namespace 流量计检定上位机
             biaoAddressTextbox.Value = serialPortConfig.BiaoAddressValue;
             exEXEPathTextBox.Text = serialPortConfig.ProLinkPath;
 
-            flowUnitsComboBox.SelectedIndex = serialPortConfig.FlowUnitsSelectIndex;
+            flowUnitsComboBox.SelectedIndex = serialPortConfig.DesUnitsSelectIndex;
+            temUnitsComboBox.SelectedIndex = serialPortConfig.TemUnitsSelectIndex;
 
             K0_XiShu.Value = serialPortConfig.K0Value;
             K1_XiShu.Value = serialPortConfig.K1Value;
             K2_XiShu.Value = serialPortConfig.K2Value;
 
-            K0_TextBox.Text = K0_XiShu.Value.ToString();
-            K1_TextBox.Text = K1_XiShu.Value.ToString();
-            K2_TextBox.Text = K2_XiShu.Value.ToString();
+            //K0_TextBox.Text = K0_XiShu.Value.ToString();
+            //K1_TextBox.Text = K1_XiShu.Value.ToString();
+            //K2_TextBox.Text = K2_XiShu.Value.ToString();
 
 
 
@@ -365,14 +414,14 @@ namespace 流量计检定上位机
 
         public void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CDM.Service.FileService.SavePara(zedGraphUtilsDes, zedGraphUtilsTem, 
-                serialPortConfig, saveFileDialog);
+            CDM.Service.FileService.SavePara(zedGraphUtilsDes, zedGraphUtilsTem 
+                ,serialPortConfig,zedGraphUtilsDriveGain, saveFileDialog);
         }
 
         public void OpenFile(object sender, EventArgs e)
         {
             if( CDM.Service.FileService.LoadPara(zedGraphUtilsDes, zedGraphUtilsTem, 
-                serialPortConfig, openFileDialog) == true)
+                zedGraphUtilsDriveGain,serialPortConfig, openFileDialog) == true)
             {
                 OpenFileRenewData();
                 btnChangeUpDown_Click(null, null);
@@ -440,10 +489,11 @@ namespace 流量计检定上位机
         #endregion
         #region SerialPort
 
-        bool SerialPortClosing,Listening;
+        bool SerialPortClosing;
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
+            serialPort = new SerialPort();
             try
             {
                 if(serialPort.IsOpen)
@@ -466,6 +516,7 @@ namespace 流量计检定上位机
                           
                 try
                 {
+                    
                     serialPort.PortName = comcmb.Text;
                     serialPort.BaudRate = serialPortConfig.BaudRateFromIndex;  
                     serialPort.DataBits = serialPortConfig.DataBitsFromIndex;
@@ -480,8 +531,11 @@ namespace 流量计检定上位机
                     master.Transport.ReadTimeout = 300; //milliseconds
                     timerGetData.Enabled = true;
                     labelStatus.Text = "端口打开成功！";
-                    timerDraw.Enabled = true;
-                    timerSave.Enabled = true;
+                    labelConnect.Text = "已连接";
+                    pictureBoxConnect.BackColor = Color.Lime;
+                    serialPortConfig.PortIsOpen = true;
+                    //timerDraw.Enabled = true;
+                    //timerSave.Enabled = true;
                     MessageBox.Show("串口打开成功！");
                     
                 }
@@ -524,6 +578,8 @@ namespace 流量计检定上位机
                 zedGraphUtilsDes.IsWarning == true ? Color.Red : Color.Lime;
             temWarningFlag.BackColor = 
                 zedGraphUtilsTem.IsWarning == true ? Color.Red : Color.Lime;
+            drgWarningFlag.BackColor =
+                zedGraphUtilsDriveGain.IsWarning == true ? Color.Red : Color.Lime;
             ClosingSaveData();
         }
 
@@ -531,6 +587,7 @@ namespace 流量计检定上位机
         {         
             zedGraphUtilsDes.TimeDraw(paraDensity.Value);
             zedGraphUtilsTem.TimeDraw(paraTem.Value);
+            zedGraphUtilsDriveGain.TimeDraw(paraDriveGain.Value);
             //labelMidu.Text = paraDensity.Value.ToString();
         }
 
@@ -558,7 +615,7 @@ namespace 流量计检定上位机
 
         private void btnChangeUpDown_Click(object sender, EventArgs e)
         {
-            float ymax, ymin,desdown,desup,temdown,temup,k0,k1,k2;
+            float ymax, ymin,desdown,desup,temdown,temup,drgdown,drgup,k0,k1,k2;
             try
             {
                 ymax = float.Parse(labelYmax.Text);
@@ -567,36 +624,38 @@ namespace 流量计检定上位机
                 desup = float.Parse(desUp.Text);
                 temdown = float.Parse(temDown.Text);
                 temup = float.Parse(temUp.Text);
-                k0 = float.Parse(K0_TextBox.Text);
-                k1 = float.Parse(K1_TextBox.Text);
-                k2 = float.Parse(K2_TextBox.Text);
+                drgdown = float.Parse(drgDown.Text);
+                drgup = float.Parse(drgUp.Text);
+                //k0 = float.Parse(K0_TextBox.Text);
+                //k1 = float.Parse(K1_TextBox.Text);
+                //k2 = float.Parse(K2_TextBox.Text);
             }
             catch
             {
                 MessageBox.Show("输入的数不合规范,请重新输入");
                 return;
             }
-            K0_XiShu.Value = k0;
+            //K0_XiShu.Value = k0;
             if(K0_XiShu.IsInRange == false)
             {
                 MessageBox.Show($"K0系数的范围在{K0_XiShu.Down}到{K0_XiShu.Up}之间");
-                K0_TextBox.Text = K0_XiShu.Value.ToString();
+                //K0_TextBox.Text = K0_XiShu.Value.ToString();
                 K0_XiShu.IsInRange = true;
             }
 
-            K1_XiShu.Value = k1;
+            //K1_XiShu.Value = k1;
             if (K1_XiShu.IsInRange == false)
             {
                 MessageBox.Show($"K1系数的范围在{K1_XiShu.Down}到{K1_XiShu.Up}之间");
-                K1_TextBox.Text = K1_XiShu.Value.ToString();
+                //K1_TextBox.Text = K1_XiShu.Value.ToString();
                 K1_XiShu.IsInRange = true;
             }
 
-            K2_XiShu.Value = k2;
+            //K2_XiShu.Value = k2;
             if (K2_XiShu.IsInRange == false)
             {
                 MessageBox.Show($"K2系数的范围在{K2_XiShu.Down}到{K2_XiShu.Up}之间");
-                K2_TextBox.Text = K2_XiShu.Value.ToString();
+                //K2_TextBox.Text = K2_XiShu.Value.ToString();
                 K2_XiShu.IsInRange = true;
             }
 
@@ -612,7 +671,11 @@ namespace 流量计检定上位机
                 zedGraphUtilsDes.RenewYScale(paras);
                 zedGraphUtilsDes.RenewDataUpDown(desup, desdown);
             }
-
+            if (tabControl1.SelectedIndex == 2)
+            {
+                zedGraphUtilsDriveGain.RenewYScale(paras);
+                zedGraphUtilsDriveGain.RenewDataUpDown(drgup, drgdown);
+            }
             //ModbusSetK012();
 
         }
@@ -633,7 +696,7 @@ namespace 流量计检定上位机
                 try
                 {
                     master?.WriteMultipleRegisters(SlaveAddress,
-                      (ushort)(CDM.Model.AddressConfig.K0 - 1), sendUShort);
+                      (ushort)(AddressConfig.K0 - 1), sendUShort);
                 }
                 catch (Exception ex)
                 {
@@ -649,10 +712,24 @@ namespace 流量计检定上位机
         {
             var comboBox = sender as SkinComboBox;
             var index = comboBox.SelectedIndex;
-            flowUnitsLabel.Text = CDM.FlowUnits.ToTalStrings[index];
             ushort[] desUnitCode = { 92, 97, 95, 96, 91 };
-            master?.WriteMultipleRegisters(1, 39,
+            master?.WriteMultipleRegisters(SlaveAddress, 
+                (ushort)(AddressConfig.DensityUnit - 1),
                 new ushort[] { desUnitCode[index] });
+            nmupYear.Select();
+            
+        }
+
+
+        private void temUnitsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var comboBox = sender as SkinComboBox;
+            var index = comboBox.SelectedIndex;
+            ushort[] temUnitCode = { 32, 33, 34, 35 };
+            master?.WriteMultipleRegisters(SlaveAddress, 
+                (ushort)(AddressConfig.TemperatureUnit - 1),
+                new ushort[] { temUnitCode[index] });
+            nmupYear.Select();
         }
 
         private void labelYmax_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -698,6 +775,10 @@ namespace 流量计检定上位机
             {
                 zedGraphUtilsTem.ReNewFormUpDown();
             }
+            else if(tab.SelectedIndex == 2)
+            {
+                zedGraphUtilsDriveGain.ReNewFormUpDown();
+            }
         }
 
         private void YiBiaoParaSettingButton_Click(object sender, EventArgs e)
@@ -725,6 +806,16 @@ namespace 流量计检定上位机
             zedGraphUtilsTem.IsHideUpDownLine = check.Checked;
         }
 
+        private void hideLineDrgCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = sender as SkinCheckBox;
+            if (check.Checked == true)
+                zedGraphUtilsDriveGain.HideUpDownLine();
+            else
+                zedGraphUtilsDriveGain.RenewDataUpDown();
+            zedGraphUtilsDriveGain.IsHideUpDownLine = check.Checked;
+        }
+
         private void renewLineTemButton_Click(object sender, EventArgs e)
         {
             zedGraphUtilsTem.RenewUpDownLine();
@@ -733,6 +824,11 @@ namespace 流量计检定上位机
         private void renewLineDesButton_Click(object sender, EventArgs e)
         {
             zedGraphUtilsDes.RenewUpDownLine();
+        }
+
+        private void renewLineDrgButton_Click(object sender, EventArgs e)
+        {
+            zedGraphUtilsDriveGain.RenewUpDownLine();
         }
 
         private void skinButton4_Click(object sender, EventArgs e)
@@ -758,6 +854,7 @@ namespace 流量计检定上位机
             if(openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 exEXEPathTextBox.Text = openFileDialog.FileName;
+                serialPortConfig.ProLinkPath = exEXEPathTextBox.Text;
             }
         }
 
@@ -798,14 +895,15 @@ namespace 流量计检定上位机
             return val;
         }
 
-        void GetDesTemData(int dataAddress,out float des,out float tem)
+        void GetDesTemDrgData(out float des,out float tem,out float drg)
         {
-            byte slaveID = Convert.ToByte(serialPortConfig.BiaoAddressValue);
-            ushort startAddress = (ushort)dataAddress;
+            byte slaveID = SlaveAddress;
+            ushort startAddress = (ushort)(AddressConfig.Density - 1);
             ushort numofPoints = 20;  //数据帧中 word 的数量
             ushort[] holdingregister = master.ReadInputRegisters(slaveID, startAddress, numofPoints);
 
-            
+            var dataDriveGain = master.ReadInputRegisters(SlaveAddress,
+                (ushort)(AddressConfig.DriveGain - 1), 2);
 
             byte[] bytes = { };
             for (int i = 0; i < numofPoints; i++)
@@ -814,23 +912,10 @@ namespace 流量计检定上位机
                 byteTemp = BitConverter.GetBytes(holdingregister[i]);
                 bytes = BitConverterHelper.BytesConnect(bytes, byteTemp);
             }
-            //string str = "";
-            //foreach(var num in bytes)
-            //{
-            //    str += num + " ";
-            //}
-            //labelStatus.Text = str;
-            List<byte> tmp = new List<byte>();
-            tmp.AddRange(BitConverter.GetBytes(holdingregister[0]));
-            tmp.AddRange(BitConverter.GetBytes(holdingregister[1]));
-            var result = BitConverter.ToSingle(tmp.ToArray(), 0);
-            des = (float)(Math.Round(result, 3));
 
-            tmp = new List<byte>();
-            tmp.AddRange(BitConverter.GetBytes(holdingregister[2]));
-            tmp.AddRange(BitConverter.GetBytes(holdingregister[3]));
-            result = BitConverter.ToSingle(tmp.ToArray(), 0);
-            tem = (float)(Math.Round(result, 5));
+            des = ModbusFloatHelper.UshortToFloat(holdingregister, 0, 3);
+            tem = ModbusFloatHelper.UshortToFloat(holdingregister, 2, 3);
+            drg = ModbusFloatHelper.UshortToFloat(dataDriveGain, 0, 3);
         }
 
         private void timerSave_Tick(object sender, EventArgs e)
@@ -838,11 +923,12 @@ namespace 流量计检定上位机
             var saveData = new CDM.Sqlite.GatherSave()
             {
                 GatherTime = DateTime.Now.ToString("yyyy/MM/dd_HH:mm:ss"),
-                Density = paraDensity.Value.ToString(),
-                Temperature = paraTem.Value.ToString(),
-                K0 = K0_TextBox.Text,
-                K1 = K1_TextBox.Text,
-                K2 = K2_TextBox.Text,
+                Density = paraDensity.Value.ToString() + " " + desUnitsLabel.Text,
+                Temperature = paraTem.Value.ToString() + " " + temUnitsLabel.Text,
+                K0 = paraDriveGain.Value.ToString(),
+                //K0 = K0_TextBox.Text,
+                //K1 = K1_TextBox.Text,
+                //K2 = K2_TextBox.Text,
             };
             ComWithSqliteServer.InsertData(saveData);
             MiDuData.ListSave.Add(saveData);
@@ -924,7 +1010,12 @@ namespace 流量计检定上位机
             {
                 zedGraphUtilsDes.Print();
             }
+            if (tabControl1.SelectedIndex == 2)
+            {
+                zedGraphUtilsDriveGain.Print();
+            }
         }
+
         /// <summary>
         /// 定时读取数据
         /// </summary>
@@ -937,16 +1028,37 @@ namespace 流量计检定上位机
             {
                 //GetDesTemData(250, out var des, out var tem);
                 //地址减一读
-                GetDesTemData(CDM.Model.AddressConfig.Density - 1, out var des, out var tem);
-                var datas = master?.ReadInputRegisters(SlaveAddress, 
-                    (ushort)(CDM.Model.AddressConfig.BitsDefine - 1), 1);
-                pictureBoxDriveGain.BackColor = (((datas[0]) >> (5)) & 0x01) == 1 ? Color.Red : Color.Lime;
-                pictureBoxSensor.BackColor = (((datas[0]) >> (10)) & 0x01) == 1 ? Color.Red : Color.Lime;
+                GetDesTemDrgData(out var des, out var tem,out var drg);
+                //读取状态位
+                var datasBitsDefine = master?.ReadInputRegisters(SlaveAddress, 
+                    (ushort)(AddressConfig.BitsDefine - 1), 1);
+                pictureBoxDriveGain.BackColor = (((datasBitsDefine[0]) >> (5)) & 0x01) == 1 ? Color.Red : Color.Lime;
+                pictureBoxSensor.BackColor = (((datasBitsDefine[0]) >> (10)) & 0x01) == 1 ? Color.Red : Color.Lime;
+                //读取单位
+                var datasUnits = master?.ReadHoldingRegisters(SlaveAddress,
+                    (ushort)(AddressConfig.DensityUnit - 1), 2);
+                desUnitsLabel.Text = ParaUnits.DesTable[datasUnits[0]];
+                temUnitsLabel.Text = ParaUnits.TemTable[datasUnits[1]];
+                //读取A37 A38
+                var datasA37 = master?.ReadInputRegisters(SlaveAddress,
+                    (ushort)(AddressConfig.A37 - 1), 1);
+                pictureBoxSensorCheck.BackColor = (((datasA37[0]) >> (3)) & 0x01) == 1 ? 
+                    Color.Red : Color.Lime;
+                var datasA38 = master?.ReadInputRegisters(SlaveAddress,
+                    (ushort)(AddressConfig.A38 - 1), 1);
+                pictureBoxTimeOutLimits.BackColor = (((datasA38[0]) >> (2)) & 0x01) == 1 ?
+                    Color.Red : Color.Lime;
+
                 paraDensity.Value = des;
                 paraTem.Value = tem;
-                labelMidu.Text = paraDensity.Value.ToString();
-                LabelTemp.Text = paraTem.Value.ToString();
+                paraDriveGain.Value = drg;
+                labelDes.Text = paraDensity.Value.ToString();
+                LabelTem.Text = paraTem.Value.ToString();
+                labelDriveGain.Text = paraDriveGain.Value.ToString();
                 labelStatus.Text = "通信正常";
+                timerDraw.Enabled = true;
+                timerSave.Enabled = true;
+
             }
             catch (Exception exception)
             {
@@ -998,8 +1110,28 @@ namespace 流量计检定上位机
                 //labelStatus.Text = exception.Message.ToString();
             }          
         }
+
         #endregion
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if(serialPortConfig.ProLinkPath == "")
+            {
+                findExEXEButton_Click(null, null);
+            }
+            try
+            {
+                Process.Start(serialPortConfig.ProLinkPath);
+            }
+            catch
+            {
 
+            }
+        }
+
+        private void btnOpenConnect_Click(object sender, EventArgs e)
+        {
+            ShowSerialConfigForm();
+        }
     }
 }

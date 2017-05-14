@@ -11,7 +11,7 @@ namespace 流量计检定上位机.CDM
         const string ExcelSaveFilter = "生成excel（*.xls）|*.xls";
         string strHeaderText = "采集数据";
 
-        public int ColumnCount { get; private set; } = 6;
+        public int ColumnCount { get; private set; } = 4;
 
         public void Export(SaveFileDialog saveFileDialog)
         {
@@ -91,7 +91,7 @@ namespace 流量计检定上位机.CDM
             int[] arrColWidth = { 20, 20, 20, 20, 20, 20, 20, 20 };
             #region 表头样式
             HSSFRow headerRow = (HSSFRow)sheet.CreateRow(0);
-            headerRow.HeightInPoints = 15;
+            headerRow.HeightInPoints = 20;
             headerRow.CreateCell(0).SetCellValue(strHeaderText);
 
             HSSFCellStyle headStyle = (HSSFCellStyle)workBook.CreateCellStyle();
@@ -119,14 +119,14 @@ namespace 流量计检定上位机.CDM
             headerRow.CreateCell(2).SetCellValue("温度");
             headerRow.GetCell(2).CellStyle = headStyle;
 
-            headerRow.CreateCell(3).SetCellValue("K0");
+            headerRow.CreateCell(3).SetCellValue("驱动增益");
             headerRow.GetCell(3).CellStyle = headStyle;
 
-            headerRow.CreateCell(4).SetCellValue("K1");
-            headerRow.GetCell(4).CellStyle = headStyle;
+            //headerRow.CreateCell(4).SetCellValue("K1");
+            //headerRow.GetCell(4).CellStyle = headStyle;
 
-            headerRow.CreateCell(5).SetCellValue("K2");
-            headerRow.GetCell(5).CellStyle = headStyle;
+            //headerRow.CreateCell(5).SetCellValue("K2");
+            //headerRow.GetCell(5).CellStyle = headStyle;
 
             for (int i = 0; i < MiDuData.ListSave.Count; ++i)
             {
@@ -148,15 +148,16 @@ namespace 流量计检定上位机.CDM
                 headerRow.CreateCell(3).SetCellValue(CDM.MiDuData.ListSave[i].K0);
                 headerRow.GetCell(3).CellStyle = headStyle;
 
-                headerRow.CreateCell(4).SetCellValue(CDM.MiDuData.ListSave[i].K1);
-                headerRow.GetCell(4).CellStyle = headStyle;
+                //headerRow.CreateCell(4).SetCellValue(CDM.MiDuData.ListSave[i].K1);
+                //headerRow.GetCell(4).CellStyle = headStyle;
 
-                headerRow.CreateCell(5).SetCellValue(CDM.MiDuData.ListSave[i].K2);
-                headerRow.GetCell(5).CellStyle = headStyle;
+                //headerRow.CreateCell(5).SetCellValue(CDM.MiDuData.ListSave[i].K2);
+                //headerRow.GetCell(5).CellStyle = headStyle;
 
             }
             sheet.SetColumnWidth(0, 30 * 256);
-            sheet.SetColumnWidth(1, 20 * 256);
+            sheet.SetColumnWidth(2, 40 * 256);
+            sheet.SetColumnWidth(1, 40 * 256);
             sheet.SetColumnWidth(3, 30 * 256);
             using (MemoryStream ms = new MemoryStream())
             {

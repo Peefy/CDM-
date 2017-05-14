@@ -6,7 +6,7 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Text;
 using System.Windows.Forms;
-using 流量计检定上位机.CDM.Model;
+using CDM.Model;
 
 namespace CDM管理系统
 {
@@ -82,6 +82,13 @@ namespace CDM管理系统
             nmudSlaveAdderss.Value = mSerialPortConfig.BiaoAddressValue;
 
             #endregion
+            buttonConnect.Enabled = !mSerialPortConfig.PortIsOpen;
+            buttonDisConnect.Enabled = mSerialPortConfig.PortIsOpen;
+        }
+
+        private void buttonDisConnect_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Ignore;
         }
 
         private void buttonConnect_Click(object sender, EventArgs e)
@@ -165,5 +172,7 @@ namespace CDM管理系统
             comcmb.Items.AddRange(ports);
             comcmb.SelectedIndex = comcmb.Items.Count > 0 ? 0 : -1;
         }
+
+
     }
 }

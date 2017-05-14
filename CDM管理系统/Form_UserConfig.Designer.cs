@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_UserConfig));
             this.btnConfirm = new System.Windows.Forms.Button();
             this.groupBoxUser = new System.Windows.Forms.GroupBox();
+            this.btnChange = new System.Windows.Forms.Button();
+            this.btnSub = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.textBoxAgainPassWord = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxNewPassWord = new System.Windows.Forms.TextBox();
@@ -42,9 +45,6 @@
             this.UserListBox = new CCWin.SkinControl.SkinListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelStatus = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnSub = new System.Windows.Forms.Button();
-            this.btnChange = new System.Windows.Forms.Button();
             this.groupBoxUser.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +78,36 @@
             this.groupBoxUser.TabIndex = 5;
             this.groupBoxUser.TabStop = false;
             this.groupBoxUser.Text = "用户信息";
+            // 
+            // btnChange
+            // 
+            this.btnChange.Location = new System.Drawing.Point(117, 169);
+            this.btnChange.Name = "btnChange";
+            this.btnChange.Size = new System.Drawing.Size(48, 23);
+            this.btnChange.TabIndex = 9;
+            this.btnChange.Text = "修改";
+            this.btnChange.UseVisualStyleBackColor = true;
+            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
+            // 
+            // btnSub
+            // 
+            this.btnSub.Location = new System.Drawing.Point(64, 169);
+            this.btnSub.Name = "btnSub";
+            this.btnSub.Size = new System.Drawing.Size(48, 23);
+            this.btnSub.TabIndex = 9;
+            this.btnSub.Text = "删除";
+            this.btnSub.UseVisualStyleBackColor = true;
+            this.btnSub.Visible = false;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(9, 169);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(50, 23);
+            this.btnAdd.TabIndex = 9;
+            this.btnAdd.Text = "增加";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Visible = false;
             // 
             // textBoxAgainPassWord
             // 
@@ -185,36 +215,6 @@
             this.labelStatus.TabIndex = 6;
             this.labelStatus.Text = "您不是管理员用户\r\n没有权限进行用户管理";
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(9, 169);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(50, 23);
-            this.btnAdd.TabIndex = 9;
-            this.btnAdd.Text = "增加";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Visible = false;
-            // 
-            // btnSub
-            // 
-            this.btnSub.Location = new System.Drawing.Point(64, 169);
-            this.btnSub.Name = "btnSub";
-            this.btnSub.Size = new System.Drawing.Size(48, 23);
-            this.btnSub.TabIndex = 9;
-            this.btnSub.Text = "删除";
-            this.btnSub.UseVisualStyleBackColor = true;
-            this.btnSub.Visible = false;
-            // 
-            // btnChange
-            // 
-            this.btnChange.Location = new System.Drawing.Point(117, 169);
-            this.btnChange.Name = "btnChange";
-            this.btnChange.Size = new System.Drawing.Size(48, 23);
-            this.btnChange.TabIndex = 9;
-            this.btnChange.Text = "修改";
-            this.btnChange.UseVisualStyleBackColor = true;
-            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
-            // 
             // Form_UserConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -232,6 +232,7 @@
             this.Name = "Form_UserConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "用户管理";
+            this.Load += new System.EventHandler(this.Form_UserConfig_Load);
             this.groupBoxUser.ResumeLayout(false);
             this.groupBoxUser.PerformLayout();
             this.groupBox2.ResumeLayout(false);

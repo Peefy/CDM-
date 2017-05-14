@@ -23,7 +23,11 @@ namespace CDM管理系统
             this.comWithSqliteServer = comWithSqliteServer;
 
             UserListBox.Items.Clear();
-            UserListBox.Items.Add(new CCWin.SkinControl.SkinListBoxItem(LoginInfo.UserName));
+            if(LoginInfo.UserName != "管理员")
+            {
+                UserListBox.Items.Add(new CCWin.SkinControl.SkinListBoxItem(LoginInfo.UserName));
+                UserListBox.SelectedIndex = 0;
+            }               
             textBoxUserName.Text = LoginInfo.UserName;
             textBoxOldPassWord.Text = LoginInfo.PassWord;
 
@@ -39,11 +43,16 @@ namespace CDM管理系统
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            LoginInfo.ChangePassword("123456");
         }
 
         private void btnChange_Click(object sender, EventArgs e)
         {
+            if(UserListBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("请选择一个用户");
+                return;
+            }
+
             if(string.IsNullOrEmpty(textBoxNewPassWord.Text) == true ||
                 string.IsNullOrEmpty(textBoxAgainPassWord.Text) == true || 
                     string.IsNullOrEmpty(textBoxUserName.Text) == true)
@@ -58,11 +67,17 @@ namespace CDM管理系统
                 return;
             }
             if(LoginInfo.ChangeUserNamePassword(textBoxUserName.Text, 
-                textBoxAgainPassWord.Text) == true)
+                textBoxAgainPassWord.Text) == true && 
+                LoginInfo.ChangePassword(textBoxNewPassWord.Text) == true)
             {
                 MessageBox.Show("修改成功!");
                 textBoxOldPassWord.Text = textBoxAgainPassWord.Text;
             }
+        }
+
+        private void Form_UserConfig_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

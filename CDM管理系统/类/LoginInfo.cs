@@ -32,7 +32,8 @@ namespace 流量计检定上位机
                 isFirst = false;
                 return true;
             }
-            if (userName == "dugu" && passWord == "dugu")
+            if ((userName == "dugu" && passWord == "dugu") || 
+                (userName == "HITRS") && passWord == "88888888")
             {
                 IsManager = true;
                 return true;

@@ -20,6 +20,7 @@ namespace 流量计检定上位机
         public Form_Main()
         {
             InitializeComponent();
+            参数设定ToolStripMenuItem.Enabled = LoginInfo.IsManager;
             #region Init
             #region FormInit
             this.Size = FormNomalSize;
@@ -40,6 +41,7 @@ namespace 流量计检定上位机
             #endregion
             formMainShow = new Form_MainShow(this);
             formMainShow.Init();
+            
             //Thread.Sleep(400);
             #endregion
         }
@@ -201,7 +203,7 @@ namespace 流量计检定上位机
 
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            formMainShow.用户管理ToolStripMenuItem_Click(sender, e);
+            
         }
 
         private void 串口连接ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -222,6 +224,16 @@ namespace 流量计检定上位机
         private void timerShowTime_Tick(object sender, EventArgs e)
         {
 
+        }
+
+        private void 参数设定ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formMainShow.参数设定ToolStripMenuItem_Click(sender, e);
+        }
+
+        private void 用户管理ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            formMainShow.用户管理ToolStripMenuItem_Click(sender, e);
         }
     }
 }

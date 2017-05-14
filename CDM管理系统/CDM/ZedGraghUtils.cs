@@ -195,7 +195,11 @@ namespace 流量计检定上位机.CDM
                 formMain.TemDown.Text = Math.Round(DataDown, 2).ToString();
                 formMain.TemUp.Text = Math.Round(DataUp, 2).ToString();
             }
-
+            else if (formMain.TabControl.SelectedIndex == 2)
+            {
+                formMain.DrgDown.Text = Math.Round(DataDown, 2).ToString();
+                formMain.DrgUp.Text = Math.Round(DataUp, 2).ToString();
+            }
         }
 
         public void ReNewFormUpDownDrag()
@@ -213,7 +217,11 @@ namespace 流量计检定上位机.CDM
                 formMain.TemDown.Text = Math.Round(DataDownDragRenew, 2).ToString();
                 formMain.TemUp.Text = Math.Round(DataUpDragRenew, 2).ToString();
             }
-
+            else if (formMain.TabControl.SelectedIndex == 2)
+            {
+                formMain.DrgDown.Text = Math.Round(DataDownDragRenew, 2).ToString();
+                formMain.DrgUp.Text = Math.Round(DataUpDragRenew, 2).ToString();
+            }
         }
 
         bool isDragLine;

@@ -137,7 +137,7 @@ namespace 流量计检定上位机
             {
                 //登入失败
                 var result = MessageBox.Show(string.Format("用户登入失败,{0}!", loginMessage[errorId]), "提示", MessageBoxButtons.OK);
-                this.txbUserName.Focus();
+                this.txbPassWord.Focus();
             }
         }
 

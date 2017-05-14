@@ -4,7 +4,7 @@ using System.Text;
 
 using System.IO.Ports;
 
-namespace 流量计检定上位机.CDM.Model
+namespace CDM.Model
 {
     public class SerialPortConfig
     {
@@ -23,7 +23,8 @@ namespace 流量计检定上位机.CDM.Model
         public int DesValueAddress { get; set; } = 100;
         public int TemValueAddress { get; set; } = 200;
 
-        public int FlowUnitsSelectIndex { get; set; } = 0;
+        public int DesUnitsSelectIndex { get; set; } = 0;
+        public int TemUnitsSelectIndex { get; set; } = 1;
 
         public float K0Value { get; set; } = 1.12f;
         public float K1Value { get; set; } = 0.95f;
@@ -88,5 +89,8 @@ namespace 流量计检定上位机.CDM.Model
                 }
             }
         }
+
+        public bool PortIsOpen { get; set; }
+
     }
 }

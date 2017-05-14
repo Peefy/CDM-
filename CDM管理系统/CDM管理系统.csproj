@@ -85,7 +85,8 @@
   <ItemGroup>
     <Compile Include="CDM\ChartParameters.cs" />
     <Compile Include="CDM\ExportExcel.cs" />
-    <Compile Include="CDM\FlowUnits.cs" />
+    <Compile Include="CDM\Helpers\ModbusFloatHelper.cs" />
+    <Compile Include="CDM\ParaUnits.cs" />
     <Compile Include="CDM\MiDuData.cs" />
     <Compile Include="CDM\Model\AddressConfig.cs" />
     <Compile Include="CDM\Model\SerialPortConfig.cs" />
@@ -107,6 +108,12 @@
     </Compile>
     <Compile Include="Form_MainShow.Designer.cs">
       <DependentUpon>Form_MainShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ParaSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ParaSetting.Designer.cs">
+      <DependentUpon>Form_ParaSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_SerialConfig.cs">
       <SubType>Form</SubType>
@@ -166,6 +173,9 @@
     <EmbeddedResource Include="Form_MainShow.resx">
       <DependentUpon>Form_MainShow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_ParaSetting.resx">
+      <DependentUpon>Form_ParaSetting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_SerialConfig.resx">
       <DependentUpon>Form_SerialConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -199,6 +209,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\121.jpg" />
+    <None Include="Resources\12.jpg" />
+    <None Include="Resources\ProLinkIII_00001.png" />
     <None Include="Resources\Port_32px_530255_easyicon.net.png" />
     <None Include="Resources\start.png" />
     <None Include="Resources\shop-open.png" />

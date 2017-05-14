@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CDM.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -13,7 +14,7 @@ namespace 流量计检定上位机.CDM.Service
         static string savePath = "C:\\Program Files\\dugu\\CDMV1";
         static string userConfigFileName = "\\\\user.uni";
 
-        public static void SaveUserConfig(CDM.ZedGraghUtils des,CDM.ZedGraghUtils tem,Model.SerialPortConfig ser)
+        public static void SaveUserConfig(CDM.ZedGraghUtils des,CDM.ZedGraghUtils tem,ZedGraghUtils drg,SerialPortConfig ser)
         {
             //try
             //{
@@ -47,7 +48,13 @@ namespace 流量计检定上位机.CDM.Service
             w.Write(ser.K2Value);
 
             w.Write(ser.ProtocolIndex);
-            w.Write(ser.FlowUnitsSelectIndex);
+            w.Write(ser.DesUnitsSelectIndex);
+            w.Write(ser.TemUnitsSelectIndex);
+
+            w.Write(drg.YMax);
+            w.Write(drg.YMin);
+            w.Write(drg.DataUp);
+            w.Write(drg.DataDown);
 
             w.Flush();
             w.Close();
@@ -58,8 +65,14 @@ namespace 流量计检定上位机.CDM.Service
             //    throw (es);
             //}
         }
-
-        public static void ReadUserConfig(CDM.ZedGraghUtils des, CDM.ZedGraghUtils tem,Model.SerialPortConfig ser)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="des"></param>
+        /// <param name="tem"></param>
+        /// <param name="ser"></param>
+        public static void ReadUserConfig(CDM.ZedGraghUtils des, CDM.ZedGraghUtils tem
+            ,ZedGraghUtils drg,SerialPortConfig ser)
         {           
             try
             {
@@ -99,7 +112,17 @@ namespace 流量计检定上位机.CDM.Service
                     ser.K2Value = r.ReadSingle();
 
                     ser.ProtocolIndex = r.ReadInt32();
-                    ser.FlowUnitsSelectIndex = r.ReadInt32();
+                    ser.DesUnitsSelectIndex = r.ReadInt32();
+                    ser.TemUnitsSelectIndex = r.ReadInt32();
+
+                    drg.YMax = r.ReadDouble();
+                    drg.YMin = r.ReadDouble();
+                    drg.DataUp = r.ReadDouble();
+                    drg.DataDown = r.ReadDouble();
+
+                    drg.DataUpDragRenew = drg.DataUp;
+                    drg.DataDownDragRenew = drg.DataDown;
+
                 }
                 fs.Close();
             }
@@ -110,7 +133,9 @@ namespace 流量计检定上位机.CDM.Service
         }
 
         // no
-        public static void SavePara(CDM.ZedGraghUtils des, CDM.ZedGraghUtils tem, Model.SerialPortConfig ser, SaveFileDialog saveFileDialog)
+        public static void SavePara(CDM.ZedGraghUtils des, 
+            CDM.ZedGraghUtils tem, SerialPortConfig ser, 
+            ZedGraghUtils drg,SaveFileDialog saveFileDialog)
         {
             saveFileDialog.FilterIndex = 1;
             saveFileDialog.Filter = ParaSaveFilter;
@@ -151,7 +176,13 @@ namespace 流量计检定上位机.CDM.Service
                     w.Write(ser.K2Value);
 
                     w.Write(ser.ProtocolIndex);
-                    w.Write(ser.FlowUnitsSelectIndex);
+                    w.Write(ser.DesUnitsSelectIndex);
+                    w.Write(ser.TemUnitsSelectIndex);
+
+                    w.Write(drg.YMax);
+                    w.Write(drg.YMin);
+                    w.Write(drg.DataUp);
+                    w.Write(drg.DataDown);
 
                     w.Flush();
                     w.Close();
@@ -164,8 +195,9 @@ namespace 流量计检定上位机.CDM.Service
                 }
             }
         }
-        // no
-        public static bool LoadPara(CDM.ZedGraghUtils des, CDM.ZedGraghUtils tem, Model.SerialPortConfig ser, OpenFileDialog openFileDialog)
+        
+        public static bool LoadPara(CDM.ZedGraghUtils des, CDM.ZedGraghUtils tem, 
+            ZedGraghUtils drg,SerialPortConfig ser, OpenFileDialog openFileDialog)
         {
             openFileDialog.FilterIndex = 1;
             openFileDialog.Filter = ParaSaveFilter;
@@ -212,7 +244,16 @@ namespace 流量计检定上位机.CDM.Service
                         ser.K2Value = r.ReadSingle();
 
                         ser.ProtocolIndex = r.ReadInt32();
-                        ser.FlowUnitsSelectIndex = r.ReadInt32();
+                        ser.DesUnitsSelectIndex = r.ReadInt32();
+                        ser.TemUnitsSelectIndex = r.ReadInt32();
+
+                        drg.YMax = r.ReadDouble();
+                        drg.YMin = r.ReadDouble();
+                        drg.DataUp = r.ReadDouble();
+                        drg.DataDown = r.ReadDouble();
+
+                        drg.DataUpDragRenew = drg.DataUp;
+                        drg.DataDownDragRenew = drg.DataDown;
 
                         r.Close();
                         fs.Close();
@@ -227,6 +268,7 @@ namespace 流量计检定上位机.CDM.Service
             }
             return false;
         }
+
 
 
     }
