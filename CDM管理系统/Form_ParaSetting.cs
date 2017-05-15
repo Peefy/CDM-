@@ -36,10 +36,16 @@ namespace CDM管理系统
 
         private void buttonRead_Click(object sender, EventArgs e)
         {
-            var datas = mMaster?.ReadHoldingRegisters(mSlaveAddress,
-                 (ushort)(AddressConfig.DensityCoefficient - 1), 2);
-            textboxDensityCoe.Text = UshortToFloat(datas, 0,3).ToString();
-
+            try
+            {
+                var datas = mMaster?.ReadHoldingRegisters(mSlaveAddress,
+                     (ushort)(AddressConfig.DensityCoefficient - 1), 2);
+                textboxDensityCoe.Text = UshortToFloat(datas, 0, 3).ToString();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void buttonWrite_Click(object sender, EventArgs e)
@@ -55,7 +61,7 @@ namespace CDM管理系统
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("仪表拒绝写入数据\r\n可能原因：数据不符合范围");
                 }
 
             }

@@ -55,7 +55,6 @@
             this.protocolGroupBox = new System.Windows.Forms.GroupBox();
             this.radioButton14 = new System.Windows.Forms.RadioButton();
             this.radioButton13 = new System.Windows.Forms.RadioButton();
-            this.buttonDisConnect = new System.Windows.Forms.Button();
             this.serialGroupBox.SuspendLayout();
             this.jiaoyanGroupBox.SuspendLayout();
             this.stopbitsGroupBox.SuspendLayout();
@@ -274,7 +273,6 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.buttonCancel);
-            this.groupBox5.Controls.Add(this.buttonDisConnect);
             this.groupBox5.Controls.Add(this.buttonConnect);
             this.groupBox5.Controls.Add(this.label1);
             this.groupBox5.Controls.Add(this.nmudSlaveAdderss);
@@ -371,16 +369,6 @@
             this.radioButton13.Text = "Modbus RTU";
             this.radioButton13.UseVisualStyleBackColor = true;
             // 
-            // buttonDisConnect
-            // 
-            this.buttonDisConnect.Location = new System.Drawing.Point(14, 101);
-            this.buttonDisConnect.Name = "buttonDisConnect";
-            this.buttonDisConnect.Size = new System.Drawing.Size(99, 36);
-            this.buttonDisConnect.TabIndex = 1;
-            this.buttonDisConnect.Text = "断开连接";
-            this.buttonDisConnect.UseVisualStyleBackColor = true;
-            this.buttonDisConnect.Click += new System.EventHandler(this.buttonDisConnect_Click);
-            // 
             // Form_SerialConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -445,6 +433,5 @@
         private System.Windows.Forms.GroupBox protocolGroupBox;
         private System.Windows.Forms.RadioButton radioButton14;
         private System.Windows.Forms.RadioButton radioButton13;
-        private System.Windows.Forms.Button buttonDisConnect;
     }
 }

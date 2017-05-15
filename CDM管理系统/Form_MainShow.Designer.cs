@@ -254,7 +254,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(4, 673);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1332, 50);
+            this.panel2.Size = new System.Drawing.Size(1358, 50);
             this.panel2.TabIndex = 30;
             // 
             // skinLabel12
@@ -493,7 +493,7 @@
             // labelConnect
             // 
             this.labelConnect.AutoSize = true;
-            this.labelConnect.Location = new System.Drawing.Point(83, 78);
+            this.labelConnect.Location = new System.Drawing.Point(83, 77);
             this.labelConnect.Name = "labelConnect";
             this.labelConnect.Size = new System.Drawing.Size(49, 14);
             this.labelConnect.TabIndex = 36;
@@ -502,7 +502,7 @@
             // pictureBoxConnect
             // 
             this.pictureBoxConnect.BackColor = System.Drawing.Color.Red;
-            this.pictureBoxConnect.Location = new System.Drawing.Point(60, 76);
+            this.pictureBoxConnect.Location = new System.Drawing.Point(60, 75);
             this.pictureBoxConnect.Name = "pictureBoxConnect";
             this.pictureBoxConnect.Size = new System.Drawing.Size(18, 18);
             this.pictureBoxConnect.TabIndex = 35;
@@ -511,7 +511,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::CDM管理系统.Properties.Resources._121;
-            this.pictureBox2.Location = new System.Drawing.Point(39, 9);
+            this.pictureBox2.Location = new System.Drawing.Point(39, 5);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(125, 65);
             this.pictureBox2.TabIndex = 34;
@@ -1557,6 +1557,7 @@
             this.temUnitsComboBox.TabIndex = 8;
             this.temUnitsComboBox.WaterText = "";
             this.temUnitsComboBox.SelectedIndexChanged += new System.EventHandler(this.temUnitsComboBox_SelectedIndexChanged);
+            this.temUnitsComboBox.DropDownClosed += new System.EventHandler(this.temUnitsComboBox_DropDownClosed);
             // 
             // flowUnitsComboBox
             // 
@@ -1579,6 +1580,7 @@
             this.flowUnitsComboBox.TabIndex = 8;
             this.flowUnitsComboBox.WaterText = "";
             this.flowUnitsComboBox.SelectedIndexChanged += new System.EventHandler(this.flowUnitsComboBox_SelectedIndexChanged);
+            this.flowUnitsComboBox.DropDownClosed += new System.EventHandler(this.flowUnitsComboBox_DropDownClosed);
             // 
             // skinLabel37
             // 
@@ -2371,7 +2373,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(1357, 727);
+            this.ClientSize = new System.Drawing.Size(1383, 727);
             this.ControlBox = false;
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.panel2);

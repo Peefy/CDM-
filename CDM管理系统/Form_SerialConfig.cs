@@ -83,12 +83,6 @@ namespace CDM管理系统
 
             #endregion
             buttonConnect.Enabled = !mSerialPortConfig.PortIsOpen;
-            buttonDisConnect.Enabled = mSerialPortConfig.PortIsOpen;
-        }
-
-        private void buttonDisConnect_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Ignore;
         }
 
         private void buttonConnect_Click(object sender, EventArgs e)

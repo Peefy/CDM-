@@ -59,10 +59,10 @@ namespace 流量计检定上位机
             byte[] bytes = new byte[4];
             ushort[] goal = new ushort[2];
             byte[] tmp = BitConverter.GetBytes(data);
-            bytes[0] = tmp[3];
-            bytes[1] = tmp[2];
-            bytes[2] = tmp[1];
-            bytes[3] = tmp[0];
+            bytes[0] = tmp[0];
+            bytes[1] = tmp[1];
+            bytes[2] = tmp[2];
+            bytes[3] = tmp[3];
             goal[0] = BitConverter.ToUInt16(bytes, 0);
             goal[1] = BitConverter.ToUInt16(bytes, 2);
             return goal;

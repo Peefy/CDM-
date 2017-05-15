@@ -193,21 +193,25 @@ namespace 流量计检定上位机
             ShowSerialConfigForm();          
         }
 
+        string comName = "";
         private void ShowSerialConfigForm()
         {
-            var form = new Form_SerialConfig(serialPortConfig);
-            var result = form.ShowDialog();
-            if (result == DialogResult.OK)
+            if(serialPortConfig.PortIsOpen == false)
             {
-                baudComboBox.SelectedIndex = serialPortConfig.BaudRateIndex;
-                stopBitsComboBox.SelectedIndex = serialPortConfig.StopBitsIndex;
-                dataBitsComboBox.SelectedIndex = serialPortConfig.DataBitsIndex;
-                parityComboBox.SelectedIndex = serialPortConfig.ParityIndex;
-                protocolComboBox.SelectedIndex = serialPortConfig.ProtocolIndex;
-                comcmb.Text = form.ComText;
-                btnConnect_Click(null, null);
-            }
-            else if(result == DialogResult.Ignore)
+                var form = new Form_SerialConfig(serialPortConfig);
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    baudComboBox.SelectedIndex = serialPortConfig.BaudRateIndex;
+                    stopBitsComboBox.SelectedIndex = serialPortConfig.StopBitsIndex;
+                    dataBitsComboBox.SelectedIndex = serialPortConfig.DataBitsIndex;
+                    parityComboBox.SelectedIndex = serialPortConfig.ParityIndex;
+                    protocolComboBox.SelectedIndex = serialPortConfig.ProtocolIndex;
+                    comName = form.ComText;
+                    btnConnect_Click(null, null);
+                }
+            }         
+            else 
             {
                 master = null;
                 serialPort?.Close();
@@ -218,12 +222,17 @@ namespace 流量计检定上位机
                 pictureBoxConnect.BackColor = Color.Red;
                 serialPortConfig.PortIsOpen = false;
                 labelStatus.Text = "端口关闭";
+                MessageBox.Show("断开连接!");
             }
+
         }
 
         public void 参数设定ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Form_ParaSetting(master, SlaveAddress).ShowDialog();
+            if (master != null)
+                new Form_ParaSetting(master, SlaveAddress).ShowDialog();
+            else
+                MessageBox.Show("仪表还未连接!");
         }
 
         #endregion
@@ -517,7 +526,7 @@ namespace 流量计检定上位机
                 try
                 {
                     
-                    serialPort.PortName = comcmb.Text;
+                    serialPort.PortName = comName;
                     serialPort.BaudRate = serialPortConfig.BaudRateFromIndex;  
                     serialPort.DataBits = serialPortConfig.DataBitsFromIndex;
                     serialPort.Parity = serialPortConfig.ParityFromIndex;    
@@ -581,6 +590,16 @@ namespace 流量计检定上位机
             drgWarningFlag.BackColor =
                 zedGraphUtilsDriveGain.IsWarning == true ? Color.Red : Color.Lime;
             ClosingSaveData();
+            if(serialPort.IsOpen == false)
+            {
+                timerDraw.Enabled = false;
+                timerSave.Enabled = false;
+                labelConnect.Text = "未连接";
+                pictureBoxConnect.BackColor = Color.Red;
+                serialPortConfig.PortIsOpen = false;
+                labelStatus.Text = "端口关闭";
+                btnOpenConnect.Text = serialPortConfig.PortIsOpen ? "断开连接" : "仪表连接";
+            }
         }
 
         private void timerDraw_Tick(object sender, EventArgs e)
@@ -928,7 +947,7 @@ namespace 流量计检定上位机
                 GatherTime = DateTime.Now.ToString("yyyy/MM/dd_HH:mm:ss"),
                 Density = paraDensity.Value.ToString() + " " + desUnitsLabel.Text,
                 Temperature = paraTem.Value.ToString() + " " + temUnitsLabel.Text,
-                K0 = paraDriveGain.Value.ToString(),
+                K0 = paraDriveGain.Value.ToString() + "%",
                 //K0 = K0_TextBox.Text,
                 //K1 = K1_TextBox.Text,
                 //K2 = K2_TextBox.Text,
@@ -1019,6 +1038,7 @@ namespace 流量计检定上位机
             }
         }
 
+        bool isShowInfoBox;
         /// <summary>
         /// 定时读取数据
         /// </summary>
@@ -1057,20 +1077,23 @@ namespace 流量计检定上位机
                 paraDriveGain.Value = drg;
                 labelDes.Text = paraDensity.Value.ToString();
                 LabelTem.Text = paraTem.Value.ToString();
-                labelDriveGain.Text = paraDriveGain.Value.ToString();
+                labelDriveGain.Text = paraDriveGain.Value.ToString() + "%";
                 labelStatus.Text = "通信正常";
                 timerDraw.Enabled = true;
                 timerSave.Enabled = true;
-
+                isShowInfoBox = false;
             }
             catch (Exception exception)
             {
-                timerGetData.Enabled = false;
-                timerGetData.Stop();
-                btnConnect.Text = "打开";
+                //timerGetData.Enabled = false;
+                //timerGetData.Stop();
                 if (exception.Source.Equals("System"))
                 {
-                    MessageBox.Show(DateTime.Now.ToString() + " " + "通信超时");
+                    if(!isShowInfoBox)
+                    {
+                        isShowInfoBox = true;
+                        MessageBox.Show(DateTime.Now.ToString() + " " + "通信超时");
+                    }               
                     labelStatus.Text = "通信超时";
                 }
                 if (exception.Source.Equals("nModbusPC"))
@@ -1135,6 +1158,17 @@ namespace 流量计检定上位机
         private void btnOpenConnect_Click(object sender, EventArgs e)
         {
             ShowSerialConfigForm();
+            btnOpenConnect.Text = serialPortConfig.PortIsOpen ? "断开连接" : "仪表连接";
+        }
+
+        private void flowUnitsComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            nmupYear.Select();
+        }
+
+        private void temUnitsComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            nmupYear.Select();
         }
     }
 }
