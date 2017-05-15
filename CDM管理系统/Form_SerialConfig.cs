@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using CDM.Configs;
+using System;
 using System.IO.Ports;
-using System.Text;
 using System.Windows.Forms;
-using CDM.Model;
 
 namespace CDM管理系统
 {

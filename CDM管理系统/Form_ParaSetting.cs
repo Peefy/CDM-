@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 using Modbus.Device;
-using CDM.Model;
-
-using static CDM管理系统.CDM.Helpers.ModbusFloatHelper;
-using 流量计检定上位机;
+using CDM.Configs;
+using static CDM.Helpers.ModbusFloatHelper;
 
 namespace CDM管理系统
 {
@@ -56,10 +49,9 @@ namespace CDM管理系统
                 {
                     mMaster?.WriteMultipleRegisters(mSlaveAddress,
                         (ushort)(AddressConfig.DensityCoefficient - 1),
-                        BitConverterHelper.SingleToUShort(data));
-                        //new ushort[] { 0x1111, 0x1111 });
+                        FloatToUshort(data));
                 }
-                catch (Exception ex)
+                catch
                 {
                     MessageBox.Show("仪表拒绝写入数据\r\n可能原因：数据不符合范围");
                 }

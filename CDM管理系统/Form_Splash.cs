@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Threading;
+using CDM.Utils;
 
 namespace 流量计检定上位机
 {

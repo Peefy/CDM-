@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-
-using System.Threading;
-using Modbus;
-using System.Net;
+using CDM.Utils;
 
 namespace 流量计检定上位机
 {

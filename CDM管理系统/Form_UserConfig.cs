@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+﻿using CDM.Sqlite;
+using CDM.Utils;
+using System;
 using System.Windows.Forms;
-using 流量计检定上位机;
-using 流量计检定上位机.CDM.Sqlite;
 
 namespace CDM管理系统
 {

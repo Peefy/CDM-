@@ -52,21 +52,13 @@
     <Reference Include="log4net">
       <HintPath>..\..\_Lib\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:\Users\shiguoan\Desktop\csharp-sdk-v7.0.0.5\net2.0\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="nmodbuspc">
       <HintPath>..\..\_Lib\nmodbuspc.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
       <HintPath>..\..\..\Lib\NPOI binary 2.1.3.1\dotnet2\NPOI.dll</HintPath>
     </Reference>
-    <Reference Include="Qiniu">
-      <HintPath>C:\Users\shiguoan\Desktop\csharp-sdk-v7.0.0.5\net2.0\Qiniu.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.105.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.105.0\lib\net20\System.Data.SQLite.dll</HintPath>
@@ -83,26 +75,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CDM\ChartParameters.cs" />
-    <Compile Include="CDM\ExportExcel.cs" />
-    <Compile Include="CDM\Helpers\ModbusFloatHelper.cs" />
-    <Compile Include="CDM\ParaUnits.cs" />
-    <Compile Include="CDM\MiDuData.cs" />
-    <Compile Include="CDM\Model\AddressConfig.cs" />
-    <Compile Include="CDM\Model\SerialPortConfig.cs" />
-    <Compile Include="CDM\Para.cs" />
-    <Compile Include="CDM\Service\FileService.cs" />
-    <Compile Include="CDM\Sqlite\BaseSqliteModel.cs" />
-    <Compile Include="CDM\Sqlite\ComWithSqlite.cs" />
-    <Compile Include="CDM\Sqlite\GatherSave.cs" />
-    <Compile Include="CDM\Sqlite\UserModel.cs" />
-    <Compile Include="CDM\ZedGraghUtils.cs" />
-    <Compile Include="Form_FindData.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_FindData.Designer.cs">
-      <DependentUpon>Form_FindData.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Models\ChartParameters.cs" />
+    <Compile Include="Models\ExportExcel.cs" />
+    <Compile Include="Helpers\ModbusFloatHelper.cs" />
+    <Compile Include="Models\ParaUnits.cs" />
+    <Compile Include="Models\SaveData.cs" />
+    <Compile Include="Configs\AddressConfig.cs" />
+    <Compile Include="Configs\SerialPortConfig.cs" />
+    <Compile Include="Models\Para.cs" />
+    <Compile Include="Service\FileService.cs" />
+    <Compile Include="Sqlite\BaseSqliteModel.cs" />
+    <Compile Include="Sqlite\ComWithSqlite.cs" />
+    <Compile Include="Sqlite\GatherSave.cs" />
+    <Compile Include="Sqlite\UserModel.cs" />
+    <Compile Include="Models\ZedGraghUtils.cs" />
     <Compile Include="Form_MainShow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,21 +113,8 @@
     <Compile Include="Form_UserConfig.Designer.cs">
       <DependentUpon>Form_UserConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="类\AppInfo.cs" />
-    <Compile Include="类\BitConverterHelper.cs" />
-    <Compile Include="类\Communication\Client.cs" />
-    <Compile Include="类\Communication\Server.cs" />
-    <Compile Include="类\ComWithS71200DB.cs" />
-    <Compile Include="类\Demarcate.cs" />
-    <Compile Include="类\DemarcateMotion.cs" />
-    <Compile Include="类\DemarcateMotionSave.cs" />
-    <Compile Include="类\ExportExcel.cs" />
-    <Compile Include="类\ExportOptions.cs" />
-    <Compile Include="类\ExportPdfReporter.cs" />
-    <Compile Include="类\FileSave.cs" />
-    <Compile Include="类\FlowMeterBase.cs" />
-    <Compile Include="类\FlowMeterStandard.cs" />
-    <Compile Include="类\FlowMeterWork.cs" />
+    <Compile Include="Utils\AppInfo.cs" />
+    <Compile Include="Helpers\BitConverterHelper.cs" />
     <Compile Include="Form_Splash.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,19 +127,11 @@
     <Compile Include="Form_Main.Designer.cs">
       <DependentUpon>Form_Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="接口\IDemarcate.cs" />
-    <Compile Include="接口\IFlowMeterStadard.cs" />
-    <Compile Include="类\LoginInfo.cs" />
-    <Compile Include="类\ModBus.cs" />
+    <Compile Include="Utils\LoginInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="类\SoftRegister.cs" />
-    <Compile Include="类\StateWordOfBiao.cs" />
-    <Compile Include="类\TimeHelper.cs" />
-    <Compile Include="类\Win32.cs" />
-    <EmbeddedResource Include="Form_FindData.resx">
-      <DependentUpon>Form_FindData.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="Utils\SoftRegister.cs" />
+    <Compile Include="Helpers\TimeHelper.cs" />
     <EmbeddedResource Include="Form_Main.resx">
       <DependentUpon>Form_Main.cs</DependentUpon>
     </EmbeddedResource>

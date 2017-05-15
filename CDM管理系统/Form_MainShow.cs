@@ -8,11 +8,12 @@ using System.Diagnostics;
 using Modbus.Device;
 using CCWin.SkinControl;
 using System.Collections.Generic;
-using 流量计检定上位机.CDM;
-using CDM管理系统;
-using CDM.Model;
 
-using CDM管理系统.CDM.Helpers;
+using CDM管理系统;
+using CDM.Utils;
+using CDM.Configs;
+using CDM.Helpers;
+using CDM.Models;
 
 namespace 流量计检定上位机
 {
@@ -27,20 +28,20 @@ namespace 流量计检定上位机
         Size FormNomalSize = new Size(490, 620);
         Size FormAboutSize = new Size(490, 710);
 
-        CDM.ZedGraghUtils zedGraphUtilsDes;
-        CDM.ZedGraghUtils zedGraphUtilsTem;
-        CDM.ZedGraghUtils zedGraphUtilsDriveGain;
+        ZedGraghUtils zedGraphUtilsDes;
+        ZedGraghUtils zedGraphUtilsTem;
+        ZedGraghUtils zedGraphUtilsDriveGain;
 
-        CDM.ChartParameters paras = new CDM.ChartParameters();
+        ChartParameters paras = new ChartParameters();
         SerialPortConfig serialPortConfig = new SerialPortConfig();
 
-        CDM.Para paraDensity = new CDM.Para() { Value = 1,Up = 100000,Down = 0};
-        CDM.Para paraTem = new CDM.Para() { Value = 1 ,Up = 100000,Down = 0};
-        CDM.Para paraDriveGain = new CDM.Para() { Value = 1, Up = 100000, Down = 0 };
+        Para paraDensity = new Para() { Value = 1,Up = 100000,Down = 0};
+        Para paraTem = new Para() { Value = 1 ,Up = 100000,Down = 0};
+        Para paraDriveGain = new Para() { Value = 1, Up = 100000, Down = 0 };
 
-        CDM.Para K0_XiShu = new CDM.Para() {Up = 1.2f,Down = 0.8f };
-        CDM.Para K1_XiShu = new CDM.Para() { Up = 1.3f, Down = 0.7f };
-        CDM.Para K2_XiShu = new CDM.Para() { Up = 1.4f, Down = 0.6f };
+        Para K0_XiShu = new Para() {Up = 1.2f,Down = 0.8f };
+        Para K1_XiShu = new Para() { Up = 1.3f, Down = 0.7f };
+        Para K2_XiShu = new Para() { Up = 1.4f, Down = 0.6f };
 
         CDM.Sqlite.ComWithSqlite ComWithSqliteServer;
 
@@ -79,13 +80,13 @@ namespace 流量计检定上位机
             formMain = formmain;
             InitializeComponent();
             ComWithSqliteServer = new CDM.Sqlite.ComWithSqlite();
-            zedGraphUtilsDes = new CDM.ZedGraghUtils(zedGraphControl1,this);
-            zedGraphUtilsTem = new CDM.ZedGraghUtils(zedGraphControl2, this)
+            zedGraphUtilsDes = new ZedGraghUtils(zedGraphControl1,this);
+            zedGraphUtilsTem = new ZedGraghUtils(zedGraphControl2, this)
             {
                 DataDown = 10,
                 DataUp = 50,
             };
-            zedGraphUtilsDriveGain = new CDM.ZedGraghUtils(zedGraphControl3, this)
+            zedGraphUtilsDriveGain = new ZedGraghUtils(zedGraphControl3, this)
             {
                 DataDown = 0.5f,
                 DataUp = 3,
@@ -108,7 +109,7 @@ namespace 流量计检定上位机
             comcmb.SelectedIndex = comcmb.Items.Count > 0 ? 0 : -1;
             #endregion
             #region ZedGraphInit
-            zedGraphUtilsDes.Init(new CDM.ChartParameters()
+            zedGraphUtilsDes.Init(new ChartParameters()
             {
                 YTitle = "密度",
                 CurveName = "密度",
@@ -116,7 +117,7 @@ namespace 流量计检定上位机
                 YMin = 500,
                 YMax = 1000,
             });
-            zedGraphUtilsTem.Init(new CDM.ChartParameters()
+            zedGraphUtilsTem.Init(new ChartParameters()
             {
                 YTitle = "温度",
                 CurveName = "温度",
@@ -159,16 +160,6 @@ namespace 流量计检定上位机
 
             #endregion
             Thread.Sleep(200);
-            #region MiduListInit
-            CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
-            CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
-            CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
-            CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
-            CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
-            CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
-            CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
-            CDM.MiDuData.List.Add(new CDM.MiDuData(DateTime.Now, 1.2f));
-            #endregion
             #endregion
         }
         #endregion
@@ -229,10 +220,10 @@ namespace 流量计检定上位机
 
         public void 参数设定ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (master != null)
+            if (master != null && serialPortConfig.PortIsOpen == true)
                 new Form_ParaSetting(master, SlaveAddress).ShowDialog();
             else
-                MessageBox.Show("仪表还未连接!");
+                MessageBox.Show("仪表还未连接或者端口未打开!");
         }
 
         #endregion
@@ -351,7 +342,7 @@ namespace 流量计检定上位机
         public void MenuItemGenerateExcel_Click(object sender, EventArgs e)
         {
 
-            if(CDM.MiDuData.List.Count == 0)
+            if(SaveData.List.Count == 0)
             {
                 MessageBox.Show("没有数据将不予生成");
                 return;
@@ -360,7 +351,7 @@ namespace 流量计检定上位机
             {
                 //new Thread(new ThreadStart(() =>
                 //{
-                    new CDM.ExportExcel().Export(saveFileDialog);
+                    new ExportExcel().Export(saveFileDialog);
                 //})).Start();
             }
             catch (Exception ex)
@@ -953,11 +944,11 @@ namespace 流量计检定上位机
                 //K2 = K2_TextBox.Text,
             };
             ComWithSqliteServer.InsertData(saveData);
-            MiDuData.ListSave.Add(saveData);
+            SaveData.ListSave.Add(saveData);
             var timeNow = DateTime.Now;
             if(timeNow.Minute == 30 && timeNow.Second < 3)
             {
-                if (CDM.MiDuData.ListSave.Count == 0)
+                if (SaveData.ListSave.Count == 0)
                 {
                     MessageBox.Show("没有数据将不予生成");
                     return;
@@ -967,8 +958,8 @@ namespace 流量计检定上位机
                     var name = TimeHelper.GetUpLoadTime();
                     new Thread(new ThreadStart(() =>
                     {
-                        new CDM.ExportExcel().ExportPath("gather" + name);
-                        MiDuData.ListSave.Clear();
+                        new ExportExcel().ExportPath("gather" + name);
+                        SaveData.ListSave.Clear();
                     })).Start();                  
                 }
                 catch (Exception ex)
