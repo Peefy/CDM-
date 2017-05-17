@@ -23,6 +23,12 @@ namespace 流量计检定上位机
             txbUserName.Select();
         }
 
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            txbUserName.Select();
+        }
+
         private void Form_Splash_Load(object sender, EventArgs e)
         {
             //labelVersion.Text = AppInfo.GetVersionInfo();
@@ -211,6 +217,10 @@ namespace 流量计检定上位机
             if(e.KeyCode == Keys.Enter)
             {
                 btnLogIn_Click(null, null);
+            }
+            if(e.KeyCode == Keys.Tab)
+            {
+                txbPassWord.Select();
             }
         }
 

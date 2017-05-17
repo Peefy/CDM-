@@ -97,6 +97,7 @@
             this.btnLogIn.NormlBack = null;
             this.btnLogIn.Size = new System.Drawing.Size(82, 40);
             this.btnLogIn.TabIndex = 3;
+            this.btnLogIn.TabStop = false;
             this.btnLogIn.Text = "登 陆";
             this.btnLogIn.UseVisualStyleBackColor = false;
             this.btnLogIn.Click += new System.EventHandler(this.btnLogIn_Click);
@@ -115,6 +116,7 @@
             this.btnLogOut.NormlBack = null;
             this.btnLogOut.Size = new System.Drawing.Size(81, 40);
             this.btnLogOut.TabIndex = 3;
+            this.btnLogOut.TabStop = false;
             this.btnLogOut.Text = "退 出";
             this.btnLogOut.UseVisualStyleBackColor = false;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
@@ -135,9 +137,9 @@
             this.chkSavePWD.SelectedNormlBack = null;
             this.chkSavePWD.Size = new System.Drawing.Size(101, 28);
             this.chkSavePWD.TabIndex = 4;
+            this.chkSavePWD.TabStop = false;
             this.chkSavePWD.Text = "记住密码";
             this.chkSavePWD.UseVisualStyleBackColor = false;
-//            this.chkSavePWD.CheckedChanged += new System.EventHandler(this.chkSavePWD_CheckedChanged);
             // 
             // txbUserName
             // 
@@ -175,6 +177,7 @@
             this.txbUserName.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txbUserName.SkinTxt.WaterText = "请输入用户名";
             this.txbUserName.TabIndex = 10;
+            this.txbUserName.TabStop = true;
             this.txbUserName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txbUserName.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txbUserName.WaterText = "请输入用户名";
@@ -218,6 +221,7 @@
             this.txbPassWord.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txbPassWord.SkinTxt.WaterText = "请输入密码";
             this.txbPassWord.TabIndex = 10;
+            this.txbPassWord.TabStop = true;
             this.txbPassWord.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txbPassWord.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txbPassWord.WaterText = "请输入密码";

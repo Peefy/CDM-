@@ -49,9 +49,6 @@
     <Reference Include="itextsharp">
       <HintPath>..\..\..\Lib\pdf\itextsharp.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\..\_Lib\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="nmodbuspc">
       <HintPath>..\..\_Lib\nmodbuspc.dll</HintPath>
     </Reference>

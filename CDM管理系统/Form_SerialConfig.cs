@@ -21,7 +21,7 @@ namespace CDM管理系统
         {
             InitializeComponent();
             mSerialPortConfig = pSerrialPortConfig;
-            
+            buttonConnect.Focus();
         }
 
         private void Form_SerialConfig_Load(object sender, EventArgs e)

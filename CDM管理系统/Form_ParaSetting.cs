@@ -34,6 +34,10 @@ namespace CDM管理系统
                 var datas = mMaster?.ReadHoldingRegisters(mSlaveAddress,
                      (ushort)(AddressConfig.DensityCoefficient - 1), 2);
                 textboxDensityCoe.Text = UshortToFloat(datas, 0, 3).ToString();
+
+                datas = mMaster?.ReadHoldingRegisters(mSlaveAddress,
+                    (ushort)(AddressConfig.K0 - 1), 2);
+
             }
             catch(Exception ex)
             {

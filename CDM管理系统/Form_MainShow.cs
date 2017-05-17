@@ -489,8 +489,6 @@ namespace 流量计检定上位机
         #endregion
         #region SerialPort
 
-        bool SerialPortClosing;
-
         private void btnConnect_Click(object sender, EventArgs e)
         {
             serialPort = new SerialPort();
@@ -498,11 +496,9 @@ namespace 流量计检定上位机
             {
                 if(serialPort.IsOpen)
                 {
-                    SerialPortClosing = true;
                     timerGetData.Enabled = false;
                     master.Dispose();
                     serialPort.Close();
-                    SerialPortClosing = false;
 
                 }
             }
