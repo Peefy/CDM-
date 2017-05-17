@@ -231,5 +231,11 @@ namespace 流量计检定上位机
         {
             formMainShow.用户管理ToolStripMenuItem_Click(sender, e);
         }
+
+        private void Form_Main_Resize(object sender, EventArgs e)
+        {
+            panelRegister.Location = new Point(Width / 2 - panelRegister.Width / 2 - 5,
+                Height / 2 - panelRegister.Height / 2);
+        }
     }
 }

@@ -4,12 +4,17 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 
-
 namespace CDM.Utils
 {
     class SoftRegister
     {
-        static readonly string RegFreeList = "AC92C9E2";
+        static readonly string user = new Guid().ToString();
+        static readonly string RegFreeList = "0";
+
+        static string MachineCode
+        {
+            get { return user + RegFreeList;  }
+        }
 
         public static bool IsRegister()
         {
@@ -21,13 +26,13 @@ namespace CDM.Utils
                 registerString = rsg.GetValue("register").ToString();
             }
             rsg.Close();
-            return registerString == getRNum_md5("dugu" + RegFreeList);
+            return registerString == getRNum_md5(user + RegFreeList);
          
         }
 
         public static bool RegisterING(string mNum)
         {
-            var md5 = getRNum_md5("dugu" + RegFreeList);
+            var md5 = getRNum_md5(user + RegFreeList);
             if(mNum == md5)
             {
                 RegistryKey rsg = null;
@@ -52,7 +57,7 @@ namespace CDM.Utils
 
         public static string GetFreeRegisterNum()
         {
-            return getRNum_md5("dugu" + RegFreeList);
+            return getRNum_md5(user + RegFreeList);
         }
 
     }

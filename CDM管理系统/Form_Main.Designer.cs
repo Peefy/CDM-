@@ -222,7 +222,7 @@
             this.串口连接ToolStripMenuItem.BackColor = System.Drawing.Color.DarkGray;
             this.串口连接ToolStripMenuItem.Image = global::CDM管理系统.Properties.Resources.Port_32px_530255_easyicon_net;
             this.串口连接ToolStripMenuItem.Name = "串口连接ToolStripMenuItem";
-            this.串口连接ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.串口连接ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.串口连接ToolStripMenuItem.Text = "仪表连接";
             this.串口连接ToolStripMenuItem.Click += new System.EventHandler(this.串口连接ToolStripMenuItem_Click);
             // 
@@ -230,7 +230,7 @@
             // 
             this.参数设定ToolStripMenuItem.BackColor = System.Drawing.Color.DarkGray;
             this.参数设定ToolStripMenuItem.Name = "参数设定ToolStripMenuItem";
-            this.参数设定ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.参数设定ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.参数设定ToolStripMenuItem.Text = "参数设定";
             this.参数设定ToolStripMenuItem.Click += new System.EventHandler(this.参数设定ToolStripMenuItem_Click);
             // 
@@ -246,7 +246,7 @@
             // 
             this.用户管理ToolStripMenuItem.BackColor = System.Drawing.Color.DarkGray;
             this.用户管理ToolStripMenuItem.Name = "用户管理ToolStripMenuItem";
-            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.用户管理ToolStripMenuItem.Text = "用户管理";
             this.用户管理ToolStripMenuItem.Click += new System.EventHandler(this.用户管理ToolStripMenuItem_Click_1);
             // 
@@ -427,9 +427,9 @@
             this.panelRegister.Controls.Add(this.btnRegister);
             this.panelRegister.Controls.Add(this.labelRegister);
             this.panelRegister.Controls.Add(this.skinLabel1);
-            this.panelRegister.Location = new System.Drawing.Point(8, 82);
+            this.panelRegister.Location = new System.Drawing.Point(7, 81);
             this.panelRegister.Name = "panelRegister";
-            this.panelRegister.Size = new System.Drawing.Size(330, 145);
+            this.panelRegister.Size = new System.Drawing.Size(288, 134);
             this.panelRegister.TabIndex = 30;
             // 
             // btnRegister
@@ -439,7 +439,7 @@
             this.btnRegister.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btnRegister.DownBack = null;
             this.btnRegister.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnRegister.Location = new System.Drawing.Point(184, 85);
+            this.btnRegister.Location = new System.Drawing.Point(101, 88);
             this.btnRegister.MouseBack = null;
             this.btnRegister.MouseBaseColor = System.Drawing.Color.DarkGray;
             this.btnRegister.Name = "btnRegister";
@@ -497,7 +497,7 @@
             this.skinLabel1.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel1.BorderColor = System.Drawing.Color.White;
             this.skinLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel1.Location = new System.Drawing.Point(15, 20);
+            this.skinLabel1.Location = new System.Drawing.Point(76, 13);
             this.skinLabel1.Name = "skinLabel1";
             this.skinLabel1.Size = new System.Drawing.Size(138, 22);
             this.skinLabel1.TabIndex = 0;
@@ -525,6 +525,7 @@
             this.TitleCenter = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Main_FormClosing);
             this.Load += new System.EventHandler(this.Form_Main_Load);
+            this.Resize += new System.EventHandler(this.Form_Main_Resize);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.toolStrip.ResumeLayout(false);

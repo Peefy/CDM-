@@ -342,7 +342,7 @@ namespace 流量计检定上位机
         public void MenuItemGenerateExcel_Click(object sender, EventArgs e)
         {
 
-            if(SaveData.List.Count == 0)
+            if(SaveData.ListSave.Count == 0)
             {
                 MessageBox.Show("没有数据将不予生成");
                 return;
@@ -574,12 +574,7 @@ namespace 流量计检定上位机
         private void timerTime_Tick(object sender, EventArgs e)
         {
             labelTime.Text = DateTime.Now.ToString();
-            desWarningFlag.BackColor = 
-                zedGraphUtilsDes.IsWarning == true ? Color.Red : Color.Lime;
-            temWarningFlag.BackColor = 
-                zedGraphUtilsTem.IsWarning == true ? Color.Red : Color.Lime;
-            drgWarningFlag.BackColor =
-                zedGraphUtilsDriveGain.IsWarning == true ? Color.Red : Color.Lime;
+
             ClosingSaveData();
             if(serialPort.IsOpen == false)
             {
@@ -598,7 +593,12 @@ namespace 流量计检定上位机
             zedGraphUtilsDes.TimeDraw(paraDensity.Value);
             zedGraphUtilsTem.TimeDraw(paraTem.Value);
             zedGraphUtilsDriveGain.TimeDraw(paraDriveGain.Value);
-            //labelMidu.Text = paraDensity.Value.ToString();
+            desWarningFlag.BackColor =
+                zedGraphUtilsDes.IsWarning == true ? Color.Red : Color.Lime;
+            temWarningFlag.BackColor =
+                zedGraphUtilsTem.IsWarning == true ? Color.Red : Color.Lime;
+            drgWarningFlag.BackColor =
+                zedGraphUtilsDriveGain.IsWarning == true ? Color.Red : Color.Lime;
         }
 
         private void btnStartCurve_Click(object sender, EventArgs e)
@@ -623,6 +623,7 @@ namespace 流量计检定上位机
             timerDraw.Enabled = false;
             zedGraphUtilsDes.Clear();
             zedGraphUtilsTem.Clear();
+            zedGraphUtilsDriveGain.Clear();
             timerDraw.Enabled = true;
         }
 

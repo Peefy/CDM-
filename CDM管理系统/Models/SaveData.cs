@@ -8,8 +8,6 @@ namespace CDM.Models
     {
         public DateTime Time { get; set; }
         public float Data { get; set; }
-        public static List<SaveData> List = new List<SaveData>();
-
         public SaveData(DateTime time,float data)
         {
             Time = time;

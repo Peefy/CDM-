@@ -62,7 +62,8 @@ namespace CDM.Models
                 IPointListEdit list = curve.Points as IPointListEdit;
                 if (list == null)
                     return false;
-                for(int i = 0;i<list.Count ;++i)
+                var count = list.Count - 1 <= 0 ? 0 : list.Count - 1;
+                for (int i = count; i < list.Count; ++i)
                 {
                     var data = list[i].Y;
                     if (data < DataDown || data > DataUp)
@@ -190,45 +191,45 @@ namespace CDM.Models
 
         public void ReNewFormUpDown()
         {
-            formMain.LabelYMax.Text = Math.Round(YMax,2).ToString();
-            formMain.LabelYMin.Text = Math.Round(YMin, 2).ToString();
-
+            formMain.LabelYMax.Text = Math.Round(YMax, 3).ToString();
+            formMain.LabelYMin.Text = Math.Round(YMin, 3).ToString();
+          
             if(formMain.TabControl.SelectedIndex == 0)
             {
-                formMain.DesDown.Text = Math.Round(DataDown, 2).ToString();
-                formMain.DesUp.Text = Math.Round(DataUp, 2).ToString();
+                formMain.DesDown.Text = Math.Round(DataDown, 3).ToString();
+                formMain.DesUp.Text = Math.Round(DataUp, 3).ToString();
             }
             else if(formMain.TabControl.SelectedIndex == 1)
             {
-                formMain.TemDown.Text = Math.Round(DataDown, 2).ToString();
-                formMain.TemUp.Text = Math.Round(DataUp, 2).ToString();
+                formMain.TemDown.Text = Math.Round(DataDown, 3).ToString();
+                formMain.TemUp.Text = Math.Round(DataUp, 3).ToString();
             }
             else if (formMain.TabControl.SelectedIndex == 2)
             {
-                formMain.DrgDown.Text = Math.Round(DataDown, 2).ToString();
-                formMain.DrgUp.Text = Math.Round(DataUp, 2).ToString();
+                formMain.DrgDown.Text = Math.Round(DataDown, 3).ToString();
+                formMain.DrgUp.Text = Math.Round(DataUp, 3).ToString();
             }
         }
 
         public void ReNewFormUpDownDrag()
         {
-            formMain.LabelYMax.Text = Math.Round(YMax, 2).ToString();
-            formMain.LabelYMin.Text = Math.Round(YMin, 2).ToString();
+            formMain.LabelYMax.Text = Math.Round(YMax, 3).ToString();
+            formMain.LabelYMin.Text = Math.Round(YMin, 3).ToString();
 
             if (formMain.TabControl.SelectedIndex == 0)
             {
-                formMain.DesDown.Text = Math.Round(DataDownDragRenew, 2).ToString();
-                formMain.DesUp.Text = Math.Round(DataUpDragRenew, 2).ToString();
+                formMain.DesDown.Text = Math.Round(DataDownDragRenew, 3).ToString();
+                formMain.DesUp.Text = Math.Round(DataUpDragRenew, 3).ToString();
             }
             else if (formMain.TabControl.SelectedIndex == 1)
             {
-                formMain.TemDown.Text = Math.Round(DataDownDragRenew, 2).ToString();
-                formMain.TemUp.Text = Math.Round(DataUpDragRenew, 2).ToString();
+                formMain.TemDown.Text = Math.Round(DataDownDragRenew, 3).ToString();
+                formMain.TemUp.Text = Math.Round(DataUpDragRenew, 3).ToString();
             }
             else if (formMain.TabControl.SelectedIndex == 2)
             {
-                formMain.DrgDown.Text = Math.Round(DataDownDragRenew, 2).ToString();
-                formMain.DrgUp.Text = Math.Round(DataUpDragRenew, 2).ToString();
+                formMain.DrgDown.Text = Math.Round(DataDownDragRenew, 3).ToString();
+                formMain.DrgUp.Text = Math.Round(DataUpDragRenew, 3).ToString();
             }
         }
 
@@ -429,7 +430,7 @@ namespace CDM.Models
 
         public void RenewUpDownLine()
         {
-            if(zedgraphControl.GraphPane.XAxis.Scale.Max >= 30000)
+            if(zedgraphControl.GraphPane.XAxis.Scale.Max >= 2000)
             {
                 double downValue = DataDown;
                 double upValue = DataUp;
@@ -439,13 +440,26 @@ namespace CDM.Models
 
                 LineItem curve3 = zedgraphControl.GraphPane.CurveList[2] as LineItem;
                 IPointListEdit list3 = curve3.Points as IPointListEdit;
+                Scale xScale = zedgraphControl.GraphPane.XAxis.Scale;
+                list2.Clear();
+                list3.Clear();
 
-                for (int i = 30000; i < 40000; ++i)
+                if(xScale.Max >= 30000)
                 {
-                    list2.Add(i, downValue);
-                    list3.Add(i, downValue);
+                    for (int i = (int)xScale.Min - 1000; i < (int)xScale.Max + 1000; ++i)
+                    {
+                        list2.Add(i, upValue);
+                        list3.Add(i, downValue);
+                    }
                 }
-
+                else
+                {
+                    for (int i = (int)xScale.Min; i < (int)xScale.Min + 30000; ++i)
+                    {
+                        list2.Add(i, upValue);
+                        list3.Add(i, downValue);
+                    }
+                }
             }
         }
 
