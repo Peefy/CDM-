@@ -10,9 +10,11 @@ namespace CDM.Models
     class ExportExcel
     {
         const string ExcelSaveFilter = "生成excel（*.xls）|*.xls";
-        string strHeaderText = "采集数据";
+        //string strHeaderText = "采集数据";
 
-        public int ColumnCount { get; private set; } = 4;
+        public int ColumnCount { get; private set; } = 5;
+
+        public bool IsFindData { get; set; }
 
         public void Export(SaveFileDialog saveFileDialog)
         {
@@ -91,63 +93,70 @@ namespace CDM.Models
 
             int[] arrColWidth = { 20, 20, 20, 20, 20, 20, 20, 20 };
             #region 表头样式
-            HSSFRow headerRow = (HSSFRow)sheet.CreateRow(0);
-            headerRow.HeightInPoints = 20;
-            headerRow.CreateCell(0).SetCellValue(strHeaderText);
-
+            HSSFRow headerRow;
             HSSFCellStyle headStyle = (HSSFCellStyle)workBook.CreateCellStyle();
             headStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
             HSSFFont font = (HSSFFont)workBook.CreateFont();
-            font.FontHeightInPoints = 20;
-            font.Boldweight = 500;
-            headStyle.SetFont(font);
-            headerRow.GetCell(0).CellStyle = headStyle;
-            sheet.AddMergedRegion(new NPOI.SS.Util.Region(0, 0, 0, ColumnCount - 1));
             #endregion
 
-            headerRow = (HSSFRow)sheet.CreateRow(1);
+            headerRow = (HSSFRow)sheet.CreateRow(0);
             headStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
-            font.FontHeightInPoints = 20;
-            font.Boldweight = 500;
+            font.FontHeightInPoints = 15;
+            font.Boldweight = 400;
             headStyle.SetFont(font);
 
-            headerRow.CreateCell(0).SetCellValue("时间");
+            headerRow.CreateCell(0).SetCellValue("日期");
+            headStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Left;
             headerRow.GetCell(0).CellStyle = headStyle;
 
-            headerRow.CreateCell(1).SetCellValue("密度");
+            headerRow.CreateCell(1).SetCellValue("时间");
             headerRow.GetCell(1).CellStyle = headStyle;
 
-            headerRow.CreateCell(2).SetCellValue("温度");
+            headerRow.CreateCell(2).SetCellValue($"密度({SaveData.DesUnitText})");
             headerRow.GetCell(2).CellStyle = headStyle;
 
-            headerRow.CreateCell(3).SetCellValue("驱动增益");
+            headerRow.CreateCell(3).SetCellValue($"温度({SaveData.TemUnitText})");
             headerRow.GetCell(3).CellStyle = headStyle;
+
+            headerRow.CreateCell(4).SetCellValue("驱动增益(%)");
+            headerRow.GetCell(4).CellStyle = headStyle;
 
             //headerRow.CreateCell(4).SetCellValue("K1");
             //headerRow.GetCell(4).CellStyle = headStyle;
 
             //headerRow.CreateCell(5).SetCellValue("K2");
             //headerRow.GetCell(5).CellStyle = headStyle;
-
-            for (int i = 0; i < SaveData.ListSave.Count; ++i)
+            var list = IsFindData == false ?SaveData.ListSave : SaveData.ListSaveFind;
+            for (int i = 0; i < list.Count; ++i)
             {
-                headerRow = (HSSFRow)sheet.CreateRow(i + 2);
+                headerRow = (HSSFRow)sheet.CreateRow(i + 1);
                 headStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
                 font.FontHeightInPoints = 15;
                 font.Boldweight = 400;
                 headStyle.SetFont(font);
 
-                headerRow.CreateCell(0).SetCellValue(SaveData.ListSave[i].GatherTime);
-                headerRow.GetCell(0).CellStyle = headStyle;
-               
-                headerRow.CreateCell(1).SetCellValue(SaveData.ListSave[i].Density);
-                headerRow.GetCell(1).CellStyle = headStyle;
+                var data = list[i].GatherTime.Split('_');
 
-                headerRow.CreateCell(2).SetCellValue(SaveData.ListSave[i].Temperature);
+                headerRow.CreateCell(0).SetCellValue(data[0]);
+                headStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Right;
+                headerRow.GetCell(0).CellStyle = headStyle;
+
+                headerRow.CreateCell(1).SetCellValue(data[1]);
+                headStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Left;
+                headerRow.GetCell(1).CellStyle = headStyle;
+               
+                headerRow.CreateCell(2).SetCellValue(double.Parse(list[i].Density));
+                headStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Right;
+                headerRow.GetCell(2).SetCellType(NPOI.SS.UserModel.CellType.Numeric);
                 headerRow.GetCell(2).CellStyle = headStyle;
 
-                headerRow.CreateCell(3).SetCellValue(SaveData.ListSave[i].K0);
+                headerRow.CreateCell(3).SetCellValue(double.Parse(list[i].Temperature));
+                headerRow.GetCell(3).SetCellType(NPOI.SS.UserModel.CellType.Numeric);
                 headerRow.GetCell(3).CellStyle = headStyle;
+
+                headerRow.CreateCell(4).SetCellValue(double.Parse(list[i].K0));
+                headerRow.GetCell(4).SetCellType(NPOI.SS.UserModel.CellType.Numeric);
+                headerRow.GetCell(4).CellStyle = headStyle;
 
                 //headerRow.CreateCell(4).SetCellValue(CDM.MiDuData.ListSave[i].K1);
                 //headerRow.GetCell(4).CellStyle = headStyle;
@@ -156,10 +165,11 @@ namespace CDM.Models
                 //headerRow.GetCell(5).CellStyle = headStyle;
 
             }
-            sheet.SetColumnWidth(0, 30 * 256);
-            sheet.SetColumnWidth(2, 40 * 256);
-            sheet.SetColumnWidth(1, 40 * 256);
+            sheet.SetColumnWidth(0, 20 * 256);
+            sheet.SetColumnWidth(1, 20 * 256);
+            sheet.SetColumnWidth(2, 30 * 256);
             sheet.SetColumnWidth(3, 30 * 256);
+            sheet.SetColumnWidth(4, 20 * 256);
             using (MemoryStream ms = new MemoryStream())
             {
                 workBook.Write(ms);

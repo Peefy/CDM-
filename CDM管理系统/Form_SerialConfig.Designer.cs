@@ -173,6 +173,7 @@
             this.radioButton5.Tag = "2";
             this.radioButton5.Text = "1.5个停止位";
             this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.Visible = false;
             // 
             // radioButton6
             // 

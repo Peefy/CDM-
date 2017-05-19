@@ -49,12 +49,30 @@ namespace CDM.Sqlite
             SQLiteCommand cmdInsert = new SQLiteCommand(connGather);
             cmdInsert.CommandText = $"SELECT * FROM {TableNameGather} ";
             cmdInsert.ExecuteNonQuery();
-
             SQLiteDataReader dataReader = cmdInsert.ExecuteReader();
             while (dataReader.Read())
             {
                 if(dataReader["GatherTime"].ToString().Contains(time) == true)
                     str += $"{dataReader["GatherTime"]}|{dataReader["Density"]}|{dataReader["Temperature"]}|{dataReader["K0"]}|{dataReader["K1"]}|{dataReader["K2"]}&" ;
+            }
+            return str;
+        }
+
+        public string FindData(DateTime startTime,DateTime endTime)
+        {
+            var str = "";
+            SQLiteCommand cmdInsert = new SQLiteCommand(connGather);
+            cmdInsert.CommandText = $"SELECT * FROM {TableNameGather} ";
+            cmdInsert.ExecuteNonQuery();
+            var startTimeStr = startTime.ToString("yyyy/MM/dd");
+            var endTimeStr = endTime.ToString("yyyy/MM/dd");
+            SQLiteDataReader dataReader = cmdInsert.ExecuteReader();
+            while (dataReader.Read())
+            {
+                var timeFindStr = dataReader["GatherTime"].ToString();
+                var dateFindStr = timeFindStr.Split('_');
+                if (startTimeStr.CompareTo(dateFindStr[0]) != 1 && endTimeStr.CompareTo(dateFindStr[0]) != -1) 
+                    str += $"{dataReader["GatherTime"]}|{dataReader["Density"]}|{dataReader["Temperature"]}|{dataReader["K0"]}|{dataReader["K1"]}|{dataReader["K2"]}&";
             }
             return str;
         }

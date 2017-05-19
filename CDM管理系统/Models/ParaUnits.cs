@@ -15,10 +15,13 @@ namespace CDM.Models
         public static string[] DesToTalStrings { get; set; } =
         {
             "千克/立方米",
-            "克/升",
-            "克/毫升",
-            "千克/升",
             "克/立方厘米",
+        };
+
+        public static string[] TemToTalStrings { get; set; } =
+        {
+            "摄氏度",
+            "华氏度",
         };
 
         public static Dictionary<int, string> DesTable = new Dictionary<int, string>
@@ -40,20 +43,12 @@ namespace CDM.Models
         {
             {32, "摄氏度" },
             {33, "华氏度" },
-            {34, "朗肯度" },
-            {35, "卡尔文" },
         };
 
         /// <summary>
         /// 
         /// </summary>
-        public static string[] TemToTalStrings { get; set; } =
-        {
-            "摄氏度",
-            "华氏度",
-            "朗肯度",
-            "卡尔文",
-        };
+
 
     }
 }

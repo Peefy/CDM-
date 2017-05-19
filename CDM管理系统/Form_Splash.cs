@@ -132,6 +132,8 @@ namespace 流量计检定上位机
                 
                 btnLogIn.Enabled = false;
                 btnLogOut.Enabled = false;
+                txbPassWord.Enabled = false;
+                txbUserName.Enabled = false;
                 RollingBar.Visible = true;
                 RollingBar.StartRolling();
                 Thread thread = new Thread(new ThreadStart(Send));

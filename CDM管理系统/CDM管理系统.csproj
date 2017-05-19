@@ -171,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\motionLogo.jpg" />
     <None Include="Resources\121.jpg" />
     <None Include="Resources\12.jpg" />
     <None Include="Resources\ProLinkIII_00001.png" />

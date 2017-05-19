@@ -143,7 +143,7 @@ namespace CDM.Models
                 if (JudgeIsDown(e.Location) == true)
                     zedgraphControl.GraphPane.CurveList[2].Color = Color.DarkRed;
                 else
-                    zedgraphControl.GraphPane.CurveList[2].Color = Color.Blue;
+                    zedgraphControl.GraphPane.CurveList[2].Color = Color.Red;
             }
 
             if(isDragLine == true)
@@ -261,7 +261,7 @@ namespace CDM.Models
                     isUpDown = 2;
                 }                 
                 else
-                    zedgraphControl.GraphPane.CurveList[2].Color = Color.Blue;
+                    zedgraphControl.GraphPane.CurveList[2].Color = Color.Red;
             }
             return false;
         }
@@ -277,7 +277,7 @@ namespace CDM.Models
             LineItem curve = myPane.AddCurve(paras.CurveName, list, Color.Black, SymbolType.None);
 
             myPane.AddCurve("上限", new RollingPointPairList(40000), Color.Red, SymbolType.None);
-            myPane.AddCurve("下限", new RollingPointPairList(40000), Color.Blue, SymbolType.None);
+            myPane.AddCurve("下限", new RollingPointPairList(40000), Color.Red, SymbolType.None);
 
             RenewDataUpDown();
 

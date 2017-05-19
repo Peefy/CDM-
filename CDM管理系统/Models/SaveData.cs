@@ -14,7 +14,10 @@ namespace CDM.Models
             Data = data;
         }
 
-        public static List<Sqlite.GatherSave> ListSave = new List<Sqlite.GatherSave>();
+        public static string DesUnitText { get; set; } = "";
+        public static string TemUnitText { get; set; } = "";
 
+        public static List<Sqlite.GatherSave> ListSave = new List<Sqlite.GatherSave>();
+        public static List<Sqlite.GatherSave> ListSaveFind = new List<Sqlite.GatherSave>();
     }
 }

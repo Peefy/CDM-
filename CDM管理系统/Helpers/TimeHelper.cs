@@ -57,5 +57,21 @@ namespace CDM.Helpers
                 (second / 30).ToString();
         }
 
+        public static string GetUpLoadDate()
+        {
+
+            string time = DateTime.Now.ToString("yyyyMMddHHmmss");
+            string hourStr = time.Substring(8, 2);
+
+            int year = DateTime.Now.Year;
+            int month = DateTime.Now.Month;
+            int day = DateTime.Now.Day;
+            int hour = DateTime.Now.Hour;
+            int minute = DateTime.Now.Minute;
+            int second = DateTime.Now.Second;
+            return year.ToString() + month.ToString().PadLeft(2, '0')
+                + day.ToString().PadLeft(2, '0');               
+        }
+
     }
 }

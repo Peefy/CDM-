@@ -22,7 +22,7 @@ namespace CDM.Configs
         public static ushort DensityUnit { get; } = 40;
         public static ushort TemperatureUnit { get; } = 41;
 
-        public static ushort DensityCoefficient { get; } = 283;
+        public static ushort DensityFactor { get; } = 4069;
 
         public static ushort DriveGain { get; } = 291;
 

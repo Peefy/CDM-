@@ -32,7 +32,7 @@ namespace CDM管理系统
             try
             {
                 var datas = mMaster?.ReadHoldingRegisters(mSlaveAddress,
-                     (ushort)(AddressConfig.DensityCoefficient - 1), 2);
+                     (ushort)(AddressConfig.DensityFactor - 1), 2);
                 textboxDensityCoe.Text = UshortToFloat(datas, 0, 3).ToString();
 
                 datas = mMaster?.ReadHoldingRegisters(mSlaveAddress,
@@ -52,7 +52,7 @@ namespace CDM管理系统
                 try
                 {
                     mMaster?.WriteMultipleRegisters(mSlaveAddress,
-                        (ushort)(AddressConfig.DensityCoefficient - 1),
+                        (ushort)(AddressConfig.DensityFactor - 1),
                         FloatToUshort(data));
                 }
                 catch
